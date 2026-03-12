@@ -20,6 +20,7 @@ import StoreChecker from './pages/StoreChecker';
 import Academy from './pages/Academy';
 import Success from './pages/Success';
 import Cancel from './pages/Cancel';
+import Home from './pages/Home';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/" element={<Home />} />
       </Route>
 
       {/* Private SaaS Routes */}
@@ -47,8 +49,7 @@ export default function App() {
       </Route>
 
       {/* Default Routes */}
-      <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="*" element={<Navigate to="/login" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

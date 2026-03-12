@@ -21,7 +21,7 @@ export default function Analyze() {
 
     const [analysisCount, setAnalysisCount] = useState(0);
     const [showPremiumModal, setShowPremiumModal] = useState(false);
-    const MAX_FREE_ANALYSES = 5;
+    const MAX_FREE_ANALYSES = 3;
 
     useEffect(() => {
         if (user?.plan === 'FREE') {
@@ -56,6 +56,10 @@ export default function Analyze() {
                 body: JSON.stringify({ content: cleanText, type: extractedSource ? 'media' : 'text' }),
             });
 
+            if (response.status === 429) {
+                setShowPremiumModal(true);
+                throw new Error('Cota diária atingida.');
+            }
             if (!response.ok) throw new Error('Falha no motor de processamento.');
             const data = await response.json();
             setResult(data);
@@ -105,6 +109,10 @@ export default function Analyze() {
                 headers: { 'Authorization': `Bearer ${user.token}` },
                 body: formData
             });
+            if (res.status === 429) {
+                setShowPremiumModal(true);
+                throw new Error('Cota diária atingida.');
+            }
             if (!res.ok) throw new Error();
             const data = await res.json();
             setContent(data.transcribedText);
@@ -253,6 +261,59 @@ export default function Analyze() {
                                     Protocolo de Segurança
                                 </h4>
                                 <p className="text-indigo-100/80 font-medium text-lg italic leading-relaxed">"{result.recommendation}"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* Modal Premium */}
+            {showPremiumModal && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">
+                    <div className="bg-white rounded-[2.5rem] max-w-lg w-full p-8 md:p-10 shadow-2xl relative overflow-hidden animate-slide-up">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-3xl -mr-16 -mt-16 opacity-60"></div>
+
+                        <div className="relative z-10 text-center space-y-6">
+                            <div className="w-20 h-20 bg-indigo-600 rounded-3xl flex items-center justify-center mx-auto shadow-lg shadow-indigo-200 rotate-12">
+                                <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 11l7-7 7 7M5 19l7-7 7 7" /></svg>
+                            </div>
+
+                            <div className="space-y-2">
+                                <h3 className="text-3xl font-black text-slate-900 tracking-tight">Cota Diária Atingida</h3>
+                                <p className="text-slate-500 font-medium leading-relaxed">
+                                    Você atingiu o limite de <span className="text-indigo-600 font-bold">3 análises gratuitas</span> por dia. O que acha de navegar sem limites?
+                                </p>
+                            </div>
+
+                            <div className="bg-slate-50 rounded-2xl p-6 text-left space-y-3 border border-slate-100">
+                                <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Vantagens Premium:</p>
+                                <div className="flex items-center gap-3 text-slate-700 font-bold text-sm">
+                                    <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                                    Análises Ilimitadas (Texto/Link)
+                                </div>
+                                <div className="flex items-center gap-3 text-slate-700 font-bold text-sm">
+                                    <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                                    Prioridade na fila da Inteligência
+                                </div>
+                                <div className="flex items-center gap-3 text-slate-700 font-bold text-sm">
+                                    <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                                    Histórico Avançado Permanente
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col gap-3">
+                                <Link
+                                    to="/plans"
+                                    className="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-black transition-all shadow-lg text-lg"
+                                    onClick={() => setShowPremiumModal(false)}
+                                >
+                                    Ficar Premium Agora
+                                </Link>
+                                <button
+                                    onClick={() => setShowPremiumModal(false)}
+                                    className="text-slate-400 font-bold text-sm hover:text-slate-600 transition-colors"
+                                >
+                                    Talvez mais tarde
+                                </button>
                             </div>
                         </div>
                     </div>

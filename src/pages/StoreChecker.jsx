@@ -11,6 +11,7 @@ export default function StoreChecker() {
     const [result, setResult] = useState(null);
     const [cnpjResult, setCnpjResult] = useState(null);
     const [error, setError] = useState(null);
+    const [showPremiumModal, setShowPremiumModal] = useState(false);
 
     const checkStore = async (e) => {
         e.preventDefault();
@@ -24,6 +25,10 @@ export default function StoreChecker() {
             const res = await fetch(`${API_ENDPOINTS.STORE_CHECK}?url=${encodeURIComponent(url)}`, {
                 headers: { 'Authorization': `Bearer ${user.token}` }
             });
+            if (res.status === 429) {
+                setShowPremiumModal(true);
+                throw new Error('Cota diária atingida.');
+            }
             if (!res.ok) throw new Error();
 
             const data = await res.json();
@@ -273,6 +278,42 @@ export default function StoreChecker() {
                             </div>
 
                             <button className="w-full py-4 text-slate-500 font-bold text-sm hover:text-slate-800 transition-all">Reportar Inconsistência</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* Modal Premium */}
+            {showPremiumModal && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">
+                    <div className="bg-white rounded-[2.5rem] max-w-lg w-full p-8 md:p-10 shadow-2xl relative overflow-hidden animate-slide-up">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-3xl -mr-16 -mt-16 opacity-60"></div>
+
+                        <div className="relative z-10 text-center space-y-6">
+                            <div className="w-20 h-20 bg-indigo-600 rounded-3xl flex items-center justify-center mx-auto shadow-lg shadow-indigo-200 rotate-12">
+                                <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 11l7-7 7 7M5 19l7-7 7 7" /></svg>
+                            </div>
+
+                            <div className="space-y-2">
+                                <h3 className="text-3xl font-black text-slate-900 tracking-tight">Cota Diária Atingida</h3>
+                                <p className="text-slate-500 font-medium leading-relaxed">
+                                    A análise avançada de lojas usa nossa inteligência premium. Faça o upgrade para continuar protegendo suas compras!
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col gap-3">
+                                <button
+                                    onClick={() => window.location.href = '/plans'}
+                                    className="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-black transition-all shadow-lg text-lg"
+                                >
+                                    Ficar Premium Agora
+                                </button>
+                                <button
+                                    onClick={() => setShowPremiumModal(false)}
+                                    className="text-slate-400 font-bold text-sm hover:text-slate-600 transition-colors"
+                                >
+                                    Talvez mais tarde
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

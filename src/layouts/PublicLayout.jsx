@@ -13,7 +13,7 @@ export default function PublicLayout() {
             </header>
 
             {/* Main content area */}
-            <main className="flex-1 w-full flex items-center justify-center pt-20 pb-10 px-4">
+            <main className="flex-1 w-full pt-20 pb-10">
                 <Outlet />
             </main>
 
