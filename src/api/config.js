@@ -1,0 +1,21 @@
+export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+export const API_ENDPOINTS = {
+    LOGIN: `${API_URL}/api/login`,
+    REGISTER: `${API_URL}/api/register`,
+    ANALYZE: `${API_URL}/api/analyze`,
+    HISTORY: `${API_URL}/api/user/history`,
+    SCAM_REPORTS: `${API_URL}/api/recent-scams`,
+    SCAM_PATTERNS: `${API_URL}/api/scam-patterns`,
+    SETTINGS: `${API_URL}/api/users/settings`,
+    API_KEYS: `${API_URL}/api/developer/key`,
+    INTELLIGENCE_STATS: `${API_URL}/api/user/stats`,
+    STORE_CHECK: `${API_URL}/api/check-store`,
+    ACADEMY_SUBMIT: `${API_URL}/api/academy/submit`,
+    ACADEMY_QUIZZES: `${API_URL}/api/academy/quizzes`,
+    REPORT_SCAM: `${API_URL}/api/report-scam`,
+    ME: `${API_URL}/api/me`,
+    RECENT_SCAMS: `${API_URL}/api/recent-scams`,
+    TRENDS: `${API_URL}/api/admin/trends`,
+    B2B_ANALYZE: `${API_URL}/api/v1/analyze`,
+    ANALYZE_MEDIA: `${API_URL}/api/analyze-media`,
+};
