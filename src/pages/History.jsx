@@ -7,6 +7,7 @@ export default function History() {
     const { user } = useContext(AuthContext);
     const [history, setHistory] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchHistory = async () => {
@@ -31,8 +32,6 @@ export default function History() {
         };
         fetchHistory();
     }, [user?.token]);
-
-    const [error, setError] = useState(null);
 
     return (
         <div className="animate-slide-up max-w-6xl mx-auto space-y-10 pb-20">
