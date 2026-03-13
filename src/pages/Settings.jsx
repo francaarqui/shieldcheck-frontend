@@ -9,6 +9,8 @@ export default function Settings() {
     const [email, setEmail] = useState(user?.email || '');
     const [password, setPassword] = useState('');
 
+    const [whatsapp, setWhatsapp] = useState(user?.whatsapp_number || '');
+
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [saving, setSaving] = useState(false);
@@ -26,14 +28,14 @@ export default function Settings() {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${user.token}`
                 },
-                body: JSON.stringify({ name, email, newPassword: password || undefined })
+                body: JSON.stringify({ name, email, whatsapp_number: whatsapp, newPassword: password || undefined })
             });
 
             const data = await response.json();
             if (!response.ok) throw new Error(data.error);
 
             setMessage(data.message);
-            setUser({ ...user, name, email });
+            setUser({ ...user, name, email, whatsapp_number: whatsapp });
             setPassword(''); // Clear password field
         } catch (err) {
             setError(err.message || 'Erro ao atualizar os dados.');
@@ -75,6 +77,37 @@ export default function Settings() {
                                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-slate-800"
                                 required
                             />
+                        </div>
+
+                        <div className="pt-6 border-t border-slate-100">
+                            <h3 className="text-lg font-bold text-slate-800 mb-4">Integração WhatsApp Bot</h3>
+                            <label className="block text-sm font-semibold text-slate-700 mb-2">Seu Número de WhatsApp</label>
+                            <input
+                                type="text"
+                                value={whatsapp}
+                                onChange={e => setWhatsapp(e.target.value.replace(/\D/g, ''))}
+                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-slate-800"
+                                placeholder="DD9XXXXXXXX (Ex: 11999999999)"
+                            />
+                            <p className="text-xs text-slate-400 mt-2">Ao cadastrar seu número, você poderá enviar mensagens para nosso Bot e ver o resultado aqui no seu dashboard.</p>
+
+                            <div className="mt-6 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                                <h4 className="text-sm font-bold text-indigo-900 mb-2">Como usar o Bot:</h4>
+                                <ul className="text-xs text-indigo-700 space-y-2">
+                                    <li className="flex items-start">
+                                        <span className="mr-2">1.</span>
+                                        <span>Adicione nosso número aos seus contatos: <strong>+55 11 99999-9999</strong> (Exemplo)</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="mr-2">2.</span>
+                                        <span>Encaminhe qualquer mensagem suspeita ou link para análise.</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="mr-2">3.</span>
+                                        <span>Você também pode enviar áudios! Nossa IA transcreve e analisa o risco de golpe para você.</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div className="pt-6 border-t border-slate-100">

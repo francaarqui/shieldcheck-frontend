@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Outlet, Navigate, Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 export default function PrivateLayout() {
     const { user, loading, logout } = useContext(AuthContext);
+    const { isDarkMode, toggleTheme } = useTheme();
     const location = useLocation();
 
     if (loading) {
@@ -27,14 +29,14 @@ export default function PrivateLayout() {
     ];
 
     return (
-        <div className="min-h-screen bg-slate-50 flex">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex transition-colors duration-300">
             {/* Sidebar */}
-            <aside className="w-64 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen transition-all">
-                <div className="p-6 flex items-center gap-3 border-b border-slate-100">
+            <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col sticky top-0 h-screen transition-all">
+                <div className="p-6 flex items-center gap-3 border-b border-slate-100 dark:border-slate-800">
                     <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-lg">S</div>
                     <div>
-                        <h1 className="text-lg font-bold text-slate-800 tracking-tight leading-tight">ShieldCheck O.S</h1>
-                        <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md inline-block mt-0.5">V1.0.0</span>
+                        <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight leading-tight">ShieldCheck O.S</h1>
+                        <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 dark:text-indigo-400 px-2 py-0.5 rounded-md inline-block mt-0.5">V1.0.0</span>
                     </div>
                 </div>
 
@@ -45,10 +47,10 @@ export default function PrivateLayout() {
                             to={item.path}
                             className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-sm
                 ${location.pathname.startsWith(item.path)
-                                    ? 'bg-indigo-50 text-indigo-700 shadow-sm'
-                                    : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600'
+                                    ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-400 shadow-sm'
+                                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400'
                                 }
-              `}
+                `}
                         >
                             {item.icon}
                             {item.label}
@@ -57,15 +59,15 @@ export default function PrivateLayout() {
                 </nav>
 
                 {/* User Card & Logout */}
-                <div className="p-4 border-t border-slate-100">
-                    <div className="bg-slate-50 rounded-xl p-4 flex flex-col gap-3">
+                <div className="p-4 border-t border-slate-100 dark:border-slate-800">
+                    <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-4 flex flex-col gap-3">
                         <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold uppercase">
+                            <div className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 font-bold uppercase">
                                 {user?.name?.charAt(0) || user?.email?.charAt(0) || '?'}
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="text-sm font-bold text-slate-800 truncate">{user?.name || 'Usuário'}</p>
-                                <p className="text-xs font-medium text-slate-500 truncate">{user?.email}</p>
+                                <p className="text-sm font-bold text-slate-800 dark:text-white truncate">{user?.name || 'Usuário'}</p>
+                                <p className="text-xs font-medium text-slate-500 dark:text-slate-400 truncate">{user?.email}</p>
                             </div>
                             {user.points !== undefined && (
                                 <div className="flex items-center gap-1 text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-1 rounded-full">
@@ -76,9 +78,9 @@ export default function PrivateLayout() {
                                 </div>
                             )}
                         </div>
-                        <Link to="/store-checker" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium ${location.pathname === '/store-checker' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-600 hover:bg-indigo-50 hover:text-indigo-700'}`}>
+                        <Link to="/store-checker" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium ${location.pathname === '/store-checker' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 hover:text-indigo-700 dark:hover:text-indigo-400'}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 3.001 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" /></svg>
-                            Verificador de CNPJ
+                            Verificador de lojas
                         </Link>
 
                         <div className="pt-4 mt-2 border-t border-slate-100">
@@ -96,9 +98,17 @@ export default function PrivateLayout() {
                                 API Desenvolvedor
                             </Link>
                         </div>
+
+                        <div className="pt-4 mt-2 border-t border-slate-100">
+                            <h4 className="px-4 text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Corporativo (B2B)</h4>
+                            <Link to="/whitelabel" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium ${location.pathname === '/whitelabel' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1-1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" /></svg>
+                                Personalização (Whitelabel)
+                            </Link>
+                        </div>
                         <button
                             onClick={logout}
-                            className="w-full mt-1 flex items-center justify-center gap-2 text-xs font-semibold text-red-600 bg-white border border-red-100 hover:bg-red-50 hover:border-red-200 py-2 rounded-lg transition-colors"
+                            className="w-full mt-1 flex items-center justify-center gap-2 text-xs font-semibold text-red-600 dark:text-red-400 bg-white dark:bg-slate-900 border border-red-100 dark:border-red-900/30 hover:bg-red-50 dark:hover:bg-red-900/10 hover:border-red-200 transition-colors py-2 rounded-lg"
                         >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
                             Sair do Sistema
@@ -110,12 +120,24 @@ export default function PrivateLayout() {
             {/* Main Content Pane */}
             <main className="flex-1 flex flex-col h-screen overflow-y-auto w-full">
                 {/* Top bar for mobile or extra actions */}
-                <header className="bg-white border-b border-slate-200 py-4 px-8 flex justify-between items-center sticky top-0 z-40">
-                    <div className="flex items-center gap-2 text-sm text-slate-500 font-medium">
+                <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 py-4 px-8 flex justify-between items-center sticky top-0 z-40 transition-colors duration-300">
+                    <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 font-medium">
                         <span className="capitalize">{location.pathname.replace('/', '') || 'Início'}</span>
                     </div>
 
-                    <div>
+                    <div className="flex items-center gap-4">
+                        {/* Theme Toggle Button */}
+                        <button
+                            onClick={toggleTheme}
+                            className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all border border-slate-100 dark:border-slate-700"
+                            title={isDarkMode ? "Mudar para Modo Claro" : "Mudar para Modo Escuro"}
+                        >
+                            {isDarkMode ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>
+                            ) : (
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
+                            )}
+                        </button>
                         {user?.plan === 'PREMIUM' ? (
                             <span className="text-sm font-bold text-white bg-gradient-to-r from-purple-500 to-indigo-500 shadow-md shadow-indigo-200 px-4 py-1.5 rounded-lg flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-1.026.1-1.096 1.411-.298 1.944l3.708 2.478-1.034 4.545c-.201.884.662 1.625 1.455 1.139l4.135-2.541 4.135 2.541c.793.486 1.656-.255 1.455-1.139l-1.034-4.545 3.708-2.478c.8-.533.729-1.844-.298-1.944l-4.753-.381-1.83-4.401Z" clipRule="evenodd" /></svg>

@@ -111,40 +111,40 @@ export default function Academy() {
         <div className="animate-slide-up max-w-5xl mx-auto space-y-10 pb-20">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div className="space-y-3">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 text-amber-700 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border border-amber-100">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border border-amber-100 dark:border-amber-900/30">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18c-2.305 0-4.408.867-6 2.292m0-14.25v14.25" /></svg>
                         Simulador de Cenários Reais
                     </div>
-                    <h2 className="text-4xl font-display font-black text-slate-900 tracking-tight leading-none">{question.title}</h2>
+                    <h2 className="text-4xl font-display font-black text-slate-900 dark:text-white tracking-tight leading-none">{question.title}</h2>
                 </div>
-                <div className="glass-card px-6 py-4 rounded-2xl flex flex-col items-end border border-white">
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Recompensa</span>
+                <div className="glass-card px-6 py-4 rounded-2xl flex flex-col items-end border border-white dark:border-slate-800">
+                    <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Recompensa</span>
                     <span className="text-2xl font-display font-black text-amber-500">+{question.points} XP</span>
                 </div>
             </div>
 
-            <div className="glass-card rounded-[2.5rem] p-8 md:p-12 border border-white shadow-2xl space-y-10">
+            <div className="glass-card rounded-[2.5rem] p-8 md:p-12 border border-white dark:border-slate-800 shadow-2xl space-y-10">
                 <div className="relative">
                     <div className="absolute -left-6 top-0 bottom-0 w-1.5 bg-indigo-500 rounded-full shadow-[0_0_15px_rgba(99,102,241,0.5)]"></div>
-                    <p className="text-2xl text-slate-700 font-medium italic leading-relaxed px-4">
+                    <p className="text-2xl text-slate-700 dark:text-slate-200 font-medium italic leading-relaxed px-4">
                         "{question.context}"
                     </p>
                 </div>
 
                 <div className="space-y-4">
-                    <h3 className="text-sm font-black text-slate-800 uppercase tracking-tighter mb-6">Qual sua conduta imediata?</h3>
+                    <h3 className="text-sm font-black text-slate-800 dark:text-slate-300 uppercase tracking-tighter mb-6">Qual sua conduta imediata?</h3>
                     <div className="grid grid-cols-1 gap-4">
                         {question.options.map((opt, idx) => {
                             const isSelected = selectedOption === idx;
-                            let btnClass = "bg-slate-50 border-slate-100 text-slate-700 hover:bg-white hover:border-indigo-300 hover:shadow-md";
+                            let btnClass = "bg-slate-50 dark:bg-slate-900/50 border-slate-100 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 hover:border-indigo-300 hover:shadow-md";
 
                             if (hasAnswered) {
-                                if (isSelected && opt.isCorrect) btnClass = "bg-emerald-50 border-emerald-500 text-emerald-900 ring-4 ring-emerald-500/10";
-                                else if (isSelected && !opt.isCorrect) btnClass = "bg-red-50 border-red-500 text-red-900 ring-4 ring-red-500/10";
-                                else if (opt.isCorrect) btnClass = "bg-emerald-50/50 border-emerald-200 text-emerald-700";
-                                else btnClass = "bg-white border-slate-100 text-slate-300 opacity-60";
+                                if (isSelected && opt.isCorrect) btnClass = "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-500 dark:border-emerald-500/50 text-emerald-900 dark:text-emerald-400 ring-4 ring-emerald-500/10";
+                                else if (isSelected && !opt.isCorrect) btnClass = "bg-red-50 dark:bg-red-900/20 border-red-500 dark:border-red-500/50 text-red-900 dark:text-red-400 ring-4 ring-red-500/10";
+                                else if (opt.isCorrect) btnClass = "bg-emerald-50/50 dark:bg-emerald-900/10 border-emerald-200 dark:border-emerald-900/30 text-emerald-700 dark:text-emerald-500";
+                                else btnClass = "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-300 dark:text-slate-600 opacity-60";
                             } else if (isSelected) {
-                                btnClass = "bg-white border-indigo-600 text-indigo-900 ring-4 ring-indigo-600/10 shadow-lg";
+                                btnClass = "bg-white dark:bg-slate-800 border-indigo-600 dark:border-indigo-500 text-indigo-900 dark:text-indigo-400 ring-4 ring-indigo-600/10 shadow-lg";
                             }
 
                             return (
@@ -167,26 +167,26 @@ export default function Academy() {
                     <button
                         onClick={handleAnswerSubmit}
                         disabled={selectedOption === null || submitting}
-                        className="w-full h-16 bg-slate-900 text-white font-black rounded-2xl hover:bg-black transition-all shadow-xl shadow-slate-200 disabled:opacity-50 disabled:cursor-not-allowed text-xl"
+                        className="w-full h-16 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black rounded-2xl hover:bg-black dark:hover:bg-slate-100 transition-all shadow-xl shadow-slate-200 dark:shadow-none disabled:opacity-50 disabled:cursor-not-allowed text-xl"
                     >
                         {submitting ? 'Sincronizando Resposta...' : 'Confirmar Decisão'}
                     </button>
                 ) : (
                     <div className={`animate-slide-up p-8 rounded-[2.5rem] border-2 shadow-sm space-y-6 text-center
-                        ${question.options[selectedOption].isCorrect ? 'bg-emerald-50 border-emerald-100' : 'bg-red-50 border-red-100'}
+                        ${question.options[selectedOption].isCorrect ? 'bg-emerald-50 dark:bg-emerald-950/20 border-emerald-100 dark:border-emerald-900/30' : 'bg-red-50 dark:bg-red-950/20 border-red-100 dark:border-red-900/30'}
                     `}>
                         <div className="space-y-2">
-                            <h4 className={`text-4xl font-display font-black ${question.options[selectedOption].isCorrect ? 'text-emerald-900' : 'text-red-900'}`}>
+                            <h4 className={`text-4xl font-display font-black ${question.options[selectedOption].isCorrect ? 'text-emerald-900 dark:text-emerald-400' : 'text-red-900 dark:text-red-400'}`}>
                                 {question.options[selectedOption].isCorrect ? 'Vítória Acadêmica!' : 'Falha Crítica!'}
                             </h4>
-                            <p className={`text-xl font-bold ${question.options[selectedOption].isCorrect ? 'text-emerald-700' : 'text-red-700'}`}>
+                            <p className={`text-xl font-bold ${question.options[selectedOption].isCorrect ? 'text-emerald-700 dark:text-emerald-500' : 'text-red-700 dark:text-red-500'}`}>
                                 {question.options[selectedOption].feedback}
                             </p>
                         </div>
                         <button
                             onClick={nextScenario}
                             className={`w-full md:w-auto px-12 py-4 rounded-xl font-black text-lg transition-all shadow-md
-                                ${question.options[selectedOption].isCorrect ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : 'bg-slate-900 hover:bg-black text-white'}
+                                ${question.options[selectedOption].isCorrect ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : 'bg-slate-900 dark:bg-white hover:bg-black dark:hover:bg-slate-100 text-white dark:text-slate-900'}
                             `}
                         >
                             Próxima Atividade

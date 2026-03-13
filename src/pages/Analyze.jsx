@@ -3,6 +3,7 @@ import { AuthContext } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 import Tesseract from 'tesseract.js';
 import { API_ENDPOINTS } from '../api/config';
+import { jsPDF } from 'jspdf';
 
 export default function Analyze() {
     const { user } = useContext(AuthContext);
@@ -125,86 +126,211 @@ export default function Analyze() {
         }
     };
 
+    const generateReport = () => {
+        if (!result) return;
+        const doc = new jsPDF();
+
+        // Branded Header
+        doc.setFillColor(15, 23, 42); // slate-900
+        doc.rect(0, 0, 210, 40, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(22);
+        doc.text('SHIELDCHECK AI - RELATÓRIO DE SEGURANÇA', 20, 25);
+
+        // Status Bar
+        const statusColor = result.score > 60 ? [220, 38, 38] : result.score > 30 ? [245, 158, 11] : [16, 185, 129];
+        doc.setFillColor(...statusColor);
+        doc.rect(20, 50, 170, 15, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(12);
+        doc.text(`VEREDITO: ${result.status.toUpperCase()} | ÍNDICE DE RISCO: ${result.score}%`, 30, 60);
+
+        // Body
+        doc.setTextColor(30, 41, 59); // slate-800
+        doc.setFontSize(14);
+        doc.text('Sumário da Análise:', 20, 85);
+        doc.setFontSize(10);
+        const splitSummary = doc.splitTextToSize(result.summary || '', 170);
+        doc.text(splitSummary, 20, 95);
+
+        // Recommendation
+        doc.setFillColor(248, 250, 252); // slate-50
+        doc.rect(20, 130, 170, 30, 'F');
+        doc.setTextColor(79, 70, 229); // indigo-600
+        doc.setFontSize(12);
+        doc.text('Protocolo de Segurança Recomendado:', 25, 140);
+        doc.setTextColor(30, 41, 59);
+        doc.setFontSize(10);
+        const splitRec = doc.splitTextToSize(result.recommendation || '', 160);
+        doc.text(splitRec, 25, 150);
+
+        // Footer
+        doc.setFontSize(8);
+        doc.setTextColor(148, 163, 184);
+        doc.text(`Gerado em: ${new Date().toLocaleString()} | shieldcheckai.com`, 20, 280);
+
+        doc.save(`ShieldCheck_Relatorio_${Date.now()}.pdf`);
+    };
+
     return (
         <div className="animate-slide-up max-w-5xl mx-auto space-y-12 pb-10">
-            <div className="text-center space-y-4">
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 text-indigo-700 rounded-full text-xs font-black uppercase tracking-widest border border-indigo-100">
-                    <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
-                    </span>
-                    Shield Intelligence Center
-                </span>
-                <h2 className="text-5xl font-display font-black text-slate-900 tracking-tight">
-                    Blindagem <span className="text-premium-gradient">Multimodal</span>
-                </h2>
-                <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium leading-relaxed">
-                    Nossa IA analisa padrões de golpes em textos, links, prints, áudios e vídeos em tempo real.
-                </p>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                <div className="flex-1">
+                    <h2 className="text-4xl font-display font-black text-slate-900 dark:text-white tracking-tight">
+                        Nova <span className="text-premium-gradient">Análise AI</span>
+                    </h2>
+                    <p className="text-slate-500 dark:text-slate-400 mt-2 text-lg font-medium">Copie e cole qualquer mensagem suspeita ou faça upload de um print para ver o risco.</p>
+                </div>
             </div>
 
-            <div className="glass-card rounded-[2.5rem] p-8 md:p-10 border border-white shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-50 rounded-full blur-3xl -mr-20 -mt-20 opacity-40"></div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                {/* Input Section */}
+                <div className="lg:col-span-12 space-y-6">
+                    <div className="glass-card p-8 rounded-[2.5rem] border border-white dark:border-slate-800 shadow-xl relative overflow-hidden transition-all duration-300">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
 
-                <div className="relative z-10 space-y-8">
-                    {extractedSource && (
-                        <div className="flex justify-between items-center px-4 py-2 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest">
-                            <span>Fonte Detectada: {extractedSource}</span>
-                            <button onClick={() => { setContent(''); setExtractedSource(null); setResult(null); }} className="text-indigo-300 hover:text-white underline">Descartar</button>
-                        </div>
-                    )}
+                        <div className="space-y-6 relative z-10">
+                            <h3 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-3">
+                                <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
+                                Conteúdo da Mensagem
+                            </h3>
 
-                    <textarea
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
-                        className="w-full h-48 bg-slate-50/50 border-2 border-slate-100/50 rounded-3xl p-6 text-slate-800 focus:outline-none focus:border-indigo-500/50 focus:bg-white transition-all font-semibold text-lg placeholder:text-slate-300 shadow-inner"
-                        placeholder="Cole o link suspeito, relate o ocorrido ou envie um arquivo abaixo..."
-                    />
-
-                    <div className="flex flex-col lg:flex-row gap-6 items-center">
-                        <div className="flex gap-3 w-full lg:w-auto">
-                            <input type="file" className="hidden" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" />
-                            <input type="file" className="hidden" ref={audioInputRef} onChange={(e) => handleMediaUpload(e.target.files[0], 'audio')} accept="audio/*" />
-                            <input type="file" className="hidden" ref={videoInputRef} onChange={(e) => handleMediaUpload(e.target.files[0], 'video')} accept="video/*" />
-
-                            <button onClick={() => fileInputRef.current.click()} className="flex-1 lg:px-6 py-4 bg-white border border-slate-200 rounded-2xl flex flex-col items-center gap-1 hover:border-indigo-500 hover:text-indigo-600 transition-all group shadow-sm">
-                                <svg className="w-6 h-6 text-slate-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                                <span className="text-[10px] font-black uppercase tracking-tighter">Print</span>
-                            </button>
-                            <button onClick={() => audioInputRef.current.click()} className="flex-1 lg:px-6 py-4 bg-white border border-slate-200 rounded-2xl flex flex-col items-center gap-1 hover:border-indigo-500 hover:text-indigo-600 transition-all group shadow-sm">
-                                <svg className="w-6 h-6 text-slate-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
-                                <span className="text-[10px] font-black uppercase tracking-tighter">Áudio</span>
-                            </button>
-                            <button onClick={() => videoInputRef.current.click()} className="flex-1 lg:px-6 py-4 bg-white border border-slate-200 rounded-2xl flex flex-col items-center gap-1 hover:border-indigo-500 hover:text-indigo-600 transition-all group shadow-sm">
-                                <svg className="w-6 h-6 text-slate-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 00-2 2z" /></svg>
-                                <span className="text-[10px] font-black uppercase tracking-tighter">Vídeo</span>
-                            </button>
-                        </div>
-
-                        <button
-                            onClick={() => handleAnalyze()}
-                            disabled={isLoading || isProcessingMedia || !content.trim()}
-                            className="w-full lg:flex-1 h-20 bg-slate-900 text-white font-black rounded-3xl hover:bg-black transition-all shadow-xl shadow-slate-200 disabled:opacity-50 flex items-center justify-center gap-4 text-xl hover-lift"
-                        >
-                            {isLoading || isProcessingMedia ? (
-                                <><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div> {processingStatus || 'Processando IA...'}</>
-                            ) : (
-                                <>Executar Varredura</>
+                            {extractedSource && (
+                                <div className="flex justify-between items-center px-4 py-2 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest">
+                                    <span>Fonte Detectada: {extractedSource}</span>
+                                    <button onClick={() => { setContent(''); setExtractedSource(null); setResult(null); }} className="text-indigo-300 hover:text-white underline">Descartar</button>
+                                </div>
                             )}
-                        </button>
-                    </div>
 
-                    {user?.plan === 'FREE' && (
-                        <div className="flex items-center justify-center gap-8 py-4 border-t border-slate-100">
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Limite Diário Grátis:</p>
-                            <div className="flex gap-1.5">
-                                {[...Array(MAX_FREE_ANALYSES)].map((_, i) => (
-                                    <div key={i} className={`w-3 h-3 rounded-full ${i < analysisCount ? 'bg-indigo-200' : 'bg-indigo-500 animate-pulse'}`}></div>
-                                ))}
+                            <textarea
+                                value={content}
+                                onChange={(e) => setContent(e.target.value)}
+                                placeholder="Ex: Oi mãe, mudei de número. Preciso que você pague um boleto de R$ 980 pra mim agora, é urgente!"
+                                className="w-full h-48 p-6 bg-slate-50/50 dark:bg-slate-950/50 border-2 border-slate-100 dark:border-slate-800 rounded-2xl focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/20 focus:border-indigo-500 outline-none transition-all text-slate-800 dark:text-slate-200 font-medium placeholder:text-slate-400"
+                            />
+
+                            <div className="flex flex-col lg:flex-row gap-6 items-center">
+                                <div className="flex gap-3 w-full lg:w-auto">
+                                    <input type="file" className="hidden" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" />
+                                    <input type="file" className="hidden" ref={audioInputRef} onChange={(e) => handleMediaUpload(e.target.files[0], 'audio')} accept="audio/*" />
+                                    <input type="file" className="hidden" ref={videoInputRef} onChange={(e) => handleMediaUpload(e.target.files[0], 'video')} accept="video/*" />
+
+                                    <button onClick={() => fileInputRef.current.click()} className="flex-1 lg:px-6 py-4 bg-white border border-slate-200 rounded-2xl flex flex-col items-center gap-1 hover:border-indigo-500 hover:text-indigo-600 transition-all group shadow-sm">
+                                        <svg className="w-6 h-6 text-slate-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                        <span className="text-[10px] font-black uppercase tracking-tighter">Print</span>
+                                    </button>
+                                    <button onClick={() => audioInputRef.current.click()} className="flex-1 lg:px-6 py-4 bg-white border border-slate-200 rounded-2xl flex flex-col items-center gap-1 hover:border-indigo-500 hover:text-indigo-600 transition-all group shadow-sm">
+                                        <svg className="w-6 h-6 text-slate-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
+                                        <span className="text-[10px] font-black uppercase tracking-tighter">Áudio</span>
+                                    </button>
+                                    <button onClick={() => videoInputRef.current.click()} className="flex-1 lg:px-6 py-4 bg-white border border-slate-200 rounded-2xl flex flex-col items-center gap-1 hover:border-indigo-500 hover:text-indigo-600 transition-all group shadow-sm">
+                                        <svg className="w-6 h-6 text-slate-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 00-2 2z" /></svg>
+                                        <span className="text-[10px] font-black uppercase tracking-tighter">Vídeo</span>
+                                    </button>
+                                </div>
+
+                                <button
+                                    onClick={() => handleAnalyze()}
+                                    disabled={isLoading || isProcessingMedia || !content.trim()}
+                                    className="w-full lg:flex-1 h-20 bg-slate-900 text-white font-black rounded-3xl hover:bg-black transition-all shadow-xl shadow-slate-200 disabled:opacity-50 flex items-center justify-center gap-4 text-xl hover-lift"
+                                >
+                                    {isLoading || isProcessingMedia ? (
+                                        <><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div> {processingStatus || 'Processando IA...'}</>
+                                    ) : (
+                                        <>Executar Varredura</>
+                                    )}
+                                </button>
+                            </div>
+
+                            {user?.plan === 'FREE' && (
+                                <div className="flex items-center justify-center gap-8 py-4 border-t border-slate-100">
+                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Limite Diário Grátis:</p>
+                                    <div className="flex gap-1.5">
+                                        {[...Array(MAX_FREE_ANALYSES)].map((_, i) => (
+                                            <div key={i} className={`w-3 h-3 rounded-full ${i < analysisCount ? 'bg-indigo-200' : 'bg-indigo-500 animate-pulse'}`}></div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Analysis Results */}
+                {isLoading ? (
+                    <div className="lg:col-span-12">
+                        <div className="glass-card p-20 rounded-[3rem] border border-indigo-100 dark:border-indigo-900/30 flex flex-col items-center justify-center space-y-8 relative overflow-hidden">
+                            <div className="absolute inset-0 bg-mesh opacity-20"></div>
+                            <div className="scan-line animate-scan"></div>
+
+                            <div className="relative">
+                                <div className="w-32 h-32 border-8 border-indigo-50 dark:border-indigo-900/20 border-t-indigo-600 rounded-full animate-spin"></div>
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <svg className="w-12 h-12 text-indigo-600 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                                </div>
+                            </div>
+
+                            <div className="text-center space-y-2 relative z-10">
+                                <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">Motor Heurístico Ativo</h3>
+                                <p className="text-slate-500 dark:text-slate-400 font-bold animate-pulse">Decompondo padrões de engenharia social...</p>
                             </div>
                         </div>
-                    )}
-                </div>
+                    </div>
+                ) : result && (
+                    <div className="lg:col-span-12 animate-slide-up">
+                        <div className="glass-card rounded-[3rem] border border-white dark:border-slate-800 shadow-2xl overflow-hidden relative">
+                            <div className={`h-4 w-full ${result.score > 60 ? 'bg-red-500' : result.score > 30 ? 'bg-amber-500' : 'bg-emerald-500'}`}></div>
+
+                            <div className="p-10 flex flex-col lg:flex-row gap-12">
+                                {/* Risk Gauge */}
+                                <div className="flex flex-col items-center justify-center space-y-4">
+                                    <div className={`w-48 h-48 rounded-[2.5rem] flex flex-col items-center justify-center border-4 shadow-2xl relative transition-all duration-500 transform hover:scale-105
+                                        ${result.score > 60 ? 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-900/30 text-red-600 dark:text-red-400 shadow-red-100 dark:shadow-none' :
+                                            result.score > 30 ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900/30 text-amber-600 dark:text-amber-400 shadow-amber-100 dark:shadow-none' :
+                                                'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/30 text-emerald-600 dark:text-emerald-400 shadow-emerald-100 dark:shadow-none'}
+                                    `}>
+                                        <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-60">Risk Score</p>
+                                        <p className="text-8xl font-display font-black leading-none">{result.score}</p>
+                                        <p className="text-xs font-bold mt-2">{result.status}</p>
+                                    </div>
+
+                                    {user?.plan === 'PREMIUM' && (
+                                        <button
+                                            onClick={generateReport}
+                                            className="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-sm uppercase tracking-widest hover:opacity-90 transition-all shadow-xl flex items-center justify-center gap-2"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                            Exportar PDF
+                                        </button>
+                                    )}
+                                </div>
+
+                                {/* Details */}
+                                <div className="flex-1 space-y-10">
+                                    <div className="space-y-4">
+                                        <h4 className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Sinais Detectados</h4>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                            {result.signals.map((signal, idx) => (
+                                                <div key={idx} className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800">
+                                                    <div className={`w-2 h-2 rounded-full ${result.score > 60 ? 'bg-red-500' : 'bg-amber-500'}`}></div>
+                                                    <p className="text-sm font-bold text-slate-700 dark:text-slate-300">{signal}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="p-8 bg-indigo-50 dark:bg-indigo-900/30 rounded-[2rem] border border-indigo-100 dark:border-indigo-900/30 relative overflow-hidden">
+                                        <div className="absolute top-0 right-0 p-4 opacity-10">
+                                            <svg className="w-20 h-20 text-indigo-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-1-5h2v2h-2v-2zm0-8h2v6h-2V7z" /></svg>
+                                        </div>
+                                        <h4 className="text-xs font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-3">Recomendação Especialista</h4>
+                                        <p className="text-slate-800 dark:text-slate-200 font-bold text-lg leading-relaxed relative z-10">{result.recommendation}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {error && (
@@ -214,58 +340,6 @@ export default function Analyze() {
                 </div>
             )}
 
-            {/* AI RESULTS EXPERT VIEW */}
-            {result && (
-                <div className="animate-slide-up bg-white rounded-[3rem] p-8 md:p-12 border border-slate-100 shadow-2xl relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50/50 skew-x-12 translate-x-1/2"></div>
-
-                    <div className="relative z-10 flex flex-col lg:flex-row gap-16">
-                        <div className="w-full lg:w-1/3 flex flex-col items-center justify-center">
-                            <div className={`w-64 h-64 rounded-full border-[16px] flex flex-col items-center justify-center shadow-xl mb-10
-                                ${result.score > 60 ? 'border-red-500/10 bg-red-50 text-red-600' :
-                                    result.score > 30 ? 'border-amber-400/10 bg-amber-50 text-amber-600' : 'border-emerald-500/10 bg-emerald-50 text-emerald-600'}
-                            `}>
-                                <span className="text-8xl font-display font-black leading-none">{result.score}</span>
-                                <span className="text-[10px] font-black uppercase tracking-[0.3em] mt-2 opacity-60">Risk Index</span>
-                            </div>
-
-                            <div className={`px-6 py-3 rounded-2xl text-center shadow-sm w-full font-black uppercase tracking-widest border-2
-                                ${result.score > 60 ? 'bg-red-600 text-white border-red-700' :
-                                    result.score > 30 ? 'bg-amber-500 text-white border-amber-600' : 'bg-emerald-600 text-white border-emerald-700'}
-                            `}>
-                                {result.status}
-                            </div>
-                        </div>
-
-                        <div className="flex-1 space-y-10">
-                            <div className="space-y-4">
-                                <h3 className="text-3xl font-display font-black text-slate-900 border-b-4 border-indigo-500 pb-2 inline-block">Sumário da Inteligência</h3>
-                                <p className="text-xl text-slate-600 font-medium leading-relaxed leading-relaxed">{result.summary || "Nenhuma descrição detalhada fornecida pelo motor de análise."}</p>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {result.signals && result.signals.map((signal, idx) => (
-                                    <div key={idx} className="flex gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 items-start group hover:bg-white hover:shadow-md transition-all">
-                                        <div className={`mt-1 p-1 rounded-md ${result.score > 30 ? 'bg-red-100 text-red-600' : 'bg-emerald-100 text-emerald-600'}`}>
-                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                        </div>
-                                        <p className="text-sm font-bold text-slate-700 leading-tight">{signal}</p>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="p-8 rounded-[2rem] bg-slate-900 text-white shadow-2xl relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700"></div>
-                                <h4 className="font-black text-xl mb-3 flex items-center gap-2">
-                                    <svg className="w-6 h-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
-                                    Protocolo de Segurança
-                                </h4>
-                                <p className="text-indigo-100/80 font-medium text-lg italic leading-relaxed">"{result.recommendation}"</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
             {/* Modal Premium */}
             {showPremiumModal && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">

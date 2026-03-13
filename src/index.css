@@ -6,7 +6,11 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 font-sans antialiased selection:bg-indigo-100 selection:text-indigo-900;
+    @apply bg-slate-50 text-slate-900 font-sans antialiased selection:bg-indigo-100 selection:text-indigo-900 transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-slate-950 text-slate-100 selection:bg-indigo-900 selection:text-indigo-100;
   }
 
   h1,
@@ -33,6 +37,12 @@
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
   }
 
+  .dark .glass-card {
+    background-color: rgba(15, 23, 42, 0.6);
+    border-color: rgba(51, 65, 85, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+
   .glass-dark {
     background-color: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(24px);
@@ -57,6 +67,15 @@
       radial-gradient(at 93% 86%, hsla(247, 100%, 95%, 1) 0px, transparent 50%),
       radial-gradient(at 77% 12%, hsla(234, 100%, 95%, 1) 0px, transparent 50%),
       radial-gradient(at 19% 82%, hsla(247, 100%, 96%, 1) 0px, transparent 50%);
+  }
+
+  .dark .bg-mesh {
+    background-color: #020617;
+    background-image:
+      radial-gradient(at 13% 14%, hsla(263, 100%, 10%, 1) 0px, transparent 50%),
+      radial-gradient(at 93% 86%, hsla(244, 100%, 10%, 1) 0px, transparent 50%),
+      radial-gradient(at 77% 12%, hsla(263, 100%, 10%, 1) 0px, transparent 50%),
+      radial-gradient(at 19% 82%, hsla(244, 100%, 10%, 1) 0px, transparent 50%);
   }
 
   /* Micro-animations */
@@ -93,4 +112,36 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Cyber Scanning Animation */
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(400%);
+    opacity: 0;
+  }
+}
+
+.animate-scan {
+  animation: scan 2s linear infinite;
+}
+
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: linear-gradient(to right, transparent, #6366f1, #818cf8, #6366f1, transparent);
+  box-shadow: 0 0 15px 3px rgba(99, 102, 241, 0.4);
+  z-index: 50;
+  pointer-events: none;
 }

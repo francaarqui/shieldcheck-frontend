@@ -14,7 +14,7 @@ export default function Plans() {
             <div className="max-w-4xl mx-auto mt-8">
                 {/* Stripe Pricing Table UI */}
                 <stripe-pricing-table
-                    pricing-table-id="prctbl_1T9xAF98y67vPsr00QHnkOST"
+                    pricing-table-id="prctbl_1TAJlQ98y67vPsr0U43gHQTy"
                     publishable-key="pk_test_51T47Vc98y67vPsr0ZkNSafsEaQLLhQTskQxAs8XERImnxF5fcgEGiiGaXFK6PMVGtN2fS9D7XdwusK5eKSHDanUu00aEm1ECCw"
                     client-reference-id={user?.id}
                 >

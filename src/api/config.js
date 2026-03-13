@@ -18,4 +18,6 @@ export const API_ENDPOINTS = {
     TRENDS: `${API_URL}/api/admin/trends`,
     B2B_ANALYZE: `${API_URL}/api/v1/analyze`,
     ANALYZE_MEDIA: `${API_URL}/api/analyze-media`,
+    CHECK_ITEM: `${API_URL}/api/check-item`,
+    EXPAND_URL: `${API_URL}/api/expand-url`,
 };

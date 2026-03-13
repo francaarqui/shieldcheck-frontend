@@ -21,6 +21,9 @@ import Academy from './pages/Academy';
 import Success from './pages/Success';
 import Cancel from './pages/Cancel';
 import Home from './pages/Home';
+import WhitelabelSettings from './pages/WhitelabelSettings';
+import Empresas from './pages/Empresas';
+
 
 export default function App() {
   return (
@@ -31,7 +34,9 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/" element={<Home />} />
+        <Route path="/empresas" element={<Empresas />} />
       </Route>
+
 
       {/* Private SaaS Routes */}
       <Route element={<PrivateLayout />}>
@@ -46,6 +51,7 @@ export default function App() {
         <Route path="/academy" element={<Academy />} />
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
+        <Route path="/whitelabel" element={<WhitelabelSettings />} />
       </Route>
 
       {/* Default Routes */}
