@@ -7,6 +7,17 @@ import App from './App.jsx'
 import './index.css'
 import './i18n'
 
+// Global Error Catching for Production
+window.onerror = function (message, source, lineno, colno, error) {
+  console.error("GLOBAL ERROR DETECTED:", { message, source, lineno, colno, error });
+};
+
+window.onunhandledrejection = function (event) {
+  console.error("UNHANDLED PROMISE REJECTION:", event.reason);
+};
+
+console.log("APP BOOTSTRAP: Starting ShieldCheck AI initialization...");
+
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +29,7 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error("CRITICAL APP ERROR:", error, errorInfo);
+    console.error("CRITICAL APP ERROR (ErrorBoundary):", error, errorInfo);
   }
 
   render() {
@@ -41,19 +52,25 @@ class ErrorBoundary extends React.Component {
 }
 
 try {
-  ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-      <ErrorBoundary>
-        <AuthProvider>
-          <ThemeProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </ThemeProvider>
-        </AuthProvider>
-      </ErrorBoundary>
-    </React.StrictMode>,
-  )
+  const rootElement = document.getElementById('root');
+  if (!rootElement) {
+    console.error("MOUNT ERROR: Element with id 'root' not found!");
+  } else {
+    console.log("MOUNT SUCCESS: 'root' element found, rendering app...");
+    ReactDOM.createRoot(rootElement).render(
+      <React.StrictMode>
+        <ErrorBoundary>
+          <AuthProvider>
+            <ThemeProvider>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </ThemeProvider>
+          </AuthProvider>
+        </ErrorBoundary>
+      </React.StrictMode>,
+    )
+  }
 } catch (error) {
   console.error("CRITICAL MOUNT ERROR:", error);
 }
