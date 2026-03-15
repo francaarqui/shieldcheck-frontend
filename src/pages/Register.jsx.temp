@@ -1,0 +1,28 @@
+# Escalabilidade de UI e Sistema de Indicação
+
+Este plano foca em tornar a interface do ShieldCheck AI preparada para grandes volumes de dados e implementar o fluxo completo de indicação.
+
+## Mudanças Propostas
+
+### 🛠️ Correções Funcionais e UI
+- **Listas Colapsáveis ([AdminDashboard.jsx](file:///c:/Users/Tiago/Desktop/ANTIGRAVITY_INICIO/shieldcheck-ai/frontend/src/pages/AdminDashboard.jsx), [B2BPortal.jsx](file:///c:/Users/Tiago/Desktop/ANTIGRAVITY_INICIO/shieldcheck-ai/frontend/src/pages/B2BPortal.jsx))**: Implementar o padrão de Accordion para tabelas de usuários e colaboradores.
+- **Botões de Ação ([B2BPortal.jsx](file:///c:/Users/Tiago/Desktop/ANTIGRAVITY_INICIO/shieldcheck-ai/frontend/src/pages/B2BPortal.jsx))**: Adicionar feedback visual para geração de chaves API e relatórios.
+
+### 🤝 Sistema de Indicação (Fluxo Completo)
+- **Frontend ([Register.jsx](file:///c:/Users/Tiago/Desktop/ANTIGRAVITY_INICIO/shieldcheck-ai/frontend/src/pages/Register.jsx))**:
+  - Utilizar `useSearchParams` do `react-router-dom` para capturar o parâmetro `?ref=`.
+  - Incluir o `referralCode` na requisição de cadastro (`POST /api/register`).
+- **Backend ([auth.js](file:///c:/Users/Tiago/Desktop/ANTIGRAVITY_INICIO/shieldcheck-ai/backend/routes/auth.js))**:
+  - Atualizar o endpoint de cadastro para aceitar o `referralCode`.
+  - Adicionar log no console para identificar quem indicou o novo usuário, permitindo a validação do "teste" do usuário.
+
+## Plano de Verificação
+
+### Testes Manuais
+- [ ] Verificar se as listas no Admin e B2B podem ser recolhidas.
+- [ ] Testar feedback visual de botões no portal B2B.
+- [ ] **Teste de Indicação**: 
+  1. Copiar o link na página `/affiliate`.
+  2. Acessar o link em uma nova janela (simulando um convidado).
+  3. Realizar o cadastro.
+  4. Verificar no log do servidor se a indicação foi detectada.
