@@ -660,30 +660,6 @@
             "copy_link": "Send Installation Link",
             "copy_success": "Installation link (invite) copied! Send to your family member."
         },
-        "community": {
-            "title_start": "Community",
-            "title_highlight": "Sentinel",
-            "subtitle": "The collective wiki against scams and fraud in real-time.",
-            "btn_report": "Report New Scam",
-            "detected_label": "Detected",
-            "status_verified": "Verified",
-            "status_pending": "Pending Analysis",
-            "author_label": "By:",
-            "modal": {
-                "title": "Report New Scam",
-                "subtitle": "Help protect other community members.",
-                "type_label": "Scam Type",
-                "type_placeholder": "Ex: Phishing, Fake Loan",
-                "platform_label": "Platform",
-                "platform_placeholder": "Ex: WhatsApp, Instagram",
-                "target_label": "Scam Target",
-                "target_placeholder": "Ex: Bank Customers, Elderly",
-                "desc_label": "Detailed Description",
-                "desc_placeholder": "Explain how the scam works and how to identify it...",
-                "submit_btn": "Publish to Community",
-                "cancel_btn": "Cancel"
-            }
-        },
         "dark_web": {
             "badge": "Active Intelligence Module",
             "title_start": "Dark Web",
@@ -709,6 +685,30 @@
                 "Use a password manager for unique keys.",
                 "Stay alert for login attempts in your e-mail."
             ]
+        },
+        "community": {
+            "title_start": "Community",
+            "title_highlight": "Sentinel",
+            "subtitle": "The collective wiki against scams and fraud in real-time.",
+            "btn_report": "Report New Scam",
+            "detected_label": "Detected",
+            "status_verified": "Verified",
+            "status_pending": "Pending Analysis",
+            "author_label": "By:",
+            "modal": {
+                "title": "Report New Scam",
+                "subtitle": "Help protect other community members.",
+                "type_label": "Scam Type",
+                "type_placeholder": "Ex: Phishing, Fake Loan",
+                "platform_label": "Platform",
+                "platform_placeholder": "Ex: WhatsApp, Instagram",
+                "target_label": "Scam Target",
+                "target_placeholder": "Ex: Bank Customers, Elderly",
+                "desc_label": "Detailed Description",
+                "desc_placeholder": "Explain how the scam works and how to identify it...",
+                "submit_btn": "Publish to Community",
+                "cancel_btn": "Cancel"
+            }
         }
     },
     "academy_v2": {
@@ -798,13 +798,6 @@
             "mfa_setup_btn": "Setup 2FA now",
             "save_btn": "Save Changes",
             "saving_btn": "Saving..."
-        },
-        "plans": {
-            "unlimited": "Unlimited Licenses",
-            "licenses_5": "5 Licenses",
-            "license_1": "1 License",
-            "solo_bot": "1 License (WhatsApp Only)",
-            "free_mode": "Free Mode (3 scans/day)"
         },
         "whatsapp_guide": {
             "title": "How to use your Shield on Mobile:",

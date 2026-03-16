@@ -800,13 +800,6 @@
             "save_btn": "Guardar Cambios",
             "saving_btn": "Guardando..."
         },
-        "plans": {
-            "unlimited": "Licencias Ilimitadas",
-            "licenses_5": "5 Licencias",
-            "license_1": "1 Licencia",
-            "solo_bot": "1 Licencia (Solo WhatsApp)",
-            "free_mode": "Modo Gratis (3 scans/día)"
-        },
         "whatsapp_guide": {
             "title": "Cómo usar tu Escudo en el Móvil:",
             "step1": "Añade nuestro número oficial a tus contactos: <strong>+34 999 999 999</strong>",

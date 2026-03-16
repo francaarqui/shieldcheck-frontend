@@ -586,7 +586,7 @@ export default function Home() {
                             <div className="pt-4">
                                 <Link
                                     to="/dark-web-scan"
-                                    className="px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-black rounded-2xl hover:bg-slate-800 dark:hover:bg-slate-100 transition-all text-sm uppercase tracking-widest inline-flex items-center gap-3 shadow-xl hover:scale-[1.02] active:scale-95"
+                                    className="px-8 py-3.5 md:px-10 md:py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-black rounded-xl md:rounded-2xl hover:bg-slate-800 dark:hover:bg-slate-100 transition-all text-xs md:text-sm uppercase tracking-widest inline-flex items-center gap-3 shadow-xl hover:scale-[1.02] active:scale-95"
                                 >
                                     {t('landing.dark_web.cta')}
                                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
@@ -619,16 +619,16 @@ export default function Home() {
                                 </p>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-2 gap-2 md:gap-4">
                                 {[
                                     { label: t('landing.deepfake.feature1'), icon: "🎙️" },
                                     { label: t('landing.deepfake.feature2'), icon: "📹" },
                                     { label: t('landing.deepfake.feature3'), icon: "🧬" },
                                     { label: t('landing.deepfake.feature4'), icon: "⚡" }
                                 ].map((feat, i) => (
-                                    <div key={i} className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all">
-                                        <span className="text-xl">{feat.icon}</span>
-                                        <span className="text-xs font-black text-white uppercase tracking-wider">{feat.label}</span>
+                                    <div key={i} className="flex items-center gap-2 md:gap-3 p-2 md:p-4 bg-white/5 border border-white/10 rounded-xl md:rounded-2xl hover:bg-white/10 transition-all">
+                                        <span className="text-base md:text-xl">{feat.icon}</span>
+                                        <span className="text-[8px] md:text-xs font-black text-white uppercase tracking-tight md:tracking-wider leading-tight">{feat.label}</span>
                                     </div>
                                 ))}
                             </div>
@@ -636,10 +636,10 @@ export default function Home() {
                             <div className="pt-4">
                                 <Link
                                     to="/deepfake-lab"
-                                    className="px-10 py-5 bg-white text-slate-950 font-black rounded-2xl hover:bg-slate-100 transition-all text-sm uppercase tracking-widest inline-flex items-center gap-3 shadow-xl hover:scale-[1.02] active:scale-95"
+                                    className="px-5 py-3 md:px-10 md:py-5 bg-white text-slate-950 font-black rounded-lg md:rounded-2xl hover:bg-slate-100 transition-all text-[10px] md:text-sm uppercase tracking-widest inline-flex items-center gap-2 md:gap-3 shadow-xl hover:scale-[1.02] active:scale-95 border-b-2 md:border-b-4 border-slate-200"
                                 >
                                     {t('landing.deepfake.cta')}
-                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                                    <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                                 </Link>
                             </div>
                         </div>

@@ -868,13 +868,6 @@
             "save_btn": "Salvar Alterações",
             "saving_btn": "Salvando..."
         },
-        "plans": {
-            "unlimited": "Licenças Ilimitadas",
-            "licenses_5": "5 Licenças",
-            "license_1": "1 Licença",
-            "solo_bot": "1 Licença (Apenas WhatsApp)",
-            "free_mode": "Modo Grátis (3 scans/dia)"
-        },
         "whatsapp_guide": {
             "title": "Como usar seu Escudo no Celular:",
             "step1": "Adicione nosso número oficial aos seus contatos: <strong>+55 11 99999-9999</strong>",

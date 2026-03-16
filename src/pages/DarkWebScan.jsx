@@ -47,7 +47,7 @@ export default function DarkWebScan() {
             <div className="flex justify-start">
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-black rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all border border-slate-100 dark:border-slate-800 shadow-sm group"
+                    className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-black rounded-xl md:rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all border border-slate-100 dark:border-slate-800 shadow-sm group"
                 >
                     <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
@@ -60,10 +60,10 @@ export default function DarkWebScan() {
                 <div className="inline-flex px-4 py-2 bg-indigo-50 dark:bg-indigo-950/30 rounded-full text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-800">
                     {t('tools.dark_web.badge')}
                 </div>
-                <h2 className="text-5xl font-display font-black text-slate-900 dark:text-white tracking-tighter">
+                <h2 className="text-3xl md:text-5xl font-display font-black text-slate-900 dark:text-white tracking-tighter">
                     {t('tools.dark_web.title_start')} <span className="text-indigo-600">{t('tools.dark_web.title_highlight')}</span> 🕵️‍♂️
                 </h2>
-                <p className="text-slate-500 dark:text-slate-400 text-xl font-medium leading-relaxed">
+                <p className="text-slate-500 dark:text-slate-400 text-base md:text-xl font-medium leading-relaxed">
                     {t('tools.dark_web.subtitle')}
                 </p>
             </div>
@@ -76,29 +76,29 @@ export default function DarkWebScan() {
                         animate={{ opacity: 1, y: 0 }}
                         className="glass-card p-8 md:p-12 rounded-[2.5rem] md:rounded-[4rem] border border-white dark:border-slate-800 shadow-2xl text-center space-y-10"
                     >
-                        <div className="w-20 h-20 md:w-24 md:h-24 bg-slate-900 rounded-[2rem] md:rounded-[2.5rem] mx-auto flex items-center justify-center text-4xl md:text-5xl shadow-2xl relative">
+                        <div className="w-16 h-16 md:w-24 md:h-24 bg-slate-900 rounded-[1.5rem] md:rounded-[2.5rem] mx-auto flex items-center justify-center text-3xl md:text-5xl shadow-2xl relative">
                             <div className="absolute inset-0 bg-indigo-500/20 blur-[30px] rounded-full animate-pulse"></div>
                             🔎
                         </div>
 
-                        <form onSubmit={handleScan} className="space-y-6 max-w-xl mx-auto">
-                            <div className="relative group">
+                        <form onSubmit={handleScan} className="space-y-4 md:space-y-6 max-w-xl mx-auto">
+                            <div className="flex flex-col md:relative group gap-3 md:gap-0">
                                 <input
                                     type="text"
                                     required
                                     value={target}
                                     onChange={e => setTarget(e.target.value)}
                                     placeholder={t('tools.dark_web.placeholder')}
-                                    className="w-full h-16 md:h-20 bg-slate-50 dark:bg-slate-950 rounded-[1.5rem] md:rounded-[2rem] border-2 border-slate-100 dark:border-slate-800 px-6 md:px-10 text-base md:text-xl font-bold focus:border-indigo-500 outline-none transition-all pr-36 md:pr-44 text-slate-800 dark:text-white shadow-inner"
+                                    className="w-full h-14 md:h-20 bg-slate-50 dark:bg-slate-950 rounded-[1.2rem] md:rounded-[2rem] border-2 border-slate-100 dark:border-slate-800 px-6 md:px-10 text-sm md:text-xl font-bold focus:border-indigo-500 outline-none transition-all md:pr-44 text-slate-800 dark:text-white shadow-inner"
                                 />
                                 <button
                                     type="submit"
-                                    className="absolute right-2 md:right-3 top-2 md:top-3 bottom-2 md:bottom-3 px-5 md:px-8 bg-indigo-600 text-white rounded-[1rem] md:rounded-[1.5rem] font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-500/20"
+                                    className="md:absolute md:right-3 md:top-3 md:bottom-3 h-10 md:h-auto px-5 md:px-8 bg-indigo-600 text-white rounded-[0.8rem] md:rounded-[1.5rem] font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-500/20 w-full md:w-auto"
                                 >
                                     {t('tools.dark_web.btn_start')}
                                 </button>
                             </div>
-                            <p className="text-[10px] md:text-xs text-slate-400 font-medium tracking-tight">{t('tools.dark_web.privacy_note')}</p>
+                            <p className="text-[10px] md:text-xs text-slate-400 font-medium tracking-tight px-2">{t('tools.dark_web.privacy_note')}</p>
                         </form>
                     </motion.div>
                 )}
