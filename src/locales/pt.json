@@ -584,7 +584,8 @@
             }
         },
         "sidebar": {
-            "protection_title": "Proteção e Scan",
+            "tools_title": "Ferramentas",
+            "protection_title": "Análises e Relatórios",
             "education_title": "Educação e Social",
             "enterprise_title": "Marcas e Negócios",
             "account_title": "Conta e Gestão",

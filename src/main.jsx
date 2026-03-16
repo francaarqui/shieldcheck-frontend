@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
 import App from './App.jsx'
-import './index.css'
+import './styles/main.scss'
 import './i18n'
 
 // Global Error Catching for Production

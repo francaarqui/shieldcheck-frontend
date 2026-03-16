@@ -31,7 +31,11 @@ const MobileCategoryHeader = ({ title, isOpen, toggle }) => (
 export default function MobileMenu({ isOpen, onClose, categories, user, logout }) {
     const { t } = useTranslation();
     const location = useLocation();
-    const [openCategories, setOpenCategories] = useState({});
+    const [openCategories, setOpenCategories] = useState({
+        protection: true,
+        tools: true,
+        family_guard: true
+    });
 
     const toggleCategory = (id) => {
         setOpenCategories(prev => ({ ...prev, [id]: !prev[id] }));
@@ -99,12 +103,18 @@ export default function MobileMenu({ isOpen, onClose, categories, user, logout }
                                                             onClick={onClose}
                                                             className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-bold text-xs
                                                                 ${isActive
-                                                                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 dark:shadow-none'
+                                                                    ? category.id === 'protection'
+                                                                        ? 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400'
+                                                                        : 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 dark:shadow-none'
                                                                     : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'
                                                                 }
                                                             `}
                                                         >
-                                                            <span className={isActive ? 'text-white' : 'text-slate-400'}>{item.icon}</span>
+                                                            <span className={isActive
+                                                                ? category.id === 'protection' ? 'text-indigo-600 dark:text-indigo-400' : 'text-white'
+                                                                : 'text-slate-400'}>
+                                                                {item.icon}
+                                                            </span>
                                                             {item.label}
                                                         </Link>
                                                     );

@@ -516,7 +516,8 @@
             }
         },
         "sidebar": {
-            "protection_title": "Protection & Scan",
+            "tools_title": "Tools",
+            "protection_title": "Analyses & Reports",
             "education_title": "Education & Social",
             "enterprise_title": "Business & Brand",
             "account_title": "Account & Management",

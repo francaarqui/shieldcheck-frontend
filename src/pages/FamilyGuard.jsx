@@ -85,6 +85,7 @@ export default function FamilyGuard() {
     const [inviteEmail, setInviteEmail] = useState('');
     const [inviteLoading, setInviteLoading] = useState(false);
     const [message, setMessage] = useState({ text: '', type: '' });
+    const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
     // Mock alerts para demonstração (na fase real viriam do backend)
     const [alerts] = useState([
@@ -141,134 +142,180 @@ export default function FamilyGuard() {
     };
 
     return (
-        <div className="animate-slide-up max-w-7xl mx-auto space-y-12 pb-20 px-4 md:px-0">
+        <div className="animate-slide-up max-w-4xl mx-auto space-y-10 pb-20 px-4">
+            {/* Back Button */}
             <div className="flex justify-start">
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-black rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all border border-slate-100 dark:border-slate-800 shadow-sm group"
+                    className="flex items-center gap-2 px-5 py-2.5 glass-card rounded-2xl text-slate-400 font-bold hover:text-white transition-all group border border-white/5"
                 >
-                    <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                     </svg>
-                    {t('tools.analyze.back')}
+                    <span className="text-xs uppercase tracking-wider">{t('tools.analyze.back')}</span>
                 </button>
             </div>
-            {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div>
-                    <h2 className="text-4xl font-display font-black text-slate-900 dark:text-white tracking-tighter">
-                        {t('tools.family_guard.title_start')} <span className="text-indigo-600">{t('tools.family_guard.title_highlight')}</span> 🛡️
-                    </h2>
-                    <p className="text-slate-500 dark:text-slate-400 mt-2 text-lg font-medium max-w-xl">
-                        {t('tools.family_guard.subtitle')}
-                    </p>
+
+            {/* Header - Centralized */}
+            <div className="text-center space-y-4">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 text-[10px] font-black uppercase tracking-[0.2em]">
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                    </span>
+                    {t('tools.family_guard.plan_activated')}
                 </div>
-                <div className="px-6 py-3 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800">
-                    <p className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">{t('tools.family_guard.plan_activated')}</p>
-                    <p className="text-sm font-bold text-slate-700 dark:text-slate-300">
-                        {t('tools.family_guard.protection_active', { count: 2 })}
-                    </p>
+                <h2 className="text-5xl font-display font-black text-white tracking-tight leading-tight">
+                    {t('tools.family_guard.title_start')} <span className="text-premium-gradient">{t('tools.family_guard.title_highlight')}</span>
+                </h2>
+                <p className="text-slate-400 text-lg font-medium max-w-2xl mx-auto leading-relaxed">
+                    {t('tools.family_guard.subtitle')}
+                </p>
+
+                <div className="pt-2">
+                    <span className="text-sm font-bold text-slate-500">
+                        {t('tools.family_guard.protection_active', { count: members.length || 2 })}
+                    </span>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-
-                {/* Lateral: Add & Members */}
-                <div className="space-y-8">
-                    <div className="glass-card p-8 rounded-[2.5rem] border border-white dark:border-slate-800 shadow-xl space-y-6">
-                        <h3 className="text-xl font-black text-slate-900 dark:text-white">{t('tools.family_guard.add_member')}</h3>
-                        <form onSubmit={handleInvite} className="space-y-4">
-                            <div>
-                                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">{t('tools.family_guard.protected_email')}</label>
-                                <input
-                                    type="email"
-                                    required
-                                    value={inviteEmail}
-                                    onChange={e => setInviteEmail(e.target.value)}
-                                    className="w-full h-14 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 px-6 text-sm font-bold focus:ring-2 focus:ring-indigo-500 outline-none"
-                                    placeholder={t('tools.family_guard.email_placeholder')}
-                                />
-                            </div>
-                            <button
-                                disabled={inviteLoading}
-                                className="w-full h-14 bg-indigo-600 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-indigo-700 transition-all flex items-center justify-center"
-                            >
-                                {inviteLoading ? t('tools.family_guard.linking') : t('tools.family_guard.protect_now')}
-                            </button>
-                            {message.text && (
-                                <p className={`text-center text-xs font-bold ${message.type === 'success' ? 'text-emerald-500' : 'text-red-500'}`}>
-                                    {message.text}
-                                </p>
-                            )}
-                        </form>
+            {/* Main Action Area - Compact & Centralized */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                {/* Invite Card */}
+                <div className="glass-card p-8 rounded-[2.5rem] border border-white/5 shadow-2xl space-y-6 flex flex-col justify-center">
+                    <div className="space-y-1">
+                        <h3 className="text-xl font-black text-white">{t('tools.family_guard.add_member')}</h3>
+                        <p className="text-xs text-slate-400 font-medium">{t('tools.family_guard.protected_email')}</p>
                     </div>
-
-                    <div className="space-y-4">
-                        <h3 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
-                            {t('tools.family_guard.connected_members')} <span className="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full">{members.length}</span>
-                        </h3>
-                        <div className="space-y-3">
-                            {members.length === 0 ? (
-                                <p className="text-sm text-slate-400 font-medium italic">{t('tools.family_guard.no_members')}</p>
-                            ) : (
-                                members.map(m => (
-                                    <div key={m.id} className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-black uppercase">{m.name.charAt(0)}</div>
-                                            <div>
-                                                <p className="text-sm font-black text-slate-900 dark:text-white truncate max-w-[120px]">{m.name}</p>
-                                                <p className="text-[10px] text-slate-400">{m.email}</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col items-end gap-1">
-                                            <span className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase ${m.status === 'Pendente' ? 'bg-amber-100 text-amber-600' : 'bg-emerald-100 text-emerald-600'}`}>
-                                                {m.status === 'Pendente' ? t('tools.family_guard.status_pending') :
-                                                    m.status === 'Ativo' ? t('tools.family_guard.status_active') : m.status}
-                                            </span>
-                                            <div className={`w-2 h-2 rounded-full ${m.status === 'Pendente' ? 'bg-amber-400 animate-pulse' : 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]'}`}></div>
-                                        </div>
-                                    </div>
-                                ))
-                            )}
-                        </div>
-                    </div>
+                    <form onSubmit={handleInvite} className="space-y-4">
+                        <input
+                            type="email"
+                            required
+                            value={inviteEmail}
+                            onChange={e => setInviteEmail(e.target.value)}
+                            className="w-full h-14 bg-slate-950/50 rounded-2xl border border-white/5 px-6 text-sm font-bold focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                            placeholder={t('tools.family_guard.email_placeholder')}
+                        />
+                        <button
+                            disabled={inviteLoading}
+                            className="w-full h-14 bg-indigo-600 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-indigo-700 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center shadow-lg shadow-indigo-500/20"
+                        >
+                            {inviteLoading ? t('tools.family_guard.linking') : t('tools.family_guard.protect_now')}
+                        </button>
+                        {message.text && (
+                            <p className={`text-center text-[10px] font-black uppercase tracking-wider ${message.type === 'success' ? 'text-emerald-500' : 'text-red-500'}`}>
+                                {message.text}
+                            </p>
+                        )}
+                    </form>
                 </div>
 
-                {/* Main: Alert Feed */}
-                <div className="lg:col-span-2 space-y-8">
+                {/* Connected Members */}
+                <div className="glass-card p-8 rounded-[2.5rem] border border-white/5 shadow-2xl space-y-6 overflow-hidden">
                     <div className="flex items-center justify-between">
-                        <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">{t('tools.family_guard.realtime_logs')}</h3>
-                        <button className="text-xs font-black text-indigo-600 uppercase hover:underline">{t('tools.family_guard.clear_history')}</button>
+                        <h3 className="text-xl font-black text-white">{t('tools.family_guard.connected_members')}</h3>
+                        <span className="text-[10px] font-black bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full uppercase tracking-tighter">
+                            {members.length} Ativos
+                        </span>
                     </div>
-
-                    <div className="space-y-4">
-                        {alerts.map((alert, i) => (
-                            <AlertItem key={alert.id} alert={alert} index={i} />
-                        ))}
+                    <div className="space-y-3 max-h-[200px] overflow-y-auto pr-2 custom-scrollbar">
+                        {members.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center py-8 opacity-40">
+                                <svg className="w-12 h-12 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor opacity-20">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                                <p className="text-xs font-bold uppercase tracking-widest">{t('tools.family_guard.no_members')}</p>
+                            </div>
+                        ) : (
+                            members.map(m => (
+                                <div key={m.id} className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-black uppercase text-xs">{m.name.charAt(0)}</div>
+                                        <div>
+                                            <p className="text-sm font-black text-white truncate max-w-[120px]">{m.name}</p>
+                                            <p className="text-[10px] text-slate-500 font-medium">{m.email}</p>
+                                        </div>
+                                    </div>
+                                    <div className={`w-2 h-2 rounded-full ${m.status === 'Pendente' ? 'bg-amber-400 animate-pulse' : 'bg-emerald-500'}`}></div>
+                                </div>
+                            ))
+                        )}
                     </div>
+                </div>
+            </div>
 
-                    {/* Upsell Card */}
-                    <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 rounded-[3rem] text-white flex flex-col md:flex-row items-center gap-8 shadow-2xl overflow-hidden relative">
-                        <div className="absolute top-0 right-0 p-4 opacity-10">
-                            <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 7l11 5 11-5-11-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
-                        </div>
-                        <div className="space-y-4 relative z-10 flex-1">
-                            <h4 className="text-2xl font-black">{t('tools.family_guard.upsell_title')}</h4>
-                            <p className="text-sm text-indigo-100 font-medium leading-relaxed">
-                                {t('tools.family_guard.upsell_desc')}
-                            </p>
-                        </div>
-                        <button
-                            onClick={() => {
-                                const link = `${window.location.origin}/register?ref=${user?.id}`;
-                                navigator.clipboard.writeText(link);
-                                alert(t('tools.family_guard.copy_success'));
-                            }}
-                            className="h-14 px-8 bg-white text-indigo-600 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl hover:bg-indigo-50 transition-colors relative z-10"
+            {/* Collapsible History Logs - Button Style */}
+            <div className="flex flex-col items-center pt-4">
+                <button
+                    onClick={() => setIsHistoryOpen(!isHistoryOpen)}
+                    className="flex items-center gap-3 px-6 py-3 bg-slate-900 border border-white/5 rounded-full hover:bg-slate-800 transition-all group"
+                >
+                    <div className="w-6 h-6 bg-indigo-500/20 rounded-full flex items-center justify-center">
+                        <svg className={`w-3 h-3 text-indigo-400 transition-transform duration-500 ${isHistoryOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <span className="text-[10px] font-black text-slate-300 uppercase tracking-[0.25em] group-hover:text-white transition-colors">
+                        {isHistoryOpen ? 'Fechar Logs de Proteção' : 'Ver Logs de Proteção'}
+                    </span>
+                    {alerts.length > 0 && !isHistoryOpen && (
+                        <span className="flex h-2 w-2 relative">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500 border border-slate-900"></span>
+                        </span>
+                    )}
+                </button>
+
+                <AnimatePresence>
+                    {isHistoryOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                            animate={{ opacity: 1, height: 'auto', marginTop: 32 }}
+                            exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                            className="w-full space-y-6 overflow-hidden"
                         >
-                            {t('tools.family_guard.copy_link')}
-                        </button>
+                            <div className="flex items-center justify-between px-2">
+                                <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">{t('tools.family_guard.realtime_logs')}</h3>
+                                <button className="text-[10px] font-black text-indigo-500 uppercase hover:text-indigo-400 transition-colors uppercase tracking-widest">{t('tools.family_guard.clear_history')}</button>
+                            </div>
+
+                            <div className="space-y-4">
+                                {alerts.map((alert, i) => (
+                                    <AlertItem key={alert.id} alert={alert} index={i} />
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+
+            {/* Premium Upsell Card */}
+            <div className="relative pt-10">
+                <div className="absolute inset-0 bg-indigo-600/20 blur-[100px] rounded-full transform -translate-y-1/2"></div>
+                <div className="relative bg-gradient-to-br from-indigo-600/90 to-purple-700/90 p-10 rounded-[3rem] text-white flex flex-col md:flex-row items-center gap-10 shadow-3xl border border-white/10 backdrop-blur-xl group overflow-hidden">
+                    <div className="absolute -right-20 -top-20 w-64 h-64 bg-white/5 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
+
+                    <div className="w-20 h-20 bg-white/10 rounded-3xl flex items-center justify-center text-4xl shadow-inner border border-white/10 shrink-0">
+                        📱
                     </div>
+
+                    <div className="space-y-3 flex-1 text-center md:text-left">
+                        <h4 className="text-3xl font-display font-black tracking-tight">{t('tools.family_guard.upsell_title')}</h4>
+                        <p className="text-indigo-100 font-medium leading-relaxed text-sm max-w-lg">
+                            {t('tools.family_guard.upsell_desc')}
+                        </p>
+                    </div>
+
+                    <button
+                        onClick={() => {
+                            const link = `${window.location.origin}/register?ref=${user?.id}`;
+                            navigator.clipboard.writeText(link);
+                            alert(t('tools.family_guard.copy_success'));
+                        }}
+                        className="w-full md:w-auto px-10 h-16 bg-white text-indigo-600 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl hover:bg-indigo-50 transition-all hover:scale-[1.05] active:scale-95 shrink-0"
+                    >
+                        {t('tools.family_guard.copy_link')}
+                    </button>
                 </div>
             </div>
         </div>

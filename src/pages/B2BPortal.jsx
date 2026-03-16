@@ -95,218 +95,210 @@ export default function B2BPortal() {
     };
 
     return (
-        <div className="animate-slide-up max-w-7xl mx-auto space-y-12 pb-20 px-4 md:px-0">
-            {/* Header Section */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                <div>
-                    <h2 className="text-5xl font-display font-black text-slate-900 dark:text-white tracking-tighter">
+        <div className="animate-slide-up max-w-4xl mx-auto pb-20 px-4 md:px-0 space-y-12">
+            {/* Header Section - Centralized and Premium */}
+            <div className="flex flex-col items-center text-center gap-6 pt-8">
+                <div className="relative group">
+                    <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur-2xl opacity-10 group-hover:opacity-20 transition-all duration-700"></div>
+                    <div className="w-20 h-20 rounded-3xl bg-premium-gradient flex items-center justify-center text-white text-3xl shadow-2xl relative border border-white/20">
+                        🏢
+                    </div>
+                </div>
+
+                <div className="space-y-3">
+                    <h2 className="text-4xl md:text-6xl font-display font-black text-slate-900 dark:text-white tracking-tighter leading-tight">
                         Shield <span className="text-premium-gradient">Business</span>
                     </h2>
-                    <p className="text-slate-500 dark:text-slate-400 mt-2 text-xl font-medium max-w-2xl">
-                        Painel de Controle Corporativo de {user?.name}.
+                    <p className="text-slate-500 dark:text-slate-400 text-lg font-medium max-w-xl mx-auto leading-relaxed">
+                        Gerencie acessos corporativos e integre nossa inteligência via API de forma direta e segura.
                     </p>
                 </div>
 
-                <button
-                    onClick={() => alert('Seu relatório executivo está sendo gerado e será enviado para seu e-mail em instantes.')}
-                    className="h-14 px-8 bg-premium-gradient text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-indigo-500/20 hover:scale-105 transition-transform"
-                >
-                    Gerar Relatório Executivo (PDF)
-                </button>
-            </div>
-
-            {/* Business Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                    { label: 'Licenças Ativas', value: stats.activeLicenses, icon: '🆔', sub: 'Painel Business' },
-                    { label: 'Análises Acumuladas', value: stats.totalChecks, icon: '📊', sub: 'Mês Atual' },
-                    { label: 'Golpes Bloqueados', value: Math.floor(stats.totalChecks * 0.15), icon: '🛡️', sub: 'Time Protegido' },
-                    { label: 'Economia Prevista', value: `R$ ${Math.floor(stats.totalChecks * 15)}`, icon: '💰', sub: 'Roi Estimado' },
-                ].map((stat, i) => (
-                    <div key={i} className="glass-card p-8 rounded-[2.5rem] border border-white dark:border-slate-800 shadow-xl relative overflow-hidden group">
-                        <div className="absolute -right-8 -top-8 w-24 h-24 bg-indigo-500/5 group-hover:bg-indigo-500/10 rounded-full transition-all"></div>
-                        <div className="text-4xl mb-4">{stat.icon}</div>
-                        <div className="space-y-1">
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{stat.label}</p>
-                            <p className="text-3xl font-display font-black text-slate-900 dark:text-white">{stat.value}</p>
-                            <p className="text-[10px] font-bold text-indigo-500 uppercase">{stat.sub}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            {/* Management Tabs */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                {/* Employee List */}
-                <div className="lg:col-span-2 space-y-8">
-                    <div className="flex items-center justify-between">
-                        <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Colaboradores Protegidos</h3>
-                        <button
-                            onClick={() => setShowInviteModal(true)}
-                            className="text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:underline"
-                        >
-                            Adicionar Licença +
-                        </button>
-                    </div>
-
-                    <div className="glass-card rounded-[3rem] border border-white dark:border-slate-800 overflow-hidden shadow-2xl">
-                        <div
-                            onClick={() => setListExpanded(!listExpanded)}
-                            className="p-8 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/30 dark:bg-slate-900/30 cursor-pointer hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors"
-                        >
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center text-xl shadow-sm">🏢</div>
-                                <div>
-                                    <h3 className="text-xl font-black text-slate-900 dark:text-white">Lista de Colaboradores</h3>
-                                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{employees.length} Protegidos</p>
-                                </div>
-                            </div>
-                            <div className={`p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 transition-transform ${listExpanded ? 'rotate-180' : ''}`}>
-                                <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <AnimatePresence>
-                            {listExpanded && (
-                                <motion.div
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: 'auto', opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    className="overflow-hidden"
-                                >
-                                    {loading ? (
-                                        <div className="p-20 text-center text-slate-400 font-bold">Carregando time...</div>
-                                    ) : employees.length === 0 ? (
-                                        <div className="p-20 text-center space-y-4">
-                                            <div className="text-4xl">🏢</div>
-                                            <p className="text-slate-500 font-medium">Nenhum colaborador vinculado ainda.</p>
-                                            <button
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    setShowInviteModal(true);
-                                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                                }}
-                                                className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold text-xs"
-                                            >
-                                                Convidar Primeiro Membro
-                                            </button>
-                                        </div>
-                                    ) : (
-                                        <div className="overflow-x-auto">
-                                            <table className="w-full text-left">
-                                                <thead className="bg-slate-50 dark:bg-slate-950/50 border-b border-slate-100 dark:border-slate-800">
-                                                    <tr>
-                                                        <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Colaborador</th>
-                                                        <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Plano</th>
-                                                        <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Ações</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody className="divide-y divide-slate-50 dark:divide-slate-800/50">
-                                                    {employees.map((row) => (
-                                                        <tr key={row.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-                                                            <td className="px-8 py-6">
-                                                                <div className="flex items-center gap-3">
-                                                                    <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-black">
-                                                                        {row.name.charAt(0)}
-                                                                    </div>
-                                                                    <div>
-                                                                        <p className="text-sm font-black text-slate-900 dark:text-white">{row.name}</p>
-                                                                        <p className="text-[10px] text-slate-400">{row.email}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td className="px-8 py-6">
-                                                                <span className="text-[10px] font-black text-indigo-500 uppercase">{row.plan}</span>
-                                                            </td>
-                                                            <td className="px-8 py-6">
-                                                                <button
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        handleRevoke(row.id);
-                                                                    }}
-                                                                    className="text-slate-400 hover:text-red-500 transition-colors"
-                                                                >
-                                                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    )}
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
+                <div className="flex flex-wrap justify-center gap-3">
+                    <button
+                        onClick={() => alert('Seu relatório executivo está sendo gerado e será enviado para seu e-mail em instantes.')}
+                        className="h-12 px-8 bg-indigo-600/10 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-500/20 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-600 hover:text-white transition-all duration-300"
+                    >
+                        Relatório Executivo (PDF)
+                    </button>
+                    <div className="h-12 px-6 flex items-center gap-2 bg-slate-100 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                        <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 tracking-widest uppercase">Portal Ativo</span>
                     </div>
                 </div>
+            </div>
 
-                {/* API INTEGRATION PANEL */}
-                <div className="space-y-8">
-                    <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">API para Desenvolvedores</h3>
-
-                    <div className="glass-card p-8 rounded-[3rem] border border-white dark:border-slate-800 shadow-2xl space-y-6">
-                        <div className="w-16 h-16 bg-slate-900 rounded-3xl flex items-center justify-center text-3xl">🧩</div>
-                        <div className="space-y-2">
-                            <h4 className="text-xl font-black text-slate-900 dark:text-white">Integração Direta</h4>
-                            <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">Use nossa API REST para proteger seu sistema de e-mail ou atendimento automaticamente.</p>
+            {/* API INTEGRATION PANEL - FOCUS POINT */}
+            <section className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-[3rem] blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+                <div className="glass-card p-10 rounded-[3rem] border border-white dark:border-white/5 shadow-2xl space-y-8 relative overflow-hidden bg-slate-900/5 dark:bg-slate-900/40">
+                    <div className="flex flex-col md:flex-row gap-8 items-start">
+                        <div className="flex-1 space-y-4 text-center md:text-left">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/10 rounded-full border border-indigo-500/20 text-[9px] font-black text-indigo-500 uppercase tracking-widest mb-2">
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                                </span>
+                                Endpoints Ativos
+                            </div>
+                            <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Integração Direta API</h3>
+                            <p className="text-base text-slate-500 dark:text-slate-400 leading-relaxed font-medium">Proteja seu ecossistema corporativo integrando nossa API em tempo real aos seus fluxos de e-mail, chatbots e ERP.</p>
                         </div>
 
-                        <div className="space-y-4">
+                        <div className="w-full md:w-auto space-y-4">
                             {apiKeys.map(key => (
-                                <div key={key.id} className="p-4 bg-slate-950 rounded-2xl border border-slate-800 flex justify-between items-center group">
-                                    <code className="text-[10px] text-emerald-400 font-mono">
-                                        X-API-KEY: {key.id}
-                                    </code>
+                                <div key={key.id} className="p-5 bg-slate-950/90 dark:bg-slate-950 rounded-[2rem] border border-white/10 flex justify-between items-center group shadow-2xl min-w-[300px]">
+                                    <div className="space-y-1">
+                                        <p className="text-[8px] font-black text-slate-500 uppercase tracking-widest">Sua Chave API</p>
+                                        <code className="text-xs text-emerald-400 font-mono tracking-tighter">{key.id}</code>
+                                    </div>
                                     <button
                                         onClick={() => {
                                             navigator.clipboard.writeText(key.id);
                                             alert('Chave API copiada!');
                                         }}
-                                        className="opacity-0 group-hover:opacity-100 p-2 hover:bg-slate-800 rounded-lg transition-all"
+                                        className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/10"
+                                        title="Copiar Chave"
                                     >
                                         📋
                                     </button>
                                 </div>
                             ))}
+                            <button
+                                disabled={isGenerating}
+                                onClick={() => {
+                                    setIsGenerating(true);
+                                    setTimeout(() => {
+                                        const newKey = `sc_${Math.random().toString(36).substring(2, 11)}...${Math.random().toString(36).substring(2, 5)}`;
+                                        setApiKeys([...apiKeys, { id: newKey, date: 'Criada agora' }]);
+                                        setIsGenerating(false);
+                                    }, 1500);
+                                }}
+                                className="w-full h-14 bg-indigo-600 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-indigo-700 transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-600/20"
+                            >
+                                {isGenerating ? (
+                                    <>
+                                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                        Gerando Chave...
+                                    </>
+                                ) : 'Gerar Nova Chave API'}
+                            </button>
                         </div>
+                    </div>
+                </div>
+            </section>
 
-                        <button
-                            disabled={isGenerating}
-                            onClick={() => {
-                                setIsGenerating(true);
-                                setTimeout(() => {
-                                    const newKey = `sc_${Math.random().toString(36).substring(2, 11)}...${Math.random().toString(36).substring(2, 5)}`;
-                                    setApiKeys([...apiKeys, { id: newKey, date: 'Criada agora' }]);
-                                    setIsGenerating(false);
-                                }, 1500);
-                            }}
-                            className="w-full h-14 bg-indigo-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
-                        >
-                            {isGenerating ? (
-                                <>
-                                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                                    Gerando...
-                                </>
-                            ) : 'Gerar Nova Chave API'}
-                        </button>
+            {/* Quick Stats - Compact */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                    { label: 'Licenças', value: stats.activeLicenses, color: 'text-indigo-500' },
+                    { label: 'Análises', value: stats.totalChecks, color: 'text-purple-500' },
+                    { label: 'Bloqueios', value: Math.floor(stats.totalChecks * 0.15), color: 'text-emerald-500' },
+                    { label: 'Economia', value: `R$ ${Math.floor(stats.totalChecks * 15)}`, color: 'text-amber-500' },
+                ].map((stat, i) => (
+                    <div key={i} className="glass-card p-6 rounded-3xl border border-white dark:border-white/5 text-center transition-all hover:scale-[1.02]">
+                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">{stat.label}</p>
+                        <p className={`text-2xl font-black ${stat.color} tracking-tight`}>{stat.value}</p>
+                    </div>
+                ))}
+            </div>
+
+            {/* Colaboradores Section */}
+            <div className="space-y-6">
+                <div className="flex items-center justify-between px-2">
+                    <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase tracking-wider">Gestão de Colaboradores</h3>
+                    <button
+                        onClick={() => setShowInviteModal(true)}
+                        className="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest bg-indigo-500/5 px-4 py-2 rounded-full hover:bg-indigo-500/10 transition-colors"
+                    >
+                        Vincular Colaborador +
+                    </button>
+                </div>
+
+                <div className="glass-card rounded-[2.5rem] border border-white dark:border-white/5 overflow-hidden shadow-xl bg-slate-900/5 dark:bg-slate-900/20">
+                    <div
+                        onClick={() => setListExpanded(!listExpanded)}
+                        className="p-6 flex justify-between items-center cursor-pointer hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors"
+                    >
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-white/60 dark:bg-slate-800/60 rounded-2xl flex items-center justify-center text-xl shadow-inner">🏢</div>
+                            <div>
+                                <h3 className="text-lg font-black text-slate-900 dark:text-white">Time Protegido</h3>
+                                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{employees.length} MEMBROS ATIVOS</p>
+                            </div>
+                        </div>
+                        <div className={`w-10 h-10 rounded-xl bg-white/40 dark:bg-slate-800/40 border border-black/5 dark:border-white/5 flex items-center justify-center transition-transform ${listExpanded ? 'rotate-180' : ''}`}>
+                            <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
                     </div>
 
-                    {/* Support Card */}
-                    <div className="p-8 bg-indigo-50 dark:bg-indigo-900/20 rounded-[3rem] border border-indigo-100 dark:border-indigo-800 space-y-4">
-                        <h4 className="font-black text-slate-800 dark:text-white">Suporte Premium B2B</h4>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed">Dúvidas sobre o faturamento ou implementação em escala? Fale com seu gerente de conta.</p>
-                        <button className="text-indigo-600 dark:text-indigo-400 text-xs font-black uppercase hover:underline">Abrir Chamado VIP →</button>
-                    </div>
-
-                    {/* Trust Asset Section */}
-                    <div className="glass-card p-8 rounded-[3rem] border border-white dark:border-slate-800 shadow-2xl space-y-6">
-                        <h4 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Selo de Confiança</h4>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed">Exiba este selo em seu e-commerce para garantir aos seus clientes que seu site é monitorado pelo ShieldCheck AI.</p>
-                        <VerifiedBadge domain={user?.email?.split('@')[1] || "yourstore.com"} />
-                    </div>
+                    <AnimatePresence>
+                        {listExpanded && (
+                            <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden border-t border-black/5 dark:border-white/5"
+                            >
+                                {loading ? (
+                                    <div className="p-16 text-center text-slate-400 font-bold text-xs uppercase tracking-widest">Sincronizando dados...</div>
+                                ) : employees.length === 0 ? (
+                                    <div className="p-16 text-center space-y-4">
+                                        <div className="text-4xl opacity-50">🏢</div>
+                                        <p className="text-slate-500 font-medium text-sm">Nenhum colaborador vinculado ainda.</p>
+                                    </div>
+                                ) : (
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left">
+                                            <thead className="bg-slate-50/50 dark:bg-slate-950/20">
+                                                <tr>
+                                                    <th className="px-8 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Colaborador</th>
+                                                    <th className="px-8 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Satus</th>
+                                                    <th className="px-8 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Gestão</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-black/5 dark:divide-white/5">
+                                                {employees.map((row) => (
+                                                    <tr key={row.id} className="hover:bg-slate-50/50 dark:hover:bg-indigo-500/5 transition-colors">
+                                                        <td className="px-8 py-5">
+                                                            <div className="flex items-center gap-3">
+                                                                <div className="w-9 h-9 rounded-xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center font-black text-[10px]">
+                                                                    {row.name.charAt(0)}
+                                                                </div>
+                                                                <div>
+                                                                    <p className="text-[11px] font-black text-slate-900 dark:text-white uppercase tracking-tight">{row.name}</p>
+                                                                    <p className="text-[9px] text-slate-400 font-medium tracking-tight">{row.email}</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td className="px-8 py-5">
+                                                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 rounded-full text-[8px] font-black text-emerald-500 uppercase tracking-widest">
+                                                                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                                                                {row.plan}
+                                                            </div>
+                                                        </td>
+                                                        <td className="px-8 py-5">
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    handleRevoke(row.id);
+                                                                }}
+                                                                className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
+                                                            >
+                                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                )}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </div>
 
@@ -319,44 +311,44 @@ export default function B2BPortal() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setShowInviteModal(false)}
-                            className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"
+                            className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
                         ></motion.div>
                         <motion.div
-                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            initial={{ scale: 0.95, opacity: 0, y: 20 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                            className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-[2.5rem] p-10 border border-slate-200 dark:border-slate-800 shadow-2xl"
+                            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                            className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-[3rem] p-10 border border-white/20 shadow-2xl"
                         >
-                            <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-6">Convidar Colaborador</h3>
-                            <form onSubmit={handleInvite} className="space-y-4">
-                                {error && <div className="text-xs text-red-500 font-bold p-3 bg-red-50 rounded-xl border border-red-100">{error}</div>}
+                            <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-8 tracking-tight">Vincular Colaborador</h3>
+                            <form onSubmit={handleInvite} className="space-y-5">
+                                {error && <div className="text-[10px] text-red-500 font-black p-4 bg-red-50 dark:bg-red-900/20 rounded-2xl border border-red-100 dark:border-red-900/30 uppercase tracking-widest">{error}</div>}
                                 <div>
-                                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Nome Completo</label>
+                                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3 block px-1">Nome Completo</label>
                                     <input
                                         type="text"
                                         required
                                         value={inviteForm.name}
                                         onChange={e => setInviteForm({ ...inviteForm, name: e.target.value })}
-                                        className="w-full h-14 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 px-6 text-sm font-bold focus:ring-2 focus:ring-indigo-500 outline-none"
+                                        className="w-full h-14 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 px-6 text-sm font-black focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                                         placeholder="Ex: Carlos Oliveira"
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">E-mail Corporativo</label>
+                                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3 block px-1">E-mail Corporativo</label>
                                     <input
                                         type="email"
                                         required
                                         value={inviteForm.email}
                                         onChange={e => setInviteForm({ ...inviteForm, email: e.target.value })}
-                                        className="w-full h-14 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 px-6 text-sm font-bold focus:ring-2 focus:ring-indigo-500 outline-none"
+                                        className="w-full h-14 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 px-6 text-sm font-black focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                                         placeholder="email@empresa.com"
                                     />
                                 </div>
                                 <button
                                     disabled={inviteLoading}
-                                    className="w-full h-16 bg-premium-gradient text-white rounded-2xl font-black uppercase tracking-widest mt-4 flex items-center justify-center"
+                                    className="w-full h-16 bg-premium-gradient text-white rounded-2xl font-black text-[10px] uppercase tracking-widest mt-6 flex items-center justify-center shadow-xl shadow-indigo-600/20 hover:scale-[1.02] active:scale-95 transition-all"
                                 >
-                                    {inviteLoading ? 'Enviando...' : 'Confirmar Convite'}
+                                    {inviteLoading ? 'Vinculando...' : 'Confirmar Vínculo'}
                                 </button>
                             </form>
                         </motion.div>

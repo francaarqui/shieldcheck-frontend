@@ -51,8 +51,22 @@ export default function ScamMap() {
                 </div>
 
                 <div className="flex gap-4">
-                    <div className="glass-card px-5 py-3 rounded-2xl flex flex-col items-center border border-white dark:border-slate-800 shadow-sm">
-                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Ativos Hoje</span>
+                    <div className="glass-card px-5 py-3 rounded-2xl flex flex-col items-center border border-white dark:border-slate-800 shadow-sm relative overflow-hidden">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                            <motion.div
+                                animate={{
+                                    scale: [1, 1.5, 1],
+                                    opacity: [0.5, 1, 0.5],
+                                }}
+                                transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                                className="w-1.5 h-1.5 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.6)]"
+                            />
+                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Ativos Hoje</span>
+                        </div>
                         <span className="text-2xl font-display font-black text-red-500">2.451</span>
                     </div>
                     <div className="glass-card px-5 py-3 rounded-2xl flex flex-col items-center border border-white dark:border-slate-800 shadow-sm">
