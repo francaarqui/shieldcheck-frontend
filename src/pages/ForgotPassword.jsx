@@ -7,13 +7,28 @@ export default function ForgotPassword() {
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!email) return;
-        // Mock functionality: Simulate sending a recovery email
-        setTimeout(() => {
-            setSubmitted(true);
-        }, 1000);
+
+        try {
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+            const response = await fetch(`${API_URL}/api/forgot-password`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+            } else {
+                const data = await response.json();
+                alert(data.error || 'Erro ao processar solicitação.');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Erro de conexão com o servidor.');
+        }
     };
 
     return (

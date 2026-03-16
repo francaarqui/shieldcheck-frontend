@@ -13,11 +13,11 @@ export default function PublicLayout() {
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center transition-colors duration-300">
             {/* App brand header */}
-            <header className="w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm py-4 px-6 fixed top-0 z-[100] transition-all duration-300 border-b border-slate-200/50 dark:border-slate-800/50">
+            <header className="w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm py-3 md:py-4 px-6 fixed top-0 z-[100] transition-all duration-300 border-b border-slate-200/50 dark:border-slate-800/50">
                 <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
                     <Link to="/" className="flex items-center gap-2 group">
-                        <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-indigo-600/20 group-hover:scale-110 transition-transform">S</div>
-                        <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">ShieldCheck AI</h1>
+                        <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-black text-xl md:text-2xl shadow-lg shadow-indigo-600/20 group-hover:scale-110 transition-transform">S</div>
+                        <h1 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tighter">ShieldCheck AI</h1>
                     </Link>
 
                     {/* DESKTOP NAV */}
@@ -64,7 +64,7 @@ export default function PublicLayout() {
                         </button>
                         <LanguageSwitcher />
                         <Link to="/login" className="hidden md:block text-[11px] font-black text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white tracking-widest uppercase">{t('nav.login')}</Link>
-                        <Link to="/register" className="px-5 py-3 md:px-8 md:py-4 bg-indigo-600 text-white text-[10px] md:text-xs font-black rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20 active:scale-95 uppercase tracking-widest">
+                        <Link to="/register" className="hidden md:flex px-8 py-4 bg-indigo-600 text-white text-xs font-black rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20 active:scale-95 uppercase tracking-widest">
                             {t('nav.try_free')}
                         </Link>
 
@@ -100,19 +100,32 @@ export default function PublicLayout() {
                                 <svg className="w-4 h-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" /></svg>
                             </Link>
                         ))}
+                        <div className="flex items-center justify-between py-6 mt-2 border-t border-slate-50 dark:border-slate-800">
+                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('common.language') || 'Idioma'}</span>
+                            <LanguageSwitcher />
+                        </div>
                     </div>
                 )}
             </header>
 
 
             {/* Main content area */}
-            <main className="flex-1 w-full flex items-center justify-center relative overflow-hidden">
+            <main className="flex-1 w-full flex flex-col items-center justify-center relative overflow-hidden">
                 {/* Background decorative elements for Premium feel */}
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-500/10 blur-[120px] rounded-full"></div>
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 blur-[120px] rounded-full"></div>
 
                 <div className="z-10 w-full flex justify-center py-20 px-4">
                     <Outlet />
+                </div>
+
+                {/* Mobile End of Page Marker */}
+                <div className="lg:hidden w-full py-12 flex flex-col items-center gap-4 border-t border-slate-100 dark:border-slate-800">
+                    <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 font-black text-xs">S</div>
+                    <div className="flex flex-col items-center">
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">ShieldCheck AI</span>
+                        <span className="text-[8px] font-bold text-slate-300 dark:text-slate-600 uppercase tracking-widest mt-1">Proteção Total Ativada</span>
+                    </div>
                 </div>
             </main>
 

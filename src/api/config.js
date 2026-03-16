@@ -1,4 +1,13 @@
-export const API_URL = import.meta.env.VITE_API_URL || 'https://shieldcheck-api.onrender.com';
+// Tenta pegar a URL do servidor do localStorage para facilitar testes locais/mobile
+// Caso contrário, usa a variável de ambiente ou o fallback do Render
+const getEffectiveApiUrl = () => {
+    const savedUrl = localStorage.getItem('shieldcheck_api_url');
+    if (savedUrl) return savedUrl;
+
+    return import.meta.env.VITE_API_URL || 'https://shieldcheck-api.onrender.com';
+};
+
+export const API_URL = getEffectiveApiUrl();
 export const API_ENDPOINTS = {
     LOGIN: `${API_URL}/api/login`,
     REGISTER: `${API_URL}/api/register`,

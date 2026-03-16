@@ -1,50 +1,51 @@
 import React, { useState, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { jsPDF } from 'jspdf';
 import confetti from 'canvas-confetti';
 import { AuthContext } from '../context/AuthContext';
 
-const SCENARIOS = [
-    {
-        id: 1,
-        source: 'WhatsApp',
-        sender: '+55 11 98234-5678',
-        content: 'Olá! Sou do suporte técnico do banco. Detectamos uma tentativa de acesso suspeita. Por favor, clique no link para validar seu dispositivo: http://banco-seguro-validacao.co/login',
-        type: 'scam',
-        explanation: 'Bancos nunca enviam links de validação por WhatsApp com domínios suspeitos como ".co".',
-        difficulty: 'Fácil'
-    },
-    {
-        id: 2,
-        source: 'SMS',
-        sender: '28445',
-        content: 'PARABENS! Voce foi selecionado para uma vaga de emprego HOME OFFICE ganhando R$ 500 por dia. Entre em contato agora: https://wa.me/message/ABC123XYZ',
-        type: 'scam',
-        explanation: 'Ofertas de emprego milagrosas via SMS sem processo seletivo são 99% das vezes golpes de recrutamento.',
-        difficulty: 'Fácil'
-    },
-    {
-        id: 3,
-        source: 'E-mail',
-        sender: 'nota.fiscal@fazenda.gov.br',
-        content: 'Prezado contribuinte, existe uma pendência em seu CPF. Visualize a nota fiscal em anexo para evitar multas.',
-        type: 'scam',
-        explanation: 'Órgãos do governo não enviam anexos executáveis ou links de cobrança direta por e-mail sem aviso prévio no portal oficial.',
-        difficulty: 'Médio'
-    },
-    {
-        id: 4,
-        source: 'WhatsApp',
-        sender: 'Mãe',
-        content: 'Filho, troquei de número. Salva aí. Preciso pagar um boleto mas meu limite excedeu, consegue transferir R$ 800 pra mim? Te devolvo amanhã cedo.',
-        type: 'scam',
-        explanation: 'Clonagem de WhatsApp e "novo número" é um dos golpes mais comuns. Sempre peça uma chamada de voz ou vídeo para confirmar.',
-        difficulty: 'Difícil'
-    }
-];
-
 export default function ScamSimulator() {
+    const { t } = useTranslation();
+    const SCENARIOS = [
+        {
+            id: 1,
+            source: t('academy_v2.scenarios.s1.source'),
+            sender: '+55 11 98234-5678',
+            content: t('academy_v2.scenarios.s1.content'),
+            type: 'scam',
+            explanation: t('academy_v2.scenarios.s1.explanation'),
+            difficulty: t('academy_v2.scenarios.s1.difficulty')
+        },
+        {
+            id: 2,
+            source: t('academy_v2.scenarios.s2.source'),
+            sender: '28445',
+            content: t('academy_v2.scenarios.s2.content'),
+            type: 'scam',
+            explanation: t('academy_v2.scenarios.s2.explanation'),
+            difficulty: t('academy_v2.scenarios.s2.difficulty')
+        },
+        {
+            id: 3,
+            source: t('academy_v2.scenarios.s3.source'),
+            sender: 'nota.fiscal@fazenda.gov.br',
+            content: t('academy_v2.scenarios.s3.content'),
+            type: 'scam',
+            explanation: t('academy_v2.scenarios.s3.explanation'),
+            difficulty: t('academy_v2.scenarios.s3.difficulty')
+        },
+        {
+            id: 4,
+            source: t('academy_v2.scenarios.s4.source'),
+            sender: t('academy_v2.scenarios.s4.sender'),
+            content: t('academy_v2.scenarios.s4.content'),
+            type: 'scam',
+            explanation: t('academy_v2.scenarios.s4.explanation'),
+            difficulty: t('academy_v2.scenarios.s4.difficulty')
+        }
+    ];
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -119,11 +120,11 @@ export default function ScamSimulator() {
         doc.setFontSize(10);
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(148, 163, 184);
-        doc.text('CERTIFICADO DE EXCELÊNCIA EM SEGURANÇA DIGITAL', pageWidth / 2, 65, { align: 'center' });
+        doc.text(t('academy_v2.results.concluded').toUpperCase(), pageWidth / 2, 65, { align: 'center' });
 
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(16);
-        doc.text('Outorgado com distinção a:', pageWidth / 2, 85, { align: 'center' });
+        doc.text(t('academy_v2.certificate.awarded_to') || 'Outorgado com distinção a:', pageWidth / 2, 85, { align: 'center' });
 
         doc.setFontSize(42);
         doc.setFont('times', 'bold');
@@ -133,8 +134,8 @@ export default function ScamSimulator() {
         doc.setFontSize(14);
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(148, 163, 184);
-        doc.text('Por demonstrar habilidades excepcionais na identificação de fraudes,', pageWidth / 2, 120, { align: 'center' });
-        doc.text('engenharia social e ameaças cibernéticas avançadas.', pageWidth / 2, 128, { align: 'center' });
+        doc.text(t('academy_v2.certificate.desc_line1') || 'Por demonstrar habilidades excepcionais na identificação de fraudes,', pageWidth / 2, 120, { align: 'center' });
+        doc.text(t('academy_v2.certificate.desc_line2') || 'engenharia social e ameaças cibernéticas avançadas.', pageWidth / 2, 128, { align: 'center' });
 
         doc.setFillColor(218, 165, 32);
         doc.circle(pageWidth - 45, pageHeight - 45, 18, 'F');
@@ -152,14 +153,14 @@ export default function ScamSimulator() {
         doc.line(40, pageHeight - 40, 100, pageHeight - 40);
         doc.setTextColor(148, 163, 184);
         doc.setFontSize(8);
-        doc.text('DIRETORIA DE INTELIGÊNCIA', 70, pageHeight - 35, { align: 'center' });
+        doc.text(t('academy_v2.certificate.directorate') || 'DIRETORIA DE INTELIGÊNCIA', 70, pageHeight - 35, { align: 'center' });
         doc.text('ShieldCheck AI Security Lab', 70, pageHeight - 31, { align: 'center' });
 
-        const date = new Date().toLocaleDateString('pt-BR');
+        const date = new Date().toLocaleDateString(t('academy_v2.certificate.locale'));
         const hash = Math.random().toString(16).substring(2, 12).toUpperCase();
         doc.setTextColor(71, 85, 105);
         doc.setFontSize(7);
-        doc.text(`ID de Verificação: SC-${hash} | Emitido em: ${date}`, pageWidth / 2, pageHeight - 15, { align: 'center' });
+        doc.text(`${t('academy_v2.certificate.verification_id')}: SC-${hash} | ${t('academy_v2.certificate.issued_on')}: ${date}`, pageWidth / 2, pageHeight - 15, { align: 'center' });
 
         doc.save(`Certificado_ShieldCheck_${user?.name || 'User'}.pdf`);
     };
@@ -189,7 +190,7 @@ export default function ScamSimulator() {
             <div className="max-w-4xl mx-auto py-20 px-4 text-center space-y-12">
                 <div className="relative inline-block">
                     <div className="absolute inset-0 bg-indigo-500 blur-[100px] opacity-20"></div>
-                    <h2 className="text-6xl font-black text-slate-900 dark:text-white relative z-10 text-premium-gradient">Treinamento Concluído!</h2>
+                    <h2 className="text-6xl font-black text-slate-900 dark:text-white relative z-10 text-premium-gradient">{t('academy_v2.results.concluded')}</h2>
                 </div>
 
                 <div className="glass-card p-12 rounded-[4rem] border border-white dark:border-slate-800 shadow-2xl space-y-8 relative overflow-hidden group">
@@ -197,12 +198,12 @@ export default function ScamSimulator() {
 
                     <div className="relative z-10 space-y-4">
                         <div className="text-8xl font-black text-indigo-600 dark:text-indigo-400">{score}</div>
-                        <div className="text-2xl font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Sua Pontuação Total</div>
+                        <div className="text-2xl font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">{t('academy_v2.results.total_score')}</div>
 
                         {score >= 300 ? (
-                            <p className="text-emerald-500 font-black text-sm uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/30 px-6 py-2 rounded-full inline-block">🏆 Status: Especialista Elite</p>
+                            <p className="text-emerald-500 font-black text-sm uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/30 px-6 py-2 rounded-full inline-block">🏆 {t('academy_v2.results.status_expert')}</p>
                         ) : (
-                            <p className="text-amber-500 font-black text-sm uppercase tracking-widest bg-amber-50 dark:bg-amber-950/30 px-6 py-2 rounded-full inline-block">💪 Quase lá! Pratique mais um pouco</p>
+                            <p className="text-amber-500 font-black text-sm uppercase tracking-widest bg-amber-50 dark:bg-amber-950/30 px-6 py-2 rounded-full inline-block">💪 {t('academy_v2.results.status_trainee')}</p>
                         )}
                     </div>
 
@@ -211,7 +212,7 @@ export default function ScamSimulator() {
                             onClick={() => window.location.reload()}
                             className="px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-3xl hover:opacity-90 transition-all shadow-xl"
                         >
-                            Tentar Novamente
+                            {t('academy_v2.results.retry')}
                         </button>
                         {score >= 300 && (
                             <button
@@ -219,7 +220,7 @@ export default function ScamSimulator() {
                                 className="px-10 py-5 bg-premium-gradient text-white rounded-3xl hover:opacity-90 transition-all shadow-xl flex items-center justify-center gap-3 animate-bounce-subtle"
                             >
                                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                                Baixar Certificado Oficial
+                                {t('academy_v2.results.download_cert')}
                             </button>
                         )}
                     </div>
@@ -238,17 +239,17 @@ export default function ScamSimulator() {
                     <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                     </svg>
-                    Voltar
+                    {t('academy_v2.controls.back')}
                 </button>
             </div>
             <div className="flex flex-col md:flex-row justify-between items-end gap-6">
                 <div className="space-y-2">
-                    <div className="inline-flex gap-2 px-4 py-2 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest">Módulo 01: Detecção de Mensagens</div>
-                    <h2 className="text-5xl font-black text-slate-900 dark:text-white tracking-tight">Simulador de <span className="text-premium-gradient">Golpes Reais</span></h2>
+                    <div className="inline-flex gap-2 px-4 py-2 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest">{t('academy_v2.header.module')}</div>
+                    <h2 className="text-5xl font-black text-slate-900 dark:text-white tracking-tight">{t('academy_v2.header.title_start')} <span className="text-premium-gradient">{t('academy_v2.header.title_highlight')}</span></h2>
                 </div>
                 <div className="flex items-center gap-8">
                     <div className="text-right">
-                        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">Cenário</div>
+                        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">{t('academy_v2.header.scenario')}</div>
                         <div className="text-3xl font-black text-slate-900 dark:text-white">{currentIndex + 1} <span className="text-slate-300 dark:text-slate-700">/ {SCENARIOS.length}</span></div>
                     </div>
                     <div className="text-right">
@@ -284,7 +285,7 @@ export default function ScamSimulator() {
                             </div>
                             <div>
                                 <div className="text-white font-black text-sm">{currentScenario?.sender}</div>
-                                <div className="text-[10px] text-white/40 font-bold uppercase tracking-widest">Online</div>
+                                <div className="text-[10px] text-white/40 font-bold uppercase tracking-widest">{t('academy_v2.phone.online')}</div>
                             </div>
                         </div>
 
@@ -295,7 +296,7 @@ export default function ScamSimulator() {
                         </div>
 
                         <div className="p-4 bg-slate-900 border-t border-slate-800 flex gap-2">
-                            <div className="flex-1 h-10 bg-slate-800 rounded-full px-4 text-white/30 text-xs flex items-center">Escreva uma resposta...</div>
+                            <div className="flex-1 h-10 bg-slate-800 rounded-full px-4 text-white/30 text-xs flex items-center">{t('academy_v2.phone.placeholder')}...</div>
                             <div className="w-10 h-10 bg-indigo-600 rounded-full"></div>
                         </div>
                     </div>
@@ -303,8 +304,8 @@ export default function ScamSimulator() {
 
                 <div className="space-y-10">
                     <div className="space-y-4">
-                        <h3 className="text-3xl font-black text-slate-900 dark:text-white leading-tight">Analise a mensagem acima e tome uma decisão.</h3>
-                        <p className="text-xl text-slate-500 dark:text-slate-400 font-medium">Lembre-se: golpistas usam urgência e autoridade para te enganar.</p>
+                        <h3 className="text-3xl font-black text-slate-900 dark:text-white leading-tight">{t('academy_v2.decision.title')}</h3>
+                        <p className="text-xl text-slate-500 dark:text-slate-400 font-medium">{t('academy_v2.decision.subtitle')}</p>
                     </div>
 
                     <div className="flex flex-col gap-4">
@@ -313,7 +314,7 @@ export default function ScamSimulator() {
                             onClick={() => handleChoice('scam')}
                             className="group relative p-6 bg-red-500 text-white rounded-3xl font-black text-xl hover:bg-red-600 transition-all flex items-center justify-between disabled:opacity-50"
                         >
-                            <span>🚩 ISSO É UM GOLPE</span>
+                            <span>🚩 {t('academy_v2.decision.scam_btn')}</span>
                             <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
                                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                             </div>
@@ -324,7 +325,7 @@ export default function ScamSimulator() {
                             onClick={() => handleChoice('safe')}
                             className="group relative p-6 bg-emerald-500 text-white rounded-3xl font-black text-xl hover:bg-emerald-600 transition-all flex items-center justify-between disabled:opacity-50"
                         >
-                            <span>✅ É SEGURO CONFIAR</span>
+                            <span>✅ {t('academy_v2.decision.safe_btn')}</span>
                             <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
                                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                             </div>
@@ -343,8 +344,8 @@ export default function ScamSimulator() {
                                 <div className="flex items-center gap-4">
                                     <div className="text-5xl">{isCorrect ? '🏆' : '❌'}</div>
                                     <div>
-                                        <h4 className="text-2xl font-black uppercase tracking-tight">{isCorrect ? 'Você acertou!' : 'Você caiu no golpe!'}</h4>
-                                        <p className="font-bold opacity-80">{isCorrect ? '+100 Pontos' : '0 Pontos'}</p>
+                                        <h4 className="text-2xl font-black uppercase tracking-tight">{isCorrect ? t('academy_v2.feedback.correct_title') : t('academy_v2.feedback.wrong_title')}</h4>
+                                        <p className="font-bold opacity-80">{isCorrect ? t('academy_v2.feedback.points_plus') : t('academy_v2.feedback.points_zero')}</p>
                                     </div>
                                 </div>
                                 <div className="p-6 bg-black/10 rounded-2xl">
@@ -356,7 +357,7 @@ export default function ScamSimulator() {
                                     onClick={nextScenario}
                                     className="w-full py-4 bg-white text-slate-900 rounded-2xl font-black text-lg hover:shadow-xl transition-all active:scale-95"
                                 >
-                                    Próximo Cenário →
+                                    {t('academy_v2.feedback.next_btn')} →
                                 </button>
                             </motion.div>
                         )}

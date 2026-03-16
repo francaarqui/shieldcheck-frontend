@@ -3,8 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { API_ENDPOINTS } from '../api/config';
+import { useTranslation } from 'react-i18next';
 
 export default function DarkWebScan() {
+    const { t } = useTranslation();
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [target, setTarget] = useState('');
@@ -50,19 +52,19 @@ export default function DarkWebScan() {
                     <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                     </svg>
-                    Voltar
+                    {t('tools.analyze.back')}
                 </button>
             </div>
             {/* Header */}
             <div className="text-center space-y-4 max-w-3xl mx-auto">
                 <div className="inline-flex px-4 py-2 bg-indigo-50 dark:bg-indigo-950/30 rounded-full text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-800">
-                    Módulo de Inteligência Ativa
+                    {t('tools.dark_web.badge')}
                 </div>
                 <h2 className="text-5xl font-display font-black text-slate-900 dark:text-white tracking-tighter">
-                    Dark Web <span className="text-indigo-600">Scan</span> 🕵️‍♂️
+                    {t('tools.dark_web.title_start')} <span className="text-indigo-600">{t('tools.dark_web.title_highlight')}</span> 🕵️‍♂️
                 </h2>
                 <p className="text-slate-500 dark:text-slate-400 text-xl font-medium leading-relaxed">
-                    Verificamos trilhões de registros vazados para encontrar seus dados pessoais e senhas expostas.
+                    {t('tools.dark_web.subtitle')}
                 </p>
             </div>
 
@@ -72,9 +74,9 @@ export default function DarkWebScan() {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="glass-card p-12 rounded-[4rem] border border-white dark:border-slate-800 shadow-2xl text-center space-y-10"
+                        className="glass-card p-8 md:p-12 rounded-[2.5rem] md:rounded-[4rem] border border-white dark:border-slate-800 shadow-2xl text-center space-y-10"
                     >
-                        <div className="w-24 h-24 bg-slate-900 rounded-[2.5rem] mx-auto flex items-center justify-center text-5xl shadow-2xl relative">
+                        <div className="w-20 h-20 md:w-24 md:h-24 bg-slate-900 rounded-[2rem] md:rounded-[2.5rem] mx-auto flex items-center justify-center text-4xl md:text-5xl shadow-2xl relative">
                             <div className="absolute inset-0 bg-indigo-500/20 blur-[30px] rounded-full animate-pulse"></div>
                             🔎
                         </div>
@@ -86,17 +88,17 @@ export default function DarkWebScan() {
                                     required
                                     value={target}
                                     onChange={e => setTarget(e.target.value)}
-                                    placeholder="Digite seu e-mail ou CPF..."
-                                    className="w-full h-20 bg-slate-50 dark:bg-slate-950 rounded-[2rem] border-2 border-slate-100 dark:border-slate-800 px-10 text-xl font-bold focus:border-indigo-500 outline-none transition-all pr-40 text-slate-800 dark:text-white"
+                                    placeholder={t('tools.dark_web.placeholder')}
+                                    className="w-full h-16 md:h-20 bg-slate-50 dark:bg-slate-950 rounded-[1.5rem] md:rounded-[2rem] border-2 border-slate-100 dark:border-slate-800 px-6 md:px-10 text-base md:text-xl font-bold focus:border-indigo-500 outline-none transition-all pr-36 md:pr-44 text-slate-800 dark:text-white shadow-inner"
                                 />
                                 <button
                                     type="submit"
-                                    className="absolute right-3 top-3 bottom-3 px-8 bg-indigo-600 text-white rounded-[1.5rem] font-black uppercase tracking-widest text-xs hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-500/20"
+                                    className="absolute right-2 md:right-3 top-2 md:top-3 bottom-2 md:bottom-3 px-5 md:px-8 bg-indigo-600 text-white rounded-[1rem] md:rounded-[1.5rem] font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-500/20"
                                 >
-                                    Iniciar Scan
+                                    {t('tools.dark_web.btn_start')}
                                 </button>
                             </div>
-                            <p className="text-xs text-slate-400 font-medium">Sua busca é privada e não salvamos os termos consultados.</p>
+                            <p className="text-[10px] md:text-xs text-slate-400 font-medium tracking-tight">{t('tools.dark_web.privacy_note')}</p>
                         </form>
                     </motion.div>
                 )}
@@ -120,9 +122,9 @@ export default function DarkWebScan() {
                             <div className="relative z-10 space-y-8">
                                 <div className="text-6xl animate-pulse">🛰️</div>
                                 <div className="space-y-4">
-                                    <h3 className="text-3xl font-display font-black text-slate-900 dark:text-white">Escaneando Camadas da Rede...</h3>
+                                    <h3 className="text-3xl font-display font-black text-slate-900 dark:text-white">{t('tools.dark_web.scanning_title')}</h3>
                                     <p className="text-slate-400 font-mono text-sm">
-                                        Analizando fóruns cibernéticos: <span className="text-indigo-500 font-black">ACTIVE</span>
+                                        {t('tools.dark_web.scanning_sub')} <span className="text-indigo-500 font-black">{t('tools.dark_web.active_label')}</span>
                                     </p>
                                 </div>
                                 <div className="w-full h-3 bg-slate-100 dark:bg-slate-900 rounded-full overflow-hidden max-w-md mx-auto border border-slate-200 dark:border-slate-800">
@@ -152,19 +154,19 @@ export default function DarkWebScan() {
                                     {results.count > 0 ? '⚠️' : '✅'}
                                 </div>
                                 <h3 className="text-3xl font-display font-black text-slate-900 dark:text-white">
-                                    {results.count > 0 ? `${results.count} Vazamentos Encontrados!` : 'Nenhum vazamento detectado!'}
+                                    {results.count > 0 ? t('tools.dark_web.found_leaks', { count: results.count }) : t('tools.dark_web.no_leaks')}
                                 </h3>
                                 <p className="text-slate-500 dark:text-slate-400 font-medium">
                                     {results.count > 0
-                                        ? "Detectamos que seus dados aparecem em bases de dados expostas. Veja abaixo os detalhes e como se proteger."
-                                        : "Tudo limpo! Sua presença digital parece estar segura nesta consulta."
+                                        ? t('tools.dark_web.leaks_desc')
+                                        : t('tools.dark_web.clean_desc')
                                     }
                                 </p>
                                 <button
                                     onClick={() => setResults(null)}
                                     className="text-xs font-black text-indigo-600 uppercase tracking-widest hover:underline"
                                 >
-                                    Fazer nova consulta
+                                    {t('tools.dark_web.new_scan')}
                                 </button>
                             </div>
 
@@ -178,10 +180,10 @@ export default function DarkWebScan() {
                                             </div>
                                             <div className="space-y-1">
                                                 <h4 className="text-lg font-black text-slate-900 dark:text-white">{leak.source}</h4>
-                                                <p className="text-xs text-red-500 font-bold uppercase tracking-widest">Dados expostos: {leak.data}</p>
+                                                <p className="text-xs text-red-500 font-bold uppercase tracking-widest">{t('tools.dark_web.exposed_data')} {leak.data}</p>
                                             </div>
                                             <p className="text-xs text-slate-500 leading-relaxed">
-                                                Sugerimos a troca imediata de senhas em sites similares e a ativação de 2FA.
+                                                {t('tools.dark_web.suggestion')}
                                             </p>
                                         </div>
                                     ))}
@@ -191,14 +193,9 @@ export default function DarkWebScan() {
                             {/* Recommendations if leaks found */}
                             {results.count > 0 && (
                                 <div className="p-10 bg-slate-900 rounded-[3rem] text-white space-y-6">
-                                    <h4 className="text-xl font-black">🛡️ Guia de Resiliência Pós-Vazamento</h4>
+                                    <h4 className="text-xl font-black">🛡️ {t('tools.dark_web.resilience_guide')}</h4>
                                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        {[
-                                            "Troque sua senha principal imediatamente.",
-                                            "Ative 2-Fatores (2FA) em todos os serviços.",
-                                            "Use um gerenciador de senhas para chaves únicas.",
-                                            "Fique atento a tentativas de login no e-mail."
-                                        ].map((tip, i) => (
+                                        {t('tools.dark_web.tips', { returnObjects: true }).map((tip, i) => (
                                             <li key={i} className="flex items-start gap-4">
                                                 <span className="w-6 h-6 bg-white/10 rounded flex items-center justify-center text-[10px] font-black">{i + 1}</span>
                                                 <span className="text-sm font-medium text-slate-400">{tip}</span>

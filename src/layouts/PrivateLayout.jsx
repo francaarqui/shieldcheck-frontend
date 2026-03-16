@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import OnboardingTour from '../components/OnboardingTour';
+import MobileMenu from '../components/MobileMenu';
 
 const CategoryHeader = ({ title, isOpen, toggle }) => (
     <button
@@ -44,15 +45,39 @@ export default function PrivateLayout() {
         business: false,
         management: false
     });
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const toggleCategory = (cat) => {
         setOpenCategories(prev => ({ ...prev, [cat]: !prev[cat] }));
     };
 
+    const getPageTitle = (path) => {
+        const routes = {
+            '/dashboard': t('common.dashboard'),
+            '/analyze': t('common.analyze'),
+            '/history': t('common.history'),
+            '/family-guard': t('tools.sidebar.family_guard'),
+            '/dark-web-scan': t('tools.sidebar.dark_web'),
+            '/store-checker': t('tools.sidebar.store_auditor'),
+            '/academy': t('tools.sidebar.academy'),
+            '/community': t('tools.sidebar.community'),
+            '/fraud-dictionary': t('tools.sidebar.fraud_dict'),
+            '/brand-protection': t('tools.sidebar.brand_protect'),
+            '/b2b-portal': t('tools.sidebar.business_portal'),
+            '/enterprise-analytics': t('tools.sidebar.enterprise_analytics'),
+            '/privacy-hub': t('tools.sidebar.privacy_hub'),
+            '/plans': t('tools.sidebar.plans'),
+            '/affiliate': t('tools.sidebar.referral'),
+            '/settings': t('common.settings'),
+            '/admin': t('common.admin_panel')
+        };
+        return routes[path] || path.replace('/', '').replace('-', ' ');
+    };
+
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-slate-50">
-                <p className="text-slate-500 font-medium animate-pulse">Carregando sistema...</p>
+            <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+                <p className="text-slate-500 font-medium animate-pulse">{t('common.loading')}</p>
             </div>
         );
     }
@@ -109,13 +134,20 @@ export default function PrivateLayout() {
         const managementCat = categories.find(c => c.id === 'management');
         if (managementCat && !managementCat.items.find(i => i.path === '/admin')) {
             managementCat.items.push({
-                label: 'Admin Panel', path: '/admin', icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                label: t('common.admin_panel'), path: '/admin', icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
             });
         }
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex transition-colors duration-500 overflow-hidden">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex transition-colors duration-500 overflow-hidden relative">
+            <MobileMenu
+                isOpen={isMobileMenuOpen}
+                onClose={() => setIsMobileMenuOpen(false)}
+                categories={categories}
+                user={user}
+                logout={logout}
+            />
             {/* Sidebar */}
             <aside className="hidden lg:flex w-72 bg-white/40 dark:bg-slate-900/40 backdrop-blur-2xl border-r border-slate-200 dark:border-slate-800 flex-col sticky top-0 h-screen transition-all z-50 overflow-hidden">
                 {/* Brand Banner */}
@@ -225,20 +257,32 @@ export default function PrivateLayout() {
                 <div className="fixed bottom-0 left-0 w-[400px] h-[400px] bg-purple-500/5 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/4 -z-10 pointer-events-none"></div>
 
                 {/* Top bar */}
-                <header className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-800/50 py-5 px-10 flex justify-between items-center sticky top-0 z-40 transition-all duration-500">
-                    <div className="flex flex-col">
-                        <div className="flex items-center gap-2 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">
-                            <span>ShieldCheck AI</span>
-                            <span className="text-slate-300">/</span>
-                            <span className="text-indigo-600">{location.pathname === '/' || location.pathname === '/dashboard' ? t('common.dashboard') : location.pathname.replace('/', '')}</span>
+                <header className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-800/50 py-4 px-4 lg:py-5 lg:px-10 flex justify-between items-center sticky top-0 z-40 transition-all duration-500">
+                    <div className="flex items-center gap-4">
+                        {/* Mobile Hamburger */}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(true)}
+                            className="lg:hidden p-2.5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-slate-600 dark:text-slate-400 shadow-sm"
+                        >
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16m-7 6h7" />
+                            </svg>
+                        </button>
+
+                        <div className="flex flex-col">
+                            <div className="flex items-center gap-2 text-[8px] lg:text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">
+                                <span className="hidden sm:inline">ShieldCheck AI</span>
+                                <span className="hidden sm:inline text-slate-300">/</span>
+                                <span className="text-indigo-600">{getPageTitle(location.pathname)}</span>
+                            </div>
+                            <h2 className="text-lg lg:text-xl font-black text-slate-900 dark:text-white capitalize leading-tight">
+                                {location.pathname === '/' || location.pathname === '/dashboard' ? t('common.command_center') : getPageTitle(location.pathname)}
+                            </h2>
                         </div>
-                        <h2 className="text-xl font-black text-slate-900 dark:text-white capitalize mt-1">
-                            {location.pathname === '/' || location.pathname === '/dashboard' ? t('common.command_center') : location.pathname.replace('/', '').replace('-', ' ')}
-                        </h2>
                     </div>
 
-                    <div className="flex items-center gap-6">
-                        <div className="flex items-center gap-2 p-1.5 bg-slate-100 dark:bg-slate-800 rounded-2xl border border-slate-200/50 dark:border-slate-700/50">
+                    <div className="flex items-center gap-3 lg:gap-6">
+                        <div className="flex items-center gap-2 p-1 bg-slate-100/50 dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50">
                             <button
                                 onClick={toggleTheme}
                                 className="p-2.5 rounded-xl bg-white dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all shadow-sm border border-slate-100 dark:border-slate-600"
@@ -253,25 +297,32 @@ export default function PrivateLayout() {
                             <LanguageSwitcher />
                         </div>
 
-                        {user?.plan === 'PREMIUM' || user?.plan === 'PRO' ? (
-                            <div className="relative group">
-                                <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl blur opacity-40 animate-pulse"></div>
-                                <div className="relative bg-slate-900 text-white px-5 py-2.5 rounded-xl flex items-center gap-3 shadow-2xl border border-indigo-500/30 transition-all hover:scale-105 active:scale-95 cursor-default">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-indigo-400"><path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-1.026.1-1.096 1.411-.298 1.944l3.708 2.478-1.034 4.545c-.201.884.662 1.625 1.455 1.139l4.135-2.541 4.135 2.541c.793.486 1.656-.255 1.455-1.139l-1.034-4.545 3.708-2.478c.8-.533.729-1.844-.298-1.944l-4.753-.381-1.83-4.401Z" clipRule="evenodd" /></svg>
-                                    <span className="text-xs font-black uppercase tracking-widest">{user?.plan || 'PRO'} PLAN</span>
-                                </div>
-                            </div>
-                        ) : (
-                            <Link to="/plans" className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl shadow-indigo-500/20 transition-all hover:translate-y-[-2px] active:translate-y-0">
-                                {t('tools.sidebar.upgrade_now')}
-                            </Link>
-                        )}
+
+                        <Link
+                            to="/plans"
+                            className="relative group flex items-center justify-center p-2.5 bg-yellow-400/10 dark:bg-yellow-400/5 rounded-xl border border-yellow-400/20 shadow-lg shadow-yellow-400/5 hover:scale-110 active:scale-95 transition-all"
+                            title={user?.plan || 'Upgrade'}
+                        >
+                            <div className="absolute -inset-1 bg-yellow-400/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-yellow-500 drop-shadow-[0_0_3px_rgba(234,179,8,0.3)]">
+                                <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433L10.788 3.21Z" clipRule="evenodd" />
+                            </svg>
+                        </Link>
                     </div>
                 </header>
 
-                <div className="p-10 pb-32">
+                <div className="p-4 sm:p-6 lg:p-10 pb-8">
                     <div className="max-w-7xl mx-auto animate-fade-in">
                         <Outlet />
+                    </div>
+                </div>
+
+                {/* Mobile End of Page Marker */}
+                <div className="lg:hidden w-full py-12 flex flex-col items-center gap-4 border-t border-slate-100 dark:border-slate-800">
+                    <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 font-black text-xs">S</div>
+                    <div className="flex flex-col items-center">
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">ShieldCheck AI</span>
+                        <span className="text-[8px] font-bold text-slate-300 dark:text-slate-600 uppercase tracking-widest mt-1">{t('common.full_protection_active')}</span>
                     </div>
                 </div>
             </main>

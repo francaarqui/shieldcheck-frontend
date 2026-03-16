@@ -1,150 +1,224 @@
 {
-    "nav": {
-        "how_it_works": "Cómo funciona",
-        "plans": "Planes",
-        "companies": "Empresas",
-        "login": "Entrar",
-        "try_free": "Probar gratis",
-        "light_mode": "Cambiar a Modo Claro",
-        "dark_mode": "Cambiar a Modo Oscuro"
-    },
     "common": {
-        "dashboard": "Panel de Control",
-        "analyze": "Analizar",
-        "academy": "Academy 2.0",
-        "history": "Historial",
-        "command_center": "Centro de Comando",
-        "settings": "Configuración",
-        "logout": "Cerrar Sesión",
-        "shield_score": "Shield Score",
-        "protection_level": "Nivel de Protección",
-        "recent_activity": "Actividad Reciente",
-        "select": "Seleccione",
-        "other": "Otro",
+        "loading": "Cargando...",
+        "error": "Error",
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "delete": "Eliminar",
+        "search": "Buscar",
         "sending": "Enviando...",
-        "error_occurred": "Error al enviar. Intente de nuevo.",
-        "create_free_account": "Crear cuenta gratis",
-        "know_more": "Saber más"
+        "success": "Éxito",
+        "dashboard": "Dashboard",
+        "analyze": "Análisis IA",
+        "history": "Historial",
+        "settings": "Configuraciones",
+        "logout": "Salir",
+        "command_center": "Centro de Mando",
+        "know_more": "Saber más",
+        "shield_score": "Shield Score",
+        "full_protection_active": "Protección Full Activa",
+        "admin_panel": "Panel Admin",
+        "academy": "Academy 2.0"
+    },
+    "nav": {
+        "dashboard": "Dashboard",
+        "analyze": "Análisis IA",
+        "history": "Historial",
+        "academy": "Academy 2.0",
+        "settings": "Configuraciones",
+        "logout": "Salir",
+        "stores": "Verificar Tiendas",
+        "solutions": "Soluciones",
+        "plans": "Planes",
+        "light_mode": "Modo Claro",
+        "dark_mode": "Modo Oscuro",
+        "login": "Entrar",
+        "try_free": "Probar Gratis"
     },
     "dashboard": {
         "welcome": "Bienvenido de nuevo, {{name}}",
-        "protection_active": "Protección ShieldCheck Activa",
-        "scan_now": "Escanear Ahora",
-        "threats_detected": "Amenazas Detectadas",
-        "safe_count": "Interacciones Seguras"
+        "protection_active": "Tu protección está activa.",
+        "protection_subtitle": " Monitorizamos riesgos en tiempo real para ti.",
+        "scan_now": "Nuevo Escaneo",
+        "syncing": "Sincronizando...",
+        "scam_economics": "Economía con Estafas",
+        "saved": "EVITADO",
+        "scam_economics_label": "Valor estimado que dejaste de perder.",
+        "quota_title": "Cuota de Uso Hoy",
+        "quota_unlimited": "Cuota Ilimitada Activa",
+        "quota_remaining": "Aún tienes {{count}} análisis hoy.",
+        "upgrade_quota": "Aumentar Cuota",
+        "pulse_title": "Pulso de Seguridad",
+        "pulse_subtitle": "Actividades recientes monitoreadas por ShieldCheck.",
+        "shield_score_label": "Índice de Seguridad",
+        "recent_logs_title": "Últimos Registros",
+        "full_panel": "Panel Completo",
+        "empty_logs": "Tu historial está limpio por ahora.",
+        "start_now": "Empezar ahora",
+        "evaluation": "Evaluación",
+        "types": {
+            "text": "TEXTO",
+            "audio": "AUDIO",
+            "video": "VIDEO",
+            "image": "IMAGEN"
+        }
     },
     "landing": {
         "hero": {
-            "badge": "🛡️ IA DE PROTECCIÓN AVANZADA",
-            "title": "Blindaje Digital Inteligente para",
-            "title_highlight": "Tu Soberanía",
-            "subtitle": "ShieldCheck AI usa inteligencia artificial para analizar mensajes, enlaces y tiendas en línea para detectar fraudes digitales en segundos.",
-            "cta_analyze": "Analizar ahora",
-            "placeholder": "Pega un mensaje sospechoso o enlace aquí...",
-            "trust_text": "ya evitan estafas con ShieldCheck AI."
+            "title": "La Inteligencia que",
+            "title_highlight": "Blinda tu vida digital.",
+            "subtitle": "Detectamos fraudes en enlaces, audios y textos con precisión militar. Protección activa 24/7 directamente en tu WhatsApp y navegador.",
+            "placeholder": "Pega un enlace o texto sospechoso aquí...",
+            "cta_analyze": "Analizar Ahora",
+            "trust_text": "usuarios confían en ShieldCheck AI"
         },
+        "problem_badge": "Alerta de Riesgo",
+        "problem_title_line1": "Las estafas digitales",
+        "problem_title_line2": "ahora son ",
+        "problem_title_highlight": "invisibles.",
+        "problem_desc": "Cada día, millones pierden dinero ante criminales que usan IA para crear mensajes perfectos, voces clonadas y sitios que parecen idénticos a los reales.",
         "stats": {
-            "lost_money": "+$2.5 Mil M",
-            "lost_money_label": "PERDIDOS EN ESTAFAS/AÑO",
-            "scam_ratio": "7 de cada 10",
-            "scam_ratio_label": "YA RECIBIERON SMS FALSO"
+            "lost_money": "$ 2.5B",
+            "lost_money_label": "Perdidos en estafas/año en el mundo",
+            "scam_ratio": "1 de 4",
+            "scam_ratio_label": "Personas ya han caído en estafas"
+        },
+        "threat_alert": "Amenaza Detectada: Enlace de Phishing",
+        "scam_map": {
+            "title": "Inteligencia en Tiempo Real:",
+            "title_highlight": "Mapa de Amenazas",
+            "desc": "Nuestra red neural monitoriza miles de nuevas estafas por hora. ShieldCheck aprende de cada intento frustrado.",
+            "stats_threats": "Amenazas Hoy",
+            "stats_accuracy": "Tasa de Detección",
+            "cta": "Ver Mapa de Calor",
+            "live_label": "Última Detección"
         },
         "how_it_works": {
-            "title": "¿Cómo funciona ShieldCheck AI?",
-            "subtitle": "Tres pasos para no dudar nunca más de lo que recibes.",
-            "step1_title": "Captura y Pega",
-            "step1_desc": "Copia el mensaje sospechoso, toma un screenshot o pega el enlace en nuestro campo de análisis o directamente en WhatsApp.",
-            "step2_title": "IA en Acción",
-            "step2_desc": "Nuestra IA avanzada escanea bases de datos globales y analiza patrones de persuasión y fraude.",
-            "step3_title": "Recibe el Veredicto",
-            "step3_desc": "En menos de 2 segundos recibes un puntaje de riesgo y una explicación de por qué debes o no confiar."
+            "title": "Cómo Funciona",
+            "subtitle": "Tres capas de protección entre tú y los criminales.",
+            "step1_title": "Tú Envías",
+            "step1_desc": "Pega el texto, enlace o manda el audio sospechoso a nuestra IA.",
+            "step2_title": "IA Analiza",
+            "step2_desc": "Descomponemos patrones de lenguaje, metadatos de enlaces y fraudes de voz.",
+            "step3_title": "Veredicto Instantáneo",
+            "step3_desc": "En segundos, recibes un informe de riesgo y recomendación.",
+            "badge": "Academy 2.0"
         },
         "brand_protection": {
-            "badge": "📍 MÓDULO CORPORATIVO",
+            "badge": "Protección de Marca",
             "title": "Tu marca bajo",
-            "title_highlight": "Protección Total.",
-            "desc": "Ve más allá del individual. Protege tu empresa contra clones de sitios, typosquatting y ataques de phishing masivos que usan tu nombre indebidamente.",
+            "title_highlight": "blindaje total.",
+            "desc": "Monitorizamos menciones y clones de tu empresa en la web para evitar fraudes en tu nombre.",
             "features": [
-                "Monitoreo 24/7 de dominios similares",
-                "Generador automático de denuncias (Takedown)",
-                "Dashboard ejecutivo de riesgo corporativo",
-                "Enterprise Scorecard para auditoría interna"
+                "Detección de Sitios Fake",
+                "Monitoreo de Social Media",
+                "Takedowns Automáticos",
+                "Alertas de Crisis 24/7"
             ]
         },
         "academy": {
-            "badge": "SHIELD ACADEMY 2.0",
-            "title": "Aprende a escuchar lo que",
-            "title_highlight": "otros no escuchan.",
-            "desc": "Nuestro nuevo Deepfake Audio Lab usa IA para entrenar tus oídos contra estafas de voz clonada. Vive situaciones reales en un entorno seguro y controlado.",
-            "stats_training": "100+",
-            "stats_training_label": "ESCENARIOS DE ENTRENAMIENTO",
-            "stats_certified": "CERTIFICADO",
-            "stats_certified_label": "ESPECIALISTA ANTI-FRAUDE"
+            "badge": "Educación Digital",
+            "title": "Aprende a",
+            "title_highlight": "no caer en estafas.",
+            "desc": "Simulaciones interactivas y entrenamientos para ti y tu equipo para reconocer ingeniería social.",
+            "stats_training": "15+ Módulos",
+            "stats_training_label": "Entrenamientos Activos",
+            "stats_certified": "Certificación",
+            "stats_certified_label": "Experto reconocido"
         },
-        "problem_badge": "Alerta de Riesgo",
-        "problem_title_line1": "Las estafas digitales se han vuelto",
-        "problem_title_line2": "",
-        "problem_title_highlight": "invisibles.",
-        "problem_desc": "Cada día, millones de personas pierden dinero ante criminales que usan IA para crear mensajes perfectos, clonar voces y construir sitios idénticos a los reales.",
-        "threat_alert": "Amenaza Detectada: Enlace de Phishing",
-        "risk_score_label": "PUNTUACIÓN DE RIESGO",
+        "whatsapp": {
+            "title": "Protección Directa en",
+            "title_highlight": "WhatsApp",
+            "desc": "No necesitas app. Añade nuestro bot y reenvía cualquier mensaje para análisis instantáneo.",
+            "feature1": "Análisis de Audio (IA Voice)",
+            "feature2": "Verificación de Enlaces Cortos",
+            "feature3": "Lectura de Capturas (OCR)",
+            "cta": "Activar Bot Ahora"
+        },
         "browser_guard": {
-            "badge": "Browser Guard",
+            "badge": "Extensión Navegador",
             "title": "Browser Guard",
-            "desc": "Nuestra nueva extensión para Chrome y Edge te protege pasivamente mientras navegas.",
+            "desc": "Nuestra extensión te protege pasivamente mientras navegas, bloqueando accesos a sitios de riesgo.",
             "feature1_title": "Alertas en Tiempo Real",
             "feature1_desc": "Notificaciones instantáneas en sitios de riesgo.",
-            "feature2_title": "Lista Negra Global",
-            "feature2_desc": "Conectada a nuestra base de datos actualizada continuamente.",
+            "feature2_title": "Blacklist Global",
+            "feature2_desc": "Conectada a nuestra base de datos actualizada.",
             "mock_alert": "SITIO PELIGROSO DETECTADO"
         },
-        "benefits": {
-            "title": "Tranquilidad Digital para ti",
-            "subtitle": "No se trata solo de software, es proteger lo que construiste.",
-            "item1_title": "Ahorra Dinero",
-            "item1_desc": "Evita pérdidas financieras en transacciones falsas.",
-            "item2_title": "Protege a tu Familia",
-            "item2_desc": "Asegúrate de que tus seres queridos no caigan en tácticas de secuestro digital.",
-            "item3_title": "Instinto Hacker",
-            "item3_desc": "Ten el poder de análisis de un experto en seguridad en la palma de tu mano.",
-            "item4_title": "Educativo",
-            "item4_desc": "Reconoce estafas incluso antes de usar nuestra IA."
+        "store_checker": {
+            "title": "Verificador de",
+            "title_highlight": "Tiendas Online",
+            "desc": "Verificamos datos fiscales, tiempo del dominio y reputación antes de que compres.",
+            "features": [
+                {
+                    "t": "Auditoría Corporativa",
+                    "d": "Validamos la situación legal ante autoridades."
+                },
+                {
+                    "t": "Edad del Sitio",
+                    "d": "Sitios nuevos con ofertas enormes son 90% riesgo."
+                },
+                {
+                    "t": "Protección de Pagos",
+                    "d": "Analizamos claves de pago sospechosas."
+                },
+                {
+                    "t": "Garantía de Compra",
+                    "d": "Consejos de seguridad para cambios y devoluciones."
+                }
+            ],
+            "cta": "Auditar Tienda Ahora"
         },
-        "defenses": {
-            "title": "Tres Capas de Defensa Total",
-            "subtitle": "Nuestra tecnología analiza el ADN del fraude.",
-            "item1_title": "Escaneo Multimodal",
-            "item1_desc": "Detectamos enlaces maliciosos camuflados y sitios falsos.",
-            "item2_title": "IA Auditiva",
-            "item2_desc": "Nuestra IA transcribe audios y detecta técnicas de manipulación.",
-            "item3_title": "Auditoría de Tienda",
-            "item3_desc": "Verificamos sitios de e-commerce y registros antes de que compres."
+        "family_guard": {
+            "badge": "Cuidado Familiar",
+            "title": "Protege a quienes",
+            "title_highlight": "más amas.",
+            "desc": "Monitorea intentos de estafa contra tus padres o hijos y recibe alertas inmediatas en tu móvil.",
+            "feature1_title": "Vínculo Remoto",
+            "feature1_desc": "Conecta dispositivos de tu familia.",
+            "feature2_title": "Alertas Críticas",
+            "feature2_desc": "Recibe SMS/Push cuando haya riesgo.",
+            "feature3_title": "Informes de Seguridad",
+            "feature3_desc": "Conoce el score de protección de todos.",
+            "cta": "Activar Family Guard"
+        },
+        "dark_web": {
+            "badge": "Monitoreo de Datos",
+            "title": "Escaneo en la",
+            "title_highlight": "Dark Web",
+            "desc": "¿Tus datos se filtraron? Verificamos foros cibernéticos buscando tu e-mail o identificación.",
+            "stat1_value": "Bi",
+            "stat1_label": "Registros filtrados monitoreados",
+            "stat2_value": "24/7",
+            "stat2_label": "Vigilancia activa de filtraciones",
+            "cta": "Iniciar Escaneo"
+        },
+        "deepfake": {
+            "badge": "Deepfake Lab",
+            "title": "Defensa contra",
+            "title_highlight": "IA Maliciosa",
+            "desc": "Analiza audios sospechosos buscando clonación de voz y manipulación digital.",
+            "feature1": "Detección de Voz Sintética",
+            "feature2": "Biometría de Audio",
+            "feature3": "Análisis de Ruido de Fondo",
+            "feature4": "Procesamiento en ms",
+            "cta": "Probar Audio Ahora"
         },
         "audience": {
             "title": "Seguridad para todos",
             "subtitle": "ShieldCheck AI se adapta a tu rutina.",
             "item1_badge": "Para Ti",
-            "item1_title": "Usuarios cotidianos",
-            "item1_desc": "Evita estafas de transferencias y facturas en el día a día.",
+            "item1_title": "Usuarios comunes",
+            "item1_desc": "Evita estafas de pagos y facturas diarias.",
             "item2_badge": "Para la Familia",
-            "item2_title": "Adultos mayores e hijos",
+            "item2_title": "Mayores e Hijos",
             "item2_desc": "Protege a quienes amas.",
-            "item3_badge": "Para Compradores",
+            "item3_badge": "Para Shops",
             "item3_title": "Consumidores Online",
-            "item3_desc": "Validamos si la oferta es real.",
+            "item3_desc": "Validamos se la oferta es real.",
             "item4_badge": "Para Empresas",
             "item4_title": "Negocios y Devs",
             "item4_desc": "Integra nuestra IA vía API."
-        },
-        "whatsapp": {
-            "badge": "WHATSAPP ELITE 🛡️",
-            "title": "Tu WhatsApp ahora tiene un",
-            "title_highlight": "Guardaespaldas.",
-            "desc": "Adjunta ShieldBot a tus conversaciones. Reenvía audios, capturas o enlaces y recibe análisis instantáneo sin salir de la app.",
-            "cta": "Activar WhatsApp Pro",
-            "feature1": "Transcripción de Audios Sospechosos",
-            "feature2": "Análisis de Capturas de Pago",
-            "feature3": "Alertas de Enlaces Maliciosos"
         }
     },
     "plans": {
@@ -155,85 +229,25 @@
         "save_badge": "OFF",
         "most_popular": "Más Popular",
         "ssl_secure": "SSL Seguro",
-        "ssl_secure_desc": "Transacciones cifradas de grado militar.",
+        "ssl_secure_desc": "Transacciones encriptadas nivel militar.",
         "guarantee": "Garantía",
-        "guarantee_desc": "7 días para cancelar con reembolso completo.",
+        "guarantee_desc": "7 días para cancelación con reembolso total.",
         "flexible_payment": "Pago flexible",
-        "flexible_payment_desc": "Tarjeta y otros métodos vía Stripe.",
+        "flexible_payment_desc": "Tarjeta y Pix vía Stripe.",
         "buttons": {
             "select": "Seleccionar Plan",
-            "upgrade": "Mejorar Ahora",
+            "upgrade": "Hacer Upgrade Ahora",
             "contact": "Hablar con Especialista",
             "current": "Tu Plan Actual"
         },
         "names": {
-            "free": "GRATUITO",
+            "free": "GRATIS",
             "solo": "SOLO BOT",
             "premium": "PREMIUM FULL",
             "starter": "Starter",
             "pro": "Pro",
-            "business": "CORPORATE",
+            "business": "EMPRESAS",
             "enterprise": "ENTERPRISE"
-        },
-        "subtitles": {
-            "starter": "Para pequeñas empresas",
-            "pro": "Para empresas en crecimiento",
-            "enterprise": "Para grandes operaciones"
-        },
-        "savings": {
-            "starter": "Ahorra R$ 598/año",
-            "pro": "Ahorra R$ 1.198/año",
-            "custom": "Personalizado"
-        },
-        "prices": {
-            "on_request": "A consultar"
-        },
-        "features": {
-            "scans_3": "3 Escaneos de Texto/Día",
-            "basic_links": "Análisis de Enlaces Básico",
-            "phishing_detect": "Detección de Phishing Común",
-            "academy_demo": "Acceso Shield Academy (Demo)",
-            "wa_free": "Bot WhatsApp (Modo Free)",
-            "scans_7": "7 Días de Prueba Gratis",
-            "wa_premium": "Bot WhatsApp Premium",
-            "audio_transcribe": "Transcripción de Audios de Voz",
-            "ai_persuasion": "Detección de Persuasión IA",
-            "training_scenarios": "Escenarios de Entrenamiento Academy",
-            "fair_use": "Uso Justo (500 Consultas/mes)",
-            "ocr_basic": "Análisis de Capturas (OCR)",
-            "scans_unlimited": "Escaneos Ilimitados 24/7",
-            "users_unlimited": "Usuarios ilimitados",
-            "users_5": "Hasta 5 usuarios",
-            "scans_500": "500 análisis/mes",
-            "api_basic": "API de integración",
-            "monthly_reports": "Informes mensuales",
-            "support_email": "Soporte por email",
-            "api_webhook": "API + Webhook",
-            "custom_dashboard": "Dashboard personalizado",
-            "support_priority": "Soporte prioritario 24/7",
-            "sla_guaranteed": "SLA garantizado",
-            "whitelabel": "Whitelabel completo",
-            "dedicated_infra": "Infraestructura dedicada",
-            "staff_training": "Entrenamiento del equipo",
-            "custom_integration": "Integración a medida",
-            "custom_contract": "Contrato personalizado",
-            "wa_full": "Bot WhatsApp (1 Licencia Full)",
-            "deepfake_detect": "Detección de Deepfakes 🎙️",
-            "academy_expert": "Certificación Academy Expert",
-            "brand_protection": "Brand Protection Dashboard",
-            "domain_monitor": "Monitoreo de Dominios",
-            "auto_takedowns": "Takedowns Automáticos (3/mes)",
-            "api_limited": "API de Análisis (5000 llamadas)",
-            "wa_5": "Bot WhatsApp (5 Licencias)",
-            "support_24h": "Soporte VIP 24h",
-            "custom_brand": "Brand Protection Personalizada",
-            "unlimited_takedowns": "Takedowns Ilimitados",
-            "api_dev": "API Dev v2 (Ilimitada)",
-            "custom_training": "Entrenamiento de Equipo Custom",
-            "unlimited_operators": "Operadores Ilimitados",
-            "low_latency": "Webhooks de Baja Latencia",
-            "crm_integration": "Integración CRM Directa",
-            "risk_consultancy": "Consultoría de Riesgo"
         },
         "billing": {
             "always": "siempre",
@@ -241,132 +255,118 @@
             "yearly": "año"
         },
         "badges": {
-            "free_trial": "7 Días Gratis",
-            "full_shield": "Blindaje Total"
+            "free_trial": "PRUEBA GRATIS",
+            "full_shield": "ESCUDO TOTAL"
         },
-        "prices_b2b": {
-            "starter_monthly": "R$ 299",
-            "starter_annual": "R$ 2.990",
-            "pro_monthly": "R$ 599",
-            "pro_annual": "R$ 5.990"
-        }
-    },
-    "b2b": {
-        "hero": {
-            "badge": "Solución para Empresas",
-            "title_start": "¿Cuánto cuesta una",
-            "title_highlight": "factura falsa",
-            "title_end": "para tu negocio?",
-            "desc": "ShieldCheck AI analiza documentos, comprobantes y mensajes en tiempo real. Bloquea el fraude antes de que cueste caro.",
-            "cta_primary": "Hablar con un Especialista",
-            "cta_secondary": "Ver Planes Empresariales"
+        "subtitles": {
+            "starter": "Para pequeños negocios",
+            "pro": "Para empresas en crecimiento",
+            "enterprise": "Para grandes operaciones"
         },
-        "stats": {
-            "value1": "$10K",
-            "label1": "Pérdida media por estafa empresarial",
-            "value2": "99%",
-            "label2": "De precisión en la detección de fraudes",
-            "value3": "< 2s",
-            "label3": "Para analizar cualquier documento o mensaje"
+        "savings": {
+            "starter": "Ahorra $ 598/año",
+            "pro": "Ahorra $ 1.198/año",
+            "custom": "Personalizado"
         },
-        "sectors": {
-            "title": "¿Quién necesita ShieldCheck?",
-            "subtitle": "Cualquier empresa que trate con pagos o documentos de clientes.",
-            "real_estate": {
-                "title": "Inmobiliarias",
-                "pain": "Los clientes envían recibos de pago falsos para asegurar propiedades.",
-                "solution": "Valida recibos y facturas antes de firmar contratos."
-            },
-            "ecommerce": {
-                "title": "E-commerce",
-                "pain": "El fraude en pagos y capturas de pantalla falsas dañan el flujo de caja.",
-                "solution": "Filtra pedidos sospechosos automáticamente antes de liberar el stock."
-            },
-            "legal": {
-                "title": "Despachos de Abogados",
-                "pain": "La ingeniería social y el phishing apuntan a datos confidenciales.",
-                "solution": "Analiza enlaces y emails sospechosos antes de hacer clic."
-            },
-            "health": {
-                "title": "Clínicas y Salud",
-                "pain": "Estafas de seguros médicos falsos y cargos indebidos son comunes.",
-                "solution": "Identifica mensajes fraudulentos que se hacen pasar por aseguradoras."
-            }
+        "prices": {
+            "on_request": "Bajo consulta"
         },
-        "quote": {
-            "text": "¿Tu empresa pierde $10K/mes por documentos falsos? ShieldCheck Pro cuesta $499/mes y bloquea el 99% de esos fraudes antes de que salgan los pagos.",
-            "author": "ShieldCheck AI — protección que se paga sola con una sola estafa bloqueada."
-        },
-        "form": {
-            "title": "Habla con nuestro equipo",
-            "subtitle": "Respondemos en hasta 24 horas hábiles. Sin compromiso.",
-            "name_label": "Tu nombre",
-            "name_placeholder": "Juan García",
-            "company_label": "Empresa",
-            "company_placeholder": "Mi Empresa S.A.",
-            "email_label": "Email",
-            "email_placeholder": "juan@empresa.com",
-            "phone_label": "Teléfono/WhatsApp",
-            "phone_placeholder": "+1 (555) 000-0000",
-            "business_type_label": "Tipo de negocio",
-            "message_label": "¿Cómo podemos ayudar?",
-            "message_placeholder": "Describe tu desafío actual con fraudes o estafas...",
-            "submit": "Enviar Mensaje",
-            "success_title": "¡Mensaje recibido!",
-            "success_desc": "Nuestro equipo de ventas se pondrá en contacto pronto."
-        },
-        "footer_cta": {
-            "text": "¿Prefieres probar antes de contratar?"
+        "features": {
+            "scans_3": "3 Escaneos de Texto/Día",
+            "basic_links": "Análisis de Enlaces Básico",
+            "phishing_detect": "Detección de Phishing Común",
+            "academy_demo": "Acceso Shield Academy (Demo)",
+            "wa_free": "WhatsApp Bot (Modo Gratis)",
+            "scans_7": "7 Días Gratis para Probar",
+            "wa_premium": "WhatsApp Bot Premium",
+            "audio_transcribe": "Transcripción de Audios de Voz",
+            "ai_persuasion": "Detección de Persuasión por IA",
+            "training_scenarios": "Escenarios de Entrenamiento Academy",
+            "fair_use": "Fair Use (500 Consultas/mes)",
+            "ocr_basic": "Análisis de Capturas (OCR)",
+            "scans_unlimited": "Análisis Ilimitados 24/7",
+            "users_unlimited": "Usuarios ilimitados",
+            "users_5": "Hasta 5 usuarios",
+            "scans_500": "500 análisis/mes",
+            "api_basic": "API de Integración",
+            "monthly_reports": "Informes mensuales",
+            "support_email": "Soporte por e-mail",
+            "api_webhook": "API + Webhook",
+            "custom_dashboard": "Dashboard personalizado",
+            "support_priority": "Soporte 24/7 prioritario",
+            "sla_guaranteed": "SLA garantizado",
+            "whitelabel": "Whitelabel total",
+            "dedicated_infra": "Infraestructura dedicada",
+            "staff_training": "Entrenamiento de staff",
+            "custom_integration": "Integración personalizada",
+            "custom_contract": "Contrato personalizado",
+            "wa_full": "WhatsApp Bot (1 Licencia Full)",
+            "deepfake_detect": "Detección de Deepfake 🎙️",
+            "academy_expert": "Certificado Academy Expert",
+            "brand_protection": "Brand Protection Dashboard",
+            "domain_monitor": "Monitoreo de Dominios",
+            "auto_takedowns": "Takedowns Automáticos (3/mes)",
+            "api_limited": "API de Análisis (5000 ch.)",
+            "wa_5": "WhatsApp Bot (5 Licencias)",
+            "support_24h": "Soporte VIP 24h",
+            "custom_brand": "Protección de Marca Personalizada",
+            "unlimited_takedowns": "Takedowns Ilimitados",
+            "api_dev": "API Dev v2 (Ilimitada)",
+            "custom_training": "Entrenamiento On-demand",
+            "unlimited_operators": "Operadores Ilimitados",
+            "low_latency": "Webhooks Low-Latency",
+            "crm_integration": "Integración Directa CRM",
+            "risk_consultancy": "Consultoría de Riesgo"
         }
     },
     "auth": {
         "welcome": "Bienvenido",
         "login_subtitle": "🛡️ Accede a tu cuenta ShieldCheck AI",
-        "email_label": "Correo Corporativo",
+        "email_label": "E-mail Corporativo",
         "email_placeholder": "ejemplo@email.com",
         "password_label": "Contraseña",
         "forgot_password": "¿Olvidaste?",
         "password_placeholder": "••••••••",
         "login_button": "Entrar al Panel",
-        "or_use": "O utiliza",
+        "or_use": "O usa",
         "google_login": "Continuar con Google",
         "mfa_title": "Seguridad de Élite",
-        "mfa_subtitle": "Ingresa el código de tu autenticador para continuar.",
+        "mfa_subtitle": "Introduce el código de tu autenticador para continuar.",
         "verifying": "Verificando...",
         "mfa_button": "Verificar y Entrar",
         "back_to_login": "Volver al login",
         "new_here": "¿Nuevo por aquí?",
-        "create_account": "Crear cuenta gratuita",
+        "create_account": "Crear cuenta gratis",
         "marketing_title_line1": "La Inteligencia que",
         "marketing_title_highlight": "Blinda tu vida digital.",
-        "feature1_title": "Precisión de Nivel Militar",
-        "feature1_desc": "Nuestra IA detecta fraudes en enlaces, audios y textos con 99.9% de eficacia.",
+        "feature1_title": "Precisión Militar",
+        "feature1_desc": "Nuestra IA detecta fraudes en enlaces, audios y textos con 99,9% de eficacia.",
         "feature2_title": "WhatsApp Activo 24/7",
-        "feature2_desc": "Protección continua directamente en tu WhatsApp, sin necesidad de abrir apps.",
+        "feature2_desc": "Protección continua directamente en tu WhatsApp, sin necesidad de apps.",
         "feature3_title": "Análisis Multimodal",
-        "feature3_desc": "Transcripción automática de audios y lectura de capturas de pantalla sospechosas.",
-        "social_proof": "Únete a más de 10.000 usuarios",
+        "feature3_desc": "Transcripción automática de audios y lectura de capturas sospechosas.",
+        "social_proof": "Únete a 10.000+ usuarios",
         "users": "usuarios",
         "social_proof_desc": "Protegidos diariamente por ShieldCheck AI.",
         "register_title": "Tu Seguridad",
-        "register_subtitle": "Crea tu cuenta y comienza a navegar de forma blindada.",
+        "register_subtitle": "Crea tu cuenta y empieza a navegar con seguridad.",
         "name_label": "Nombre Completo",
-        "name_placeholder": "¿Cómo quieres ser llamado?",
-        "email_register_placeholder": "tu@mejor-correo.com",
+        "name_placeholder": "¿Cómo quieres que te llamemos?",
+        "email_register_placeholder": "tu@mejor-email.com",
         "password_create_label": "Crea una Contraseña",
         "password_confirm_label": "Confirma",
         "register_button": "Crear Mi Cuenta",
-        "already_have_account": "¿Ya tienes cuenta?",
-        "login_link": "Iniciar sesión",
+        "already_have_account": "¿Ya tienes una cuenta?",
+        "login_link": "Entrar",
         "forgot_password_title": "Recuperar Contraseña",
-        "forgot_password_subtitle": "Enviaremos un enlace de restablecimiento a tu correo.",
+        "forgot_password_subtitle": "Enviaremos un enlace de recuperación a tu e-mail.",
         "forgot_password_button": "Enviar enlace de recuperación",
-        "email_sent_title": "¡Correo Enviado!",
+        "email_sent_title": "¡E-mail Enviado!",
         "email_sent_desc": "Revisa tu bandeja de entrada y sigue las instrucciones para crear una nueva contraseña.",
         "error_passwords_mismatch": "Las contraseñas no coinciden.",
         "error_login": "Error al iniciar sesión",
         "error_register": "Error al crear cuenta",
-        "google_setup_msg": "Configurando integración con Google... Por favor, espere la liberación del desarrollador."
+        "google_setup_msg": "Configurando integración Google... Por favor espera al lanzamiento para desarrolladores."
     },
     "footer": {
         "about": "Inteligencia artificial de última generación para detectar estafas digitales, enlaces maliciosos y fraudes online en segundos.",
@@ -383,10 +383,12 @@
             "stores": "Verificar tienda online",
             "fraud_dictionary": "Diccionario de Estafas",
             "academy": "Shield Academy",
-            "api": "API para empresas",
-            "plan_free": "Plan gratuito",
-            "plan_premium": "Plan Premium",
-            "plan_business": "Plan Empresas (API)",
+            "api": "API Enterprise",
+            "plan_free": "Plan Gratis",
+            "plan_solo": "Plan Solo Bot (WhatsApp)",
+            "plan_premium": "Plan Premium Full",
+            "plan_business": "Plan Business",
+            "plan_enterprise": "Plan Pro (Empresas)",
             "compare_plans": "Comparar planes",
             "help_center": "Centro de ayuda",
             "contact": "Contacto",
@@ -395,69 +397,86 @@
             "privacy_policy": "Política de Privacidad",
             "terms_of_use": "Términos de Uso",
             "cookie_policy": "Política de Cookies",
-            "lgpd_compliance": "Cumplimiento de Privacidad"
+            "lgpd_compliance": "Cumplimiento LGPD"
         },
         "seals": {
             "ai_protection": "Protección por IA",
-            "military_encryption": "Cifrado Militar",
-            "lgpd": "Conformidad Privacidad"
+            "military_encryption": "Encriptación Militar",
+            "lgpd": "Privacidad LGPD"
         },
-        "disclaimer": "\"ShieldCheck AI proporciona análisis basados en inteligencia artificial y datos públicos. Las recomendaciones tienen carácter informativo y no sustituyen verificaciones oficiales de instituciones financieras.\"",
+        "cta": {
+            "title": "¿Listo para proteger tu vida digital?",
+            "subtitle": "Únete a miles de Centinelas y activa tu escudo ahora mismo.",
+            "button": "Empezar Ahora"
+        },
+        "disclaimer": "\"ShieldCheck AI proporciona análisis basados en inteligencia artificial y datos públicos. Las recomendaciones son informativas y no sustituyen comprobaciones oficiales.\"",
         "copyright": "© 2026 ShieldCheck AI — Todos los derechos reservados."
     },
     "tools": {
         "analyze": {
-            "title": "Nuevo <span class=\"text-premium-gradient\">Análisis de IA</span>",
-            "subtitle": "Copie y pegue cualquier mensaje sospechoso o suba una captura de pantalla para verificar el riesgo.",
+            "title": "Nuevo <span class=\"text-premium-gradient\">Análisis IA</span>",
+            "subtitle": "Pega cualquier mensaje sospechoso o envía una captura para verificar el riesgo.",
             "back": "Volver",
             "content_title": "Contenido del Mensaje",
-            "source_detected": "Fuente Detectada: {{source}}",
+            "source_detected": "Origen Detectado: {{source}}",
             "discard": "Descartar",
-            "placeholder": "Pegue aquí el mensaje sospechoso, enlace o texto para un análisis profundo...",
-            "input_monitor": "Input Monitor Activo",
+            "placeholder": "Pega aquí el mensaje, enlace o texto sospechoso para un análisis profundo...",
+            "input_monitor": "Monitor de Entrada Activo",
             "btn_image": "Imagen",
             "btn_audio": "Audio",
-            "btn_video": "Video",
+            "btn_video": "Vídeo",
             "btn_start": "Iniciar Escaneo Blindado",
             "analyzing": "Analizando...",
-            "daily_limit_label": "Límite Diario Gratuito:",
+            "daily_limit_label": "Límite Diario Gratis:",
             "heuristic_motor": "Motor Heurístico Activo",
             "heuristic_desc": "Descomponiendo patrones de ingeniería social...",
-            "risk_score": "Risk Score",
+            "risk_score": "Riesgo",
             "detected_signals": "Señales Detectadas",
-            "recommendation": "Recomendación del Experto",
+            "recommendation": "Recomendación Experta",
             "export_pdf": "Exportar PDF",
+            "source_types": {
+                "image": "Imagen (screenshot)",
+                "audio": "Audio",
+                "video": "Vídeo"
+            },
+            "status": {
+                "scam": "ESTAFA",
+                "safe": "SEGURO",
+                "recognizing": "Reconociendo Patrones Visuales...",
+                "decoding_audio": "Decodificando Audio...",
+                "decomposing_video": "Descomponiendo Vídeo...",
+                "transcribe_error": "Error al transcribir archivo de {{type}}.",
+                "vision_error": "La imagen parece ilegible para el motor de visión IA.",
+                "quota_error": "Cuota diaria alcanzada.",
+                "motor_error": "Fallo en el motor de procesamiento.",
+                "instability_error": "Inestabilidad en el motor de IA. Inténtalo de nuevo en unos segundos."
+            },
+            "voice": {
+                "synthetic": "VOZ SINTÉTICA (DEEPFAKE)",
+                "human": "VOZ HUMANA AUTÉNTICA",
+                "confidence_label": "Confianza"
+            },
             "modal": {
                 "title": "Cuota Diaria Alcanzada",
-                "desc": "Has alcanzado el límite de <span class=\"text-indigo-600 font-bold\">3 análisis gratuitos</span> por día. ¿Qué tal navegar sin límites?",
+                "desc": "Has alcanzado el límite de <span class=\"text-indigo-600 font-bold\">3 análisis gratis</span> por día. ¿Qué tal navegar sin límites?",
                 "benefits_label": "Beneficios Premium:",
                 "benefit_unlimited": "Análisis Ilimitados (Texto/Enlace)",
-                "benefit_priority": "Prioridad en la Cola de Inteligencia",
+                "benefit_priority": "Prioridad en la Fila de Inteligencia",
                 "benefit_history": "Historial Avanzado Permanente",
-                "cta": "Hacerse Premium Ahora",
-                "later": "Tal vez más tarde"
+                "cta": "Ser Premium Ahora",
+                "later": "Quizás después"
             },
             "pdf": {
                 "header": "SHIELDCHECK AI - INFORME DE SEGURIDAD",
-                "verdict": "VERDICTO",
+                "verdict": "VEREDICTO",
                 "risk_index": "ÍNDICE DE RIESGO",
                 "summary_title": "Resumen del Análisis:",
                 "protocol": "Protocolo de Seguridad Recomendado:",
                 "generated_at": "Generado en"
-            },
-            "status": {
-                "recognizing": "Reconociendo Patrones Visuales...",
-                "decoding_audio": "Decodificando Audio...",
-                "decomposing_video": "Descomponiendo Vídeo...",
-                "transcribe_error": "Error ao transcribir o arquivo de {{type}}.",
-                "vision_error": "La imagen parece ser ilegible para el motor de visión de IA.",
-                "quota_error": "Cuota diaria alcanzada.",
-                "motor_error": "Fallo del motor de procesamiento.",
-                "instability_error": "Inestabilidad del motor de IA. Intente de nuevo en unos segundos."
             }
         },
         "history": {
-            "title": "Historial de <span class=\"text-premium-gradient\">Escaneos</span>",
+            "title": "Tu <span class=\"text-premium-gradient\">Historial</span>",
             "subtitle": "Informe completo de amenazas interceptadas.",
             "digital_security": "Seguridad Digital",
             "nova_analise": "Nuevo Análisis",
@@ -469,69 +488,345 @@
             },
             "status": {
                 "loading": "Recuperando Registros...",
-                "error_title": "¡Ups! Algo salió mal",
-                "retry": "Intentar de Nuevo",
+                "error_title": "¡Ops! Algo salió mal",
+                "retry": "Reintentar",
                 "empty": "Sin registros",
-                "empty_desc": "No hay elementos para el filtro seleccionado.",
+                "empty_desc": "No hay ítems para el filtro seleccionado.",
                 "clean_timeline": "Tu línea de tiempo está limpia. Inicia un nuevo análisis para proteger tus datos.",
                 "start_now": "Empezar ahora"
             },
             "table": {
-                "timestamp": "Timestamp",
+                "timestamp": "Fecha/Hora",
                 "content": "Contenido",
                 "category": "Categoría",
-                "risk": "Riesgo"
+                "risk": "Riesgo",
+                "types": {
+                    "text": "TEXTO",
+                    "audio": "AUDIO",
+                    "video": "VIDEO",
+                    "image": "IMAGEN"
+                }
             },
             "modal": {
-                "title": "¿Vou apagar o rexistro?",
-                "desc": "Esta acción no se puede deshacer. ¿Desea eliminar permanentemente este elemento de su historial?",
+                "title": "¿Eliminar Registro?",
+                "desc": "Esta acción no se puede deshacer. ¿Deseas eliminar permanentemente este ítem de tu historial?",
                 "cancel": "Cancelar",
                 "confirm": "Confirmar",
-                "delete_error": "Error al eliminar el registro."
-            }
-        },
-        "academy": {
-            "title": "Shield <span class=\"text-premium-gradient\">Academy</span>",
-            "subtitle": "Conviértase en un experto en seguridad digital. Aprenda jugando y gane XP.",
-            "current_level": "Tu Nivel Actual",
-            "explorador": "Explorador",
-            "next_level": "Próximo Nivel: Guardián",
-            "reward": "Recompensa:",
-            "start_training": "Iniciar Entrenamiento",
-            "unavailable": "No disponible",
-            "certification": {
-                "launch": "Lanzamiento Próxima Semana",
-                "title": "Obtenga su Certificación Profesional",
-                "desc": "Conviértase en un referente en seguridad digital y comparta su éxito en las redes sociales.",
-                "seal": "Sello Verificado",
-                "portfolio": "Portafolio de Amenazas"
+                "delete_error": "Error al eliminar registro."
             }
         },
         "sidebar": {
-            "protection_title": "Protección y Escaneo",
+            "protection_title": "Protección y Scan",
             "education_title": "Educación y Social",
-            "enterprise_title": "Interprocess y Marca",
+            "enterprise_title": "Negocios y Marcas",
             "account_title": "Cuenta y Gestión",
-            "protection": "Protección y Escaneo",
+            "brand_protect": "Protección de Marca",
+            "business_portal": "Portal B2B",
+            "enterprise_analytics": "Analytics Enterprise",
+            "privacy_hub": "Hub de Privacidad",
+            "plans": "Planes",
+            "referral": "Indica y Gana",
+            "operator": "Operador",
+            "plan_label": "Cuenta",
             "family_guard": "Family Guard",
             "dark_web": "Dark Web Scan",
-            "store_auditor": "Store Auditor",
-            "education": "Educación y Social",
+            "store_auditor": "Auditor de Tienda",
             "academy": "Academy 2.0",
             "community": "Comunidad",
             "fraud_dict": "Diccionario de Estafas",
-            "enterprise": "Interprocess y Marca",
-            "brand_protect": "Brand Protection",
-            "business_portal": "Portal Business",
-            "enterprise_analytics": "Enterprise Analytics",
-            "privacy_hub": "Privacy Hub",
-            "account": "Cuenta y Gestión",
-            "plans": "Planes",
-            "referral": "Indicar y Ganar",
-            "elite_protection": "Protección ELITE",
-            "operator": "Operador",
-            "plan_label": "Cuenta",
-            "upgrade_now": "Upgrade Ahora"
+            "elite_protection": "Protección Elite Activa",
+            "upgrade_now": "Hacer Upgrade Ahora"
+        },
+        "academy": {
+            "title": "Centro de <span class=\"text-premium-gradient\">Entrenamiento Avanzado</span>",
+            "subtitle": "Domina las técnicas de defensa contra ingeniería social y estafas de IA.",
+            "current_level": "Nivel Actual",
+            "explorador": "Centinela Explorador",
+            "next_level": "Próximo Nivel: {{level}}",
+            "guardiao": "Guardián",
+            "reward": "RECOMPENSA",
+            "available": "Disponible",
+            "unavailable": "Lanzamiento Próximamente",
+            "start_training": "Iniciar Entrenamiento",
+            "simulator_title": "Scam Simulator",
+            "simulator_desc": "Prueba tus reflejos contra simulaciones reales de WhatsApp, SMS y E-mail.",
+            "category_gamification": "Gamificación",
+            "deepfake_title": "Deepfake Lab",
+            "deepfake_desc": "Aprende a identificar voces y vídeos clonados por IA en tiempo real.",
+            "category_ai": "Inteligencia Artificial",
+            "certification_course_title": "Certificación Profesional",
+            "certification_course_desc": "Curso completo de cibersegurança pessoal con certificado digital.",
+            "category_certification": "Certificación",
+            "certification": {
+                "launch": "Lanzamiento Exclusivo",
+                "title": "Certificado Sentinela de Elite",
+                "desc": "Concluye todos los módulos y recibe una certificación digital verificada en la blockchain.",
+                "seal": "Sello de Especialista",
+                "portfolio": "Destacado en Portafolio"
+            }
+        },
+        "store_checker": {
+            "title_start": "Store",
+            "title_highlight": "Checker",
+            "subtitle": "Auditoría de seguridad instantánea para sitios e identificaciones fiscales.",
+            "tabs": {
+                "store": "Tiendas",
+                "cnpj": "ID",
+                "pix": "PIX",
+                "phone": "Fono",
+                "link": "Enlace"
+            },
+            "error_domain": "No se pudo escanear este dominio en este momento.",
+            "error_cnpj": "ID inválido. Inserta 14 dígitos.",
+            "error_cnpj_not_found": "Empresa no encontrada o error en la base de datos.",
+            "error_generic": "Fallo en la consulta de seguridad.",
+            "error_link": "No se pudo procesar este enlace.",
+            "error_quota": "Cuota diaria alcanzada.",
+            "form": {
+                "domain_title": "Análisis de Dominio y Enlaces",
+                "domain_placeholder": "URL de la tienda o Enlace corto (ej: bit.ly/...)",
+                "domain_button": "Auditar Sitio",
+                "cnpj_title": "Consulta de Legitimidad Fiscal",
+                "cnpj_placeholder": "00.000.000/0001-00",
+                "cnpj_button": "Validar ID",
+                "pix_title": "Verificador de Clave PIX",
+                "pix_placeholder": "ID, E-mail, Teléfono o Clave Aleatoria",
+                "pix_button": "Verificar PIX",
+                "phone_title": "Análisis de Número de Teléfono",
+                "phone_placeholder": "(11) 99999-9999",
+                "phone_button": "Analizar Número",
+                "link_title": "Expansor de Enlaces Sospechosos",
+                "link_placeholder": "https://bit.ly/ejemplo-sospechoso",
+                "link_button": "Expandir y Analizar"
+            },
+            "results": {
+                "trust_score": "Trust Score",
+                "global_index": "Índice Global",
+                "pdf_report": "Informe PDF",
+                "age": "Edad",
+                "verdict": "Veredicto Final",
+                "situation": "Situación",
+                "active": "Activa",
+                "foundation": "Fundación",
+                "capital": "Capital Social",
+                "location": "Localización Física",
+                "fiscal_score": "Score Fiscal",
+                "verified_rfb": "Verificado RFB",
+                "consistent_activity": "Actividad Consistente",
+                "legitimate_msg": "Este ID es legítimo ante los órganos reguladores.",
+                "export_pdf": "Exportar PDF",
+                "risk": "Riesgo",
+                "reported_times": "Reportado {{count}}x por la comunidad",
+                "verified_identity": "Identidad Verificada por IA",
+                "security_advice": "Consejo de Seguridad",
+                "expansion_msg": "Enlace expandido a:"
+            },
+            "premium_modal": {
+                "title": "Módulo Premium",
+                "desc": "El análisis de tiendas e ID es exclusivo para suscriptores Premium. ¡Protege tu dinero ahora!",
+                "cta": "Conocer Planes",
+                "later": "Quizás después"
+            }
+        },
+        "family_guard": {
+            "title_start": "Family",
+            "title_highlight": "Guard",
+            "subtitle": "Protege a quienes amas. Monitorea accesos sospechosos de tus padres o hijos remotamente.",
+            "plan_activated": "Plan Activado",
+            "protection_active": "Protección Activa en {{count}} Dispositivos",
+            "add_member": "Añadir Familiar",
+            "protected_email": "E-mail del Protegido",
+            "email_placeholder": "ej: mama@email.com",
+            "linking": "Vinculando...",
+            "protect_now": "Proteger Ahora",
+            "connected_members": "Miembros Conectados",
+            "no_members": "Ningún familiar conectado aún.",
+            "invite_success": "¡Invitación enviada con éxito!",
+            "invite_error": "Error al enviar invitación.",
+            "status_pending": "Pendiente",
+            "status_active": "Activo",
+            "realtime_logs": "Logs de Protección en Tiempo Real",
+            "clear_history": "Limpiar Historial",
+            "event_details": "Detalles del Evento",
+            "timestamp": "Fecha/Hora",
+            "type": "Tipo",
+            "target_url": "URL Destino",
+            "block_global": "Bloquear Dominio Global",
+            "report_fp": "Reportar Falso Positivo",
+            "detected_label": "Detectado",
+            "status_blocked": "Bloqueado",
+            "status_alert_sent": "Alerta Enviada",
+            "upsell_title": "¡Añade Shield en su móvil!",
+            "upsell_desc": "Para recibir estas alertas, instala nuestro **Browser Guard** o conecta el **WhatsApp Bot** en el aparato de tu familiar.",
+            "copy_link": "Enviar Enlace de Instalación",
+            "copy_success": "¡Enlace de instalación copiado! Envíaselo a tu familiar."
+        },
+        "community": {
+            "title_start": "Comunidad",
+            "title_highlight": "Sentinel",
+            "subtitle": "El wiki colectivo contra estafas y fraudes en tempo real.",
+            "btn_report": "Reportar Nueva Estafa",
+            "detected_label": "Detectado",
+            "status_verified": "Verificado",
+            "status_pending": "Análisis Pendiente",
+            "author_label": "Por:",
+            "modal": {
+                "title": "Reportar Nueva Estafa",
+                "subtitle": "Ayuda a proteger a otros miembros de la comunidad.",
+                "type_label": "Tipo de Estafa",
+                "type_placeholder": "Ej: Phishing, Falso Préstamo",
+                "platform_label": "Plataforma",
+                "platform_placeholder": "Ej: WhatsApp, Instagram",
+                "target_label": "Objetivo de la Estafa",
+                "target_placeholder": "Ej: Clientes de Banco, Ancianos",
+                "desc_label": "Descripción Detallada",
+                "desc_placeholder": "Explica cómo funciona la estafa y cómo identificarla...",
+                "submit_btn": "Publicar en la Comunidad",
+                "cancel_btn": "Cancelar"
+            }
+        },
+        "dark_web": {
+            "badge": "Módulo de Inteligencia Activa",
+            "title_start": "Dark Web",
+            "title_highlight": "Scan",
+            "subtitle": "Verificamos trillones de registros filtrados para encontrar tus datos personales y contraseñas expuestas.",
+            "placeholder": "Inserta tu e-mail o identificación...",
+            "btn_start": "Iniciar Escaneo",
+            "privacy_note": "Tu búsqueda es privada y no guardamos los términos consultados.",
+            "scanning_title": "Escaneando Capas de la Red...",
+            "scanning_sub": "Analizando foros cibernéticos:",
+            "active_label": "ACTIVE",
+            "found_leaks": "¡{{count}} Filtraciones Encontradas!",
+            "no_leaks": "¡Ninguna filtración detectada!",
+            "leaks_desc": "Detectamos que tus datos aparecen en bases de datos expuestas. Mira abajo los detalles y cómo protegerte.",
+            "clean_desc": "¡Todo limpio! Tu presencia digital parece estar segura en esta consulta.",
+            "new_scan": "Nueva consulta",
+            "exposed_data": "Datos expuestos:",
+            "suggestion": "Sugerimos el cambio inmediato de contraseñas en sitios similares y activación de 2FA.",
+            "resilience_guide": "Guía de Resiliencia Post-Filtración",
+            "tips": [
+                "Cambia tu contraseña principal inmediatamente.",
+                "Activa 2-Factores (2FA) en todos los servicios.",
+                "Usa un gestor de contraseñas para claves únicas.",
+                "Mantente alerta a intentos de login en tu e-mail."
+            ]
+        }
+    },
+    "academy_v2": {
+        "header": {
+            "module": "Módulo de Seguridad",
+            "title_start": "Academy",
+            "title_highlight": "Scam Simulator",
+            "scenario": "Escenario"
+        },
+        "phone": {
+            "online": "ONLINE AHORA",
+            "placeholder": "Escribe una respuesta"
+        },
+        "decision": {
+            "title": "Analiza el mensaje",
+            "subtitle": "Los estafadores usan la urgencia para engañarte. ¿Cuál es tu decisión?",
+            "scam_btn": "ESTO ES ESTAFA",
+            "safe_btn": "ES SEGURO"
+        },
+        "feedback": {
+            "correct_title": "¡Excelente!",
+            "wrong_title": "¡Caíste en la estafa!",
+            "points_plus": "+100 Puntos XP",
+            "points_zero": "+0 Puntos",
+            "next_btn": "Próximo Desafío"
+        },
+        "results": {
+            "concluded": "Entrenamiento Finalizado",
+            "total_score": "XP ACUMULADO",
+            "status_expert": "ESTADO: SENTINELA EXPERT",
+            "status_trainee": "ESTADO: EN ENTRENAMIENTO",
+            "retry": "Reintentar",
+            "download_cert": "Descargar Certificado"
+        },
+        "controls": {
+            "back": "Salir del Entrenamiento"
+        },
+        "certificate": {
+            "locale": "es-ES",
+            "verification_id": "ID de Verificación",
+            "issued_on": "Emitido el"
+        },
+        "scenarios": {
+            "s1": {
+                "source": "WhatsApp",
+                "content": "¡Hola! Soy del soporte de tu banco. Detectamos un acceso sospechoso. Haz clic aquí para validar tu dispositivo: http://banco-seguro.co/validar-acceso",
+                "explanation": "Los bancos nunca envían enlaces de validación por WhatsApp con dominios sospechosos como \".co\".",
+                "difficulty": "Fácil"
+            },
+            "s2": {
+                "source": "SMS",
+                "content": "¡FELICIDADES! Fuiste seleccionado para un empleo remoto ganando $ 500/día. Saber más: bit.ly/empleo-urgente",
+                "explanation": "Ofertas de empleo milagrosas vía SMS sin proceso selectivo son estafas el 99% de las veces.",
+                "difficulty": "Fácil"
+            },
+            "s3": {
+                "source": "E-mail",
+                "content": "Estimado contribuyente, consta una irregularidad en su registro. Visualice el adjunto para regularizar su situación fiscal antes del bloqueo.",
+                "explanation": "Las agencias gubernamentales no envían adjuntos ejecutables ni enlaces de cobro por e-mail sin aviso previo en el portal oficial.",
+                "difficulty": "Medio"
+            },
+            "s4": {
+                "sender": "Hijo",
+                "source": "WhatsApp",
+                "content": "Hola papá, cambié de número. Borra el otro y guarda este. Necesito pagar una cuenta pero pasé mi límite, ¿puedes transferirme 800?",
+                "explanation": "La clonación de WhatsApp y el \"número nuevo\" es de las estafas más comunes. Siempre pide una llamada de voz o vídeo para confirmar.",
+                "difficulty": "Difícil"
+            }
+        }
+    },
+    "settings": {
+        "title": "Configuraciones de la Cuenta",
+        "subtitle": "Actualiza tus datos personales y preferencias de seguridad.",
+        "labels": {
+            "full_name": "Nombre Completo",
+            "email": "Dirección de E-mail",
+            "integration_title": "Integración WhatsApp Bot",
+            "whatsapp_number": "Tu Número de WhatsApp Primario",
+            "whatsapp_placeholder": "CodPaisNumero (Ej: 34999999999)",
+            "whatsapp_note": "Este número será reconocido por ShieldCheck AI como tu cuenta <strong>{{plan}}</strong> para análisis ilimitados.",
+            "security_title": "Seguridad",
+            "security_note": "Recomendamos usar una contraseña fuerte con al menos 8 caracteres.",
+            "mfa_title": "Seguridad de Élite (2FA)",
+            "mfa_active": "ACTIVADO",
+            "mfa_disabled": "DESACTIVADO",
+            "mfa_note": "Protege tu cuenta con una capa extra de seguridad usando Google Authenticator o similar.",
+            "mfa_setup_btn": "Configurar 2FA ahora",
+            "save_btn": "Guardar Cambios",
+            "saving_btn": "Guardando..."
+        },
+        "plans": {
+            "unlimited": "Licencias Ilimitadas",
+            "licenses_5": "5 Licencias",
+            "license_1": "1 Licencia",
+            "solo_bot": "1 Licencia (Solo WhatsApp)",
+            "free_mode": "Modo Gratis (3 scans/día)"
+        },
+        "whatsapp_guide": {
+            "title": "Cómo usar tu Escudo en el Móvil:",
+            "step1": "Añade nuestro número oficial a tus contactos: <strong>+34 999 999 999</strong>",
+            "step2": "Reenvía cualquier mensaje sospechoso o audio para un análisis instantáneo.",
+            "step3": "<strong>Anti-Clonación:</strong> Tu licencia Premium está ligada al número arriba. Para cambiarlo, usa este panel."
+        },
+        "mfa_modal": {
+            "title": "Configurar Capa Extra",
+            "subtitle": "Escanea el código QR de abajo con tu aplicación de autenticación.",
+            "code_label": "Inserta el código de 6 dígitos",
+            "placeholder": "000000",
+            "confirm_btn": "Confirmar y Activar",
+            "verifying_btn": "Verificando...",
+            "cancel": "Cancelar"
+        },
+        "messages": {
+            "mfa_success": "¡Autenticación de dos factores activada!",
+            "mfa_error": "Error al verificar el código MFA.",
+            "save_error": "Error al actualizar los datos.",
+            "mfa_setup_fail": "Fallo al iniciar configuración de 2FA."
         }
     }
 }

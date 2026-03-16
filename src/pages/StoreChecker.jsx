@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../context/AuthContext';
 import { API_ENDPOINTS } from '../api/config';
 import { jsPDF } from 'jspdf';
 
 export default function StoreChecker() {
+    const { t } = useTranslation();
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('store'); // 'store', 'cnpj', 'pix', 'phone', 'link'
@@ -40,7 +42,7 @@ export default function StoreChecker() {
             const data = await res.json();
             setResult(data);
         } catch (err) {
-            setError('Não foi possível realizar a varredura deste domínio no momento.');
+            setError(t('tools.store_checker.error_domain'));
         } finally {
             setLoading(false);
         }
@@ -49,7 +51,7 @@ export default function StoreChecker() {
     const checkCnpj = async (e) => {
         e.preventDefault();
         const cleanCnpj = cnpj.replace(/\D/g, '');
-        if (cleanCnpj.length !== 14) return setError('CNPJ inválido. Digite os 14 dígitos.');
+        if (cleanCnpj.length !== 14) return setError(t('tools.store_checker.error_cnpj'));
 
         setLoading(true);
         setCnpjResult(null);
@@ -58,7 +60,7 @@ export default function StoreChecker() {
         try {
             // Using BrasilAPI for real data
             const res = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${cleanCnpj}`);
-            if (!res.ok) throw new Error('Empresa não encontrada ou erro na base de dados.');
+            if (!res.ok) throw new Error(t('tools.store_checker.error_cnpj_not_found'));
 
             const data = await res.json();
             setCnpjResult(data);
@@ -90,7 +92,7 @@ export default function StoreChecker() {
             const data = await res.json();
             setGenericResult(data);
         } catch (err) {
-            setError('Falha na consulta de segurança.');
+            setError(t('tools.store_checker.error_generic'));
         } finally {
             setLoading(false);
         }
@@ -118,11 +120,11 @@ export default function StoreChecker() {
             setResult({
                 ...data.analysis,
                 domain: data.expandedUrl,
-                recommendation: `O link redireciona para: ${data.expandedUrl}. ${data.analysis.recommendation}`,
+                recommendation: `${t('tools.store_checker.results.expansion_msg')} ${data.expandedUrl}. ${data.analysis.recommendation}`,
                 isExpanded: true
             });
         } catch (err) {
-            setError('Não foi possível processar este link.');
+            setError(t('tools.store_checker.error_link'));
         } finally {
             setLoading(false);
         }
@@ -201,44 +203,44 @@ export default function StoreChecker() {
             <div className="flex justify-start">
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-black rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all border border-slate-100 dark:border-slate-800 shadow-sm group"
+                    className="flex items-center gap-1.5 px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-black rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700 shadow-sm group text-[10px] uppercase tracking-widest"
                 >
-                    <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                    <svg className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
                     </svg>
-                    Voltar
+                    {t('tools.analyze.back')}
                 </button>
             </div>
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 text-center md:text-left">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 text-center md:text-left">
                 <div>
-                    <h2 className="text-4xl font-display font-black text-slate-900 dark:text-white tracking-tight">
-                        Verificador <span className="text-premium-gradient">de Lojas</span>
+                    <h2 className="text-3xl lg:text-4xl font-display font-black text-slate-900 dark:text-white tracking-tight">
+                        {t('tools.store_checker.title_start')} <span className="text-premium-gradient">{t('tools.store_checker.title_highlight')}</span>
                     </h2>
-                    <p className="text-slate-500 dark:text-slate-400 mt-2 text-lg font-medium">Auditoria instantânea de segurança para sites e CNPJs.</p>
+                    <p className="text-slate-500 dark:text-slate-400 mt-2 text-base lg:text-lg font-medium">{t('tools.store_checker.subtitle')}</p>
                 </div>
             </div>
 
             {/* Selection Tabs */}
-            <div className="glass-card p-3 rounded-[2.5rem] border border-white dark:border-slate-800 shadow-xl backdrop-blur-xl">
-                <div className="flex flex-wrap md:flex-nowrap gap-2">
+            <div className="glass-card p-2 rounded-[2rem] border border-white dark:border-slate-800 shadow-xl backdrop-blur-xl">
+                <div className="grid grid-cols-2 lg:flex lg:flex-nowrap gap-1.5">
                     {[
-                        { id: 'store', label: 'Lojas e Sites', icon: '🌐' },
-                        { id: 'cnpj', label: 'CNPJ', icon: '🏢' },
-                        { id: 'pix', label: 'Chave PIX', icon: '💎' },
-                        { id: 'phone', label: 'Telefone', icon: '📞' },
-                        { id: 'link', label: 'Expandir Link', icon: '🔗' },
+                        { id: 'store', label: t('tools.store_checker.tabs.store'), icon: '🌐' },
+                        { id: 'cnpj', label: t('tools.store_checker.tabs.cnpj'), icon: '🏢' },
+                        { id: 'pix', label: t('tools.store_checker.tabs.pix'), icon: '💎' },
+                        { id: 'phone', label: t('tools.store_checker.tabs.phone'), icon: '📞' },
+                        { id: 'link', label: t('tools.store_checker.tabs.link'), icon: '🔗', span: 'col-span-2 lg:col-span-1' },
                     ].map((tab) => (
                         <button
                             key={tab.id}
                             onClick={() => { setActiveTab(tab.id); setError(null); }}
-                            className={`flex-1 px-6 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-3 whitespace-nowrap
+                            className={`px-3 py-3 lg:px-6 lg:py-4 rounded-xl font-black text-[9px] uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap ${tab.span || ''}
                                 ${activeTab === tab.id
                                     ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-lg scale-[1.02] z-10'
-                                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+                                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
                                 }
                             `}
                         >
-                            <span className="text-lg">{tab.icon}</span>
+                            <span className="text-base">{tab.icon}</span>
                             {tab.label}
                         </button>
                     ))}
@@ -267,7 +269,7 @@ export default function StoreChecker() {
                             <div className="space-y-8">
                                 <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-widest flex items-center gap-3">
                                     <div className="w-2 h-6 bg-indigo-600 rounded-full"></div>
-                                    Análise de Domínio e Links
+                                    {t('tools.store_checker.form.domain_title')}
                                 </h3>
                                 <div className="flex flex-col lg:flex-row gap-4">
                                     <div className="flex-1 relative group">
@@ -276,7 +278,7 @@ export default function StoreChecker() {
                                             type="url"
                                             value={url}
                                             onChange={(e) => setUrl(e.target.value)}
-                                            placeholder="URL da loja ou Link encurtado (ex: bit.ly/...)"
+                                            placeholder={t('tools.store_checker.form.domain_placeholder')}
                                             className="relative w-full h-20 px-8 bg-slate-50/50 dark:bg-slate-950/50 border-2 border-slate-100 dark:border-slate-800 rounded-3xl focus:ring-0 focus:border-indigo-500 outline-none transition-all text-slate-800 dark:text-slate-100 font-bold text-xl placeholder:text-slate-300"
                                         />
                                     </div>
@@ -286,7 +288,7 @@ export default function StoreChecker() {
                                         className="lg:w-72 h-20 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black rounded-3xl hover:opacity-90 transition-all shadow-xl disabled:opacity-50 text-xl flex items-center justify-center gap-3 active:scale-95"
                                     >
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                                        Auditar Site
+                                        {t('tools.store_checker.form.domain_button')}
                                     </button>
                                 </div>
 
@@ -295,14 +297,14 @@ export default function StoreChecker() {
                             <div className="space-y-8">
                                 <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-widest flex items-center gap-3">
                                     <div className="w-2 h-6 bg-purple-600 rounded-full"></div>
-                                    Consulta de Legitimidade Fiscal
+                                    {t('tools.store_checker.form.cnpj_title')}
                                 </h3>
                                 <div className="flex flex-col lg:flex-row gap-4">
                                     <input
                                         type="text"
                                         value={cnpj}
                                         onChange={(e) => setCnpj(e.target.value)}
-                                        placeholder="00.000.000/0001-00"
+                                        placeholder={t('tools.store_checker.form.cnpj_placeholder')}
                                         className="flex-1 h-20 px-8 bg-slate-50 dark:bg-slate-950 border-2 border-slate-100 dark:border-slate-800 rounded-3xl focus:ring-8 focus:ring-purple-100 dark:focus:ring-purple-900/20 focus:border-purple-500 outline-none transition-all text-slate-800 dark:text-slate-100 font-bold text-xl placeholder:text-slate-300"
                                     />
                                     <button
@@ -310,7 +312,7 @@ export default function StoreChecker() {
                                         disabled={loading || !cnpj}
                                         className="lg:w-72 h-20 bg-purple-600 text-white font-black rounded-3xl hover:bg-purple-700 transition-all shadow-2xl shadow-purple-200 dark:shadow-none disabled:opacity-50 text-xl"
                                     >
-                                        Validar CNPJ
+                                        {t('tools.store_checker.form.cnpj_button')}
                                     </button>
                                 </div>
                             </div>
@@ -318,14 +320,14 @@ export default function StoreChecker() {
                             <div className="space-y-8">
                                 <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-widest flex items-center gap-3">
                                     <div className="w-2 h-6 bg-emerald-500 rounded-full"></div>
-                                    Verificador de Chave PIX
+                                    {t('tools.store_checker.form.pix_title')}
                                 </h3>
                                 <div className="flex flex-col lg:flex-row gap-4">
                                     <input
                                         type="text"
                                         value={pix}
                                         onChange={(e) => setPix(e.target.value)}
-                                        placeholder="CPF, E-mail, Telefone ou Chave Aleatória"
+                                        placeholder={t('tools.store_checker.form.pix_placeholder')}
                                         className="flex-1 h-20 px-8 bg-slate-50 dark:bg-slate-950 border-2 border-slate-100 dark:border-slate-800 rounded-3xl focus:ring-8 focus:ring-emerald-100 dark:focus:ring-emerald-900/20 focus:border-emerald-500 outline-none transition-all text-slate-800 dark:text-slate-100 font-bold text-xl placeholder:text-slate-300"
                                     />
                                     <button
@@ -333,7 +335,7 @@ export default function StoreChecker() {
                                         disabled={loading || !pix}
                                         className="lg:w-72 h-20 bg-emerald-600 text-white font-black rounded-3xl hover:bg-emerald-700 transition-all shadow-2xl shadow-emerald-200 dark:shadow-none disabled:opacity-50 text-xl"
                                     >
-                                        Verificar PIX
+                                        {t('tools.store_checker.form.pix_button')}
                                     </button>
                                 </div>
                             </div>
@@ -341,14 +343,14 @@ export default function StoreChecker() {
                             <div className="space-y-8">
                                 <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-widest flex items-center gap-3">
                                     <div className="w-2 h-6 bg-blue-500 rounded-full"></div>
-                                    Análise de Número de Telefone
+                                    {t('tools.store_checker.form.phone_title')}
                                 </h3>
                                 <div className="flex flex-col lg:flex-row gap-4">
                                     <input
                                         type="tel"
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
-                                        placeholder="(11) 99999-9999"
+                                        placeholder={t('tools.store_checker.form.phone_placeholder')}
                                         className="flex-1 h-20 px-8 bg-slate-50 dark:bg-slate-950 border-2 border-slate-100 dark:border-slate-800 rounded-3xl focus:ring-8 focus:ring-blue-100 dark:focus:ring-blue-900/20 focus:border-blue-500 outline-none transition-all text-slate-800 dark:text-slate-100 font-bold text-xl placeholder:text-slate-300"
                                     />
                                     <button
@@ -356,7 +358,7 @@ export default function StoreChecker() {
                                         disabled={loading || !phone}
                                         className="lg:w-72 h-20 bg-blue-600 text-white font-black rounded-3xl hover:bg-blue-700 transition-all shadow-2xl shadow-blue-200 dark:shadow-none disabled:opacity-50 text-xl"
                                     >
-                                        Analisar Número
+                                        {t('tools.store_checker.form.phone_button')}
                                     </button>
                                 </div>
                             </div>
@@ -365,14 +367,14 @@ export default function StoreChecker() {
                             <div className="space-y-8">
                                 <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-widest flex items-center gap-3">
                                     <div className="w-2 h-6 bg-indigo-500 rounded-full"></div>
-                                    Expansor de Links Suspeitos
+                                    {t('tools.store_checker.form.link_title')}
                                 </h3>
                                 <div className="flex flex-col lg:flex-row gap-4">
                                     <input
                                         type="url"
                                         value={url}
                                         onChange={(e) => setUrl(e.target.value)}
-                                        placeholder="https://bit.ly/exemplo-suspeito"
+                                        placeholder={t('tools.store_checker.form.link_placeholder')}
                                         className="flex-1 h-20 px-8 bg-slate-50 dark:bg-slate-950 border-2 border-slate-100 dark:border-slate-800 rounded-3xl focus:ring-8 focus:ring-indigo-100 dark:focus:ring-indigo-900/20 focus:border-indigo-500 outline-none transition-all text-slate-800 dark:text-slate-100 font-bold text-xl placeholder:text-slate-300"
                                     />
                                     <button
@@ -380,7 +382,7 @@ export default function StoreChecker() {
                                         disabled={loading || !url}
                                         className="lg:w-72 h-20 bg-indigo-600 text-white font-black rounded-3xl hover:bg-indigo-700 transition-all shadow-2xl shadow-indigo-200 dark:shadow-none disabled:opacity-50 text-xl"
                                     >
-                                        Expandir e Analisar
+                                        {t('tools.store_checker.form.link_button')}
                                     </button>
                                 </div>
                             </div>
@@ -401,9 +403,9 @@ export default function StoreChecker() {
                                             result.trustScore > 40 ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900/30 text-amber-600 dark:text-amber-400' :
                                                 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-900/30 text-red-600 dark:text-red-400'}
                                     `}>
-                                        <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Trust Score</p>
+                                        <p className="text-[10px] font-black uppercase tracking-widest opacity-60">{t('tools.store_checker.results.trust_score')}</p>
                                         <p className="text-8xl font-display font-black leading-none">{result.trustScore}</p>
-                                        <p className="text-xs font-bold mt-2 uppercase tracking-tighter">Índice Global</p>
+                                        <p className="text-xs font-bold mt-2 uppercase tracking-tighter">{t('tools.store_checker.results.global_index')}</p>
                                     </div>
 
                                     {user?.plan === 'PREMIUM' && (
@@ -412,7 +414,7 @@ export default function StoreChecker() {
                                             className="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-xs uppercase tracking-widest hover:opacity-90 transition-all shadow-xl flex items-center justify-center gap-2"
                                         >
                                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                                            Relatório PDF
+                                            {t('tools.store_checker.results.pdf_report')}
                                         </button>
                                     )}
                                 </div>
@@ -421,7 +423,7 @@ export default function StoreChecker() {
                                     <div>
                                         <h4 className="text-3xl font-display font-black text-slate-900 dark:text-white mb-2 break-all">{result.domain}</h4>
                                         <div className="flex gap-2">
-                                            <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded-lg text-[10px] font-black uppercase tracking-widest border border-slate-200 dark:border-slate-700">Idade: {result.registrationAge}</span>
+                                            <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded-lg text-[10px] font-black uppercase tracking-widest border border-slate-200 dark:border-slate-700">{t('tools.store_checker.results.age')}: {result.registrationAge}</span>
                                         </div>
                                     </div>
 
@@ -437,8 +439,8 @@ export default function StoreChecker() {
                                     </div>
 
                                     <div className={`p-8 rounded-[2rem] border-2 shadow-sm ${result.trustScore > 50 ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-100 dark:border-emerald-900/30' : 'bg-red-50/50 dark:bg-red-950/20 border-red-100 dark:border-red-900/30'}`}>
-                                        <h4 className={`text-xs font-black uppercase tracking-[0.2em] mb-3 ${result.trustScore > 50 ? 'text-emerald-600' : 'text-red-600'}`}>Veredito Final</h4>
-                                        <p className={`text-xl font-bold leading-relaxed ${result.trustScore > 50 ? 'text-emerald-900 dark:text-emerald-400' : 'text-red-900 dark:text-red-400'}`}>"{result.recommendation}"</p>
+                                        <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-3 text-emerald-600">{t('tools.store_checker.results.verdict')}</h4>
+                                        <p className="text-xl font-bold leading-relaxed text-emerald-900 dark:text-emerald-400">"{result.recommendation}"</p>
                                     </div>
                                 </div>
                             </div>
@@ -457,7 +459,7 @@ export default function StoreChecker() {
                                     <div className="space-y-3">
                                         <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${cnpjResult.descricao_situacao_cadastral === 'Ativa' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-red-50 text-red-700 border-red-100'}`}>
                                             <div className={`w-2 h-2 rounded-full ${cnpjResult.descricao_situacao_cadastral === 'Ativa' ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`}></div>
-                                            Situação: {cnpjResult.descricao_situacao_cadastral || 'ATIVA'}
+                                            {t('tools.store_checker.results.situation')}: {cnpjResult.descricao_situacao_cadastral || t('tools.store_checker.results.active')}
                                         </span>
                                         <h3 className="text-4xl font-display font-black text-slate-900 dark:text-white leading-tight">{cnpjResult.razao_social || cnpjResult.nome_fantasia}</h3>
                                         <p className="text-slate-400 dark:text-slate-500 font-bold font-mono text-xl">{cnpjResult.cnpj}</p>
@@ -465,11 +467,11 @@ export default function StoreChecker() {
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                         <div className="bg-slate-50/50 dark:bg-slate-900/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-800">
-                                            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Fundação</label>
+                                            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">{t('tools.store_checker.results.foundation')}</label>
                                             <p className="text-slate-800 dark:text-slate-200 font-black text-xl">{cnpjResult.data_inicio_atividade || '---'}</p>
                                         </div>
                                         <div className="bg-slate-50/50 dark:bg-slate-900/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-800">
-                                            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Capital Social</label>
+                                            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">{t('tools.store_checker.results.capital')}</label>
                                             <p className="text-slate-800 dark:text-slate-200 font-black text-xl">R$ {cnpjResult.capital_social?.toLocaleString() || '---'}</p>
                                         </div>
                                         <div className="sm:col-span-2 bg-slate-50/50 dark:bg-slate-900/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 flex items-start gap-4">
@@ -477,7 +479,7 @@ export default function StoreChecker() {
                                                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                                             </div>
                                             <div>
-                                                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Localização Física</label>
+                                                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{t('tools.store_checker.results.location')}</label>
                                                 <p className="text-slate-800 dark:text-slate-200 font-bold">{cnpjResult.logradouro}, {cnpjResult.numero}</p>
                                                 <p className="text-slate-500 dark:text-slate-400 font-medium text-sm">{cnpjResult.bairro}, {cnpjResult.municipio} - {cnpjResult.uf}</p>
                                             </div>
@@ -489,19 +491,19 @@ export default function StoreChecker() {
                                     <div className="bg-indigo-600 rounded-[2rem] p-8 text-white shadow-2xl shadow-indigo-200 dark:shadow-none relative overflow-hidden group">
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700"></div>
                                         <h4 className="font-black text-xl mb-6 relative z-10 flex items-center justify-between">
-                                            Score Fiscal
+                                            {t('tools.store_checker.results.fiscal_score')}
                                             <div className="bg-white/20 p-2 rounded-xl"><svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 12l2 2 4-4" /></svg></div>
                                         </h4>
                                         <div className="space-y-4 relative z-10">
                                             <div className="flex items-center gap-3">
                                                 <div className="w-1.5 h-1.5 bg-indigo-300 rounded-full"></div>
-                                                <span className="text-xs font-bold">Verificado RFB</span>
+                                                <span className="text-xs font-bold">{t('tools.store_checker.results.verified_rfb')}</span>
                                             </div>
                                             <div className="flex items-center gap-3">
                                                 <div className="w-1.5 h-1.5 bg-indigo-300 rounded-full"></div>
-                                                <span className="text-xs font-bold">Atividade Condizente</span>
+                                                <span className="text-xs font-bold">{t('tools.store_checker.results.consistent_activity')}</span>
                                             </div>
-                                            <p className="text-[10px] text-indigo-100/60 font-black uppercase tracking-widest pt-6 mt-4 border-t border-white/10">Este CNPJ é legítimo perante os órgãos reguladores.</p>
+                                            <p className="text-[10px] text-indigo-100/60 font-black uppercase tracking-widest pt-6 mt-4 border-t border-white/10">{t('tools.store_checker.results.legitimate_msg')}</p>
                                         </div>
                                     </div>
 
@@ -511,7 +513,7 @@ export default function StoreChecker() {
                                             className="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-xs uppercase tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-2"
                                         >
                                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                                            Exportar PDF
+                                            {t('tools.store_checker.results.export_pdf')}
                                         </button>
                                     )}
                                 </div>
@@ -533,13 +535,13 @@ export default function StoreChecker() {
                                             genericResult.score > 30 ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900/30 text-amber-600 dark:text-amber-400' :
                                                 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/30 text-emerald-600 dark:text-emerald-400'}
                                     `}>
-                                        <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Risco</p>
+                                        <p className="text-[10px] font-black uppercase tracking-widest opacity-60">{t('tools.store_checker.results.risk')}</p>
                                         <p className="text-8xl font-display font-black leading-none">{genericResult.score}</p>
                                         <p className="text-xs font-bold mt-2 uppercase tracking-tighter">{genericResult.status}</p>
                                     </div>
                                     {genericResult.reportedTimes > 0 && (
                                         <div className="px-4 py-2 bg-red-100 text-red-700 rounded-xl text-[10px] font-black uppercase tracking-widest animate-pulse">
-                                            Reportado {genericResult.reportedTimes}x pela comunidade
+                                            {t('tools.store_checker.results.reported_times', { count: genericResult.reportedTimes })}
                                         </div>
                                     )}
                                 </div>
@@ -549,7 +551,7 @@ export default function StoreChecker() {
                                         <h4 className="text-3xl font-display font-black text-slate-900 dark:text-white mb-2 break-all">
                                             {activeTab === 'pix' ? pix : phone}
                                         </h4>
-                                        <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Identidade Verificada por IA</p>
+                                        <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">{t('tools.store_checker.results.verified_identity')}</p>
                                     </div>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -562,7 +564,7 @@ export default function StoreChecker() {
                                     </div>
 
                                     <div className="p-8 bg-slate-900 dark:bg-white rounded-[2rem] text-white dark:text-slate-900">
-                                        <h4 className="text-[10px] font-black uppercase tracking-widest mb-3 opacity-60">Conselho de Segurança</h4>
+                                        <h4 className="text-[10px] font-black uppercase tracking-widest mb-3 opacity-60">{t('tools.store_checker.results.security_advice')}</h4>
                                         <p className="text-xl font-bold leading-relaxed">{genericResult.recommendation}</p>
                                     </div>
                                 </div>
@@ -582,12 +584,12 @@ export default function StoreChecker() {
                                 <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 11l7-7 7 7M5 19l7-7 7 7" /></svg>
                             </div>
                             <div className="space-y-2">
-                                <h3 className="text-3xl font-black text-slate-900 tracking-tight">Módulo Premium</h3>
-                                <p className="text-slate-500 font-medium leading-relaxed">A análise de lojas e CNPJs é exclusiva para assinantes Premium. Proteja seu dinheiro agora!</p>
+                                <h3 className="text-3xl font-black text-slate-900 tracking-tight">{t('tools.store_checker.premium_modal.title')}</h3>
+                                <p className="text-slate-500 font-medium leading-relaxed">{t('tools.store_checker.premium_modal.desc')}</p>
                             </div>
                             <div className="flex flex-col gap-3">
-                                <Link to="/plans" className="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-black transition-all shadow-lg text-lg">Ver Planos</Link>
-                                <button onClick={() => setShowPremiumModal(false)} className="text-slate-400 font-bold text-sm hover:text-slate-600 transition-colors">Talvez mais tarde</button>
+                                <Link to="/plans" className="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-black transition-all shadow-lg text-lg">{t('tools.store_checker.premium_modal.cta')}</Link>
+                                <button onClick={() => setShowPremiumModal(false)} className="text-slate-400 font-bold text-sm hover:text-slate-600 transition-colors">{t('tools.store_checker.premium_modal.later')}</button>
                             </div>
                         </div>
                     </div>

@@ -9,7 +9,7 @@ export default function Home() {
     return (
         <div className="w-full space-y-32 pb-32">
             {/* HERO SECTION - CONVERSION FOCUSED */}
-            <section className="relative min-h-[90vh] flex items-center justify-center px-4 overflow-hidden pt-48 lg:pt-40">
+            <section className="relative min-h-[85vh] flex items-center justify-center px-4 overflow-hidden pt-28 lg:pt-24">
                 {/* Background mesh gradients */}
                 <div className="absolute inset-0 -z-10 bg-mesh opacity-30 dark:opacity-20"></div>
                 <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-indigo-500/10 blur-[150px] rounded-full animate-pulse"></div>
@@ -42,7 +42,7 @@ export default function Home() {
                                 </div>
                                 <Link
                                     to="/register"
-                                    className="px-10 py-5 bg-indigo-600 text-white font-black rounded-3xl hover:bg-indigo-700 transition-all shadow-xl hover:shadow-indigo-500/20 active:scale-95 text-lg flex items-center justify-center"
+                                    className="px-8 py-3.5 bg-indigo-600 text-white font-black rounded-3xl hover:bg-indigo-700 transition-all shadow-xl hover:shadow-indigo-500/20 active:scale-95 text-lg flex items-center justify-center"
                                 >
                                     {t('landing.hero.cta_analyze')}
                                 </Link>
@@ -109,14 +109,14 @@ export default function Home() {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                             </span>
-                            {t('landing.problem_badge') || 'Alerta de Risco'}
+                            {t('landing.problem_badge')}
                         </div>
                         <h2 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white leading-tight tracking-tight">
-                            {t('landing.problem_title_line1') || 'Os golpes digitais'} <br />
-                            {t('landing.problem_title_line2') ? `${t('landing.problem_title_line2')} ` : ''}<span className="text-red-500 underline decoration-red-500/20">{t('landing.problem_title_highlight') || 'invisíveis.'}</span>
+                            {t('landing.problem_title_line1')} <br />
+                            {t('landing.problem_title_line2')} <span className="text-red-500 underline decoration-red-500/20">{t('landing.problem_title_highlight')}</span>
                         </h2>
                         <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
-                            {t('landing.problem_desc') || 'Todos os dias, milhões de brasileiros perdem dinheiro para criminosos que usam IA para criar mensagens perfeitas, vozes clonadas e sites que parecem idênticos aos reais.'}
+                            {t('landing.problem_desc')}
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -129,26 +129,17 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                    <div className="relative">
-                        <div className="absolute inset-0 bg-red-500/10 blur-[100px] rounded-full"></div>
-                        <div className="relative glass-card bg-slate-950 rounded-[3rem] p-8 border border-red-500/20 shadow-2xl">
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-3 p-4 bg-red-500/10 rounded-2xl border border-red-500/20 animate-pulse">
-                                    <svg className="w-6 h-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor font-bold"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                                    <div className="text-sm font-black text-red-400 uppercase">{t('landing.threat_alert') || 'Ameaça Detectada: Link de Phishing'}</div>
-                                </div>
-                                <div className="space-y-3 pt-4">
-                                    <div className="h-4 w-3/4 bg-slate-800 rounded-full"></div>
-                                    <div className="h-4 w-full bg-slate-800 rounded-full"></div>
-                                    <div className="h-4 w-5/6 bg-slate-800 rounded-full"></div>
-                                </div>
-                                <div className="pt-6 flex justify-between items-center">
-                                    <div className="text-xs font-bold text-slate-500">{t('landing.risk_score_label') || 'SCORE DE RISCO'}</div>
-                                    <div className="text-2xl font-black text-red-500">98/100</div>
-                                </div>
-                                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                                    <div className="h-full bg-red-500 w-[98%]"></div>
-                                </div>
+                    <div className="relative group">
+                        <div className="absolute inset-0 bg-red-500/20 blur-[100px] rounded-full group-hover:bg-red-500/30 transition-all duration-700"></div>
+                        <img
+                            src="/assets/landing/cyber_threat_visual.png"
+                            alt="Digital Threat Protection"
+                            className="relative w-full rounded-[3rem] shadow-3xl border border-red-500/20 transform hover:scale-[1.02] transition-all duration-700"
+                        />
+                        <div className="absolute bottom-6 left-6 right-6 p-6 glass-card bg-slate-950/80 rounded-2xl border border-red-500/20 shadow-2xl animate-pulse">
+                            <div className="flex items-center gap-3">
+                                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                                <div className="text-xs font-black text-red-500 uppercase">{t('landing.threat_alert')}</div>
                             </div>
                         </div>
                     </div>
@@ -182,17 +173,18 @@ export default function Home() {
                                 </div>
                             </div>
                             <div className="pt-4">
-                                <Link to="/community" className="inline-flex items-center gap-2 text-white font-black uppercase text-sm tracking-widest hover:gap-4 transition-all">
+                                <Link to="/scam-map" className="inline-flex items-center gap-2 text-white font-black uppercase text-sm tracking-widest hover:gap-4 transition-all">
                                     {t('landing.scam_map.cta')} <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                 </Link>
                             </div>
                         </div>
-                        <div className="relative h-[400px] w-full bg-slate-800 rounded-[3rem] border border-white/5 overflow-hidden group/map animate-float">
-                            <div className="absolute inset-0 opacity-40 bg-[url('https://upload.wikimedia.org/wikipedia/commons/2/2f/Brazil_location_map.svg')] bg-no-repeat bg-center bg-contain p-20 invert" />
-                            <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-red-500 rounded-full animate-ping" />
-                            <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-red-500 rounded-full animate-ping [animation-delay:1s]" />
-                            <div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-red-500 rounded-full animate-ping [animation-delay:2s]" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
+                        <div className="relative h-[450px] w-full bg-slate-900 rounded-[3rem] border border-white/5 overflow-hidden group/map animate-float">
+                            <img
+                                src="/assets/landing/stylized_security_map.png"
+                                alt="Security Intel Map"
+                                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-[3s]"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
                             <div className="absolute bottom-8 left-8 right-8 p-6 bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-between">
                                 <div className="flex flex-col">
                                     <span className="text-[10px] font-black text-slate-500 uppercase">Live Intel</span>
@@ -270,14 +262,14 @@ export default function Home() {
                             {t('landing.brand_protection.desc')}
                         </p>
                         <ul className="space-y-4 pt-4">
-                            {t('landing.brand_protection.features', { returnObjects: true })?.map((item, i) => (
+                            {t('landing.brand_protection.features', { returnObjects: true }) && Array.isArray(t('landing.brand_protection.features', { returnObjects: true })) ? t('landing.brand_protection.features', { returnObjects: true }).map((item, i) => (
                                 <li key={i} className="flex items-center gap-4 text-slate-600 dark:text-slate-300 font-bold">
                                     <div className="w-6 h-6 bg-indigo-600/10 rounded-lg flex items-center justify-center text-indigo-600 border border-indigo-600/20">
                                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                     {item}
                                 </li>
-                            ))}
+                            )) : null}
                         </ul>
                     </div>
                 </div>
@@ -368,18 +360,18 @@ export default function Home() {
                 <div className="flex flex-col lg:flex-row items-center gap-16 p-12 lg:p-20 bg-indigo-50 dark:bg-indigo-950/20 rounded-[4rem] border border-indigo-100 dark:border-indigo-800/50 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-64 h-64 bg-indigo-500/10 blur-[100px] -z-10 rounded-full"></div>
                     <div className="flex-1 space-y-8">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-full text-[10px] font-black uppercase tracking-widest">{t('landing.browser_guard.badge') || 'Browser Guard'}</div>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-full text-[10px] font-black uppercase tracking-widest">{t('landing.browser_guard.badge')}</div>
                         <h2 className="text-5xl font-black text-slate-900 dark:text-white leading-tight">
                             ShieldCheck <br />
-                            <span className="text-premium-gradient">{t('landing.browser_guard.title') || 'Browser Guard'}</span>
+                            <span className="text-premium-gradient">{t('landing.browser_guard.title')}</span>
                         </h2>
                         <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
-                            {t('landing.browser_guard.desc') || 'Nossa nova extensão para Chrome e Edge protege você passivamente enquanto você navega.'}
+                            {t('landing.browser_guard.desc')}
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {[
-                                { t: t('landing.browser_guard.feature1_title') || 'Alertas em Tempo Real', d: t('landing.browser_guard.feature1_desc') || 'Notificações instantâneas em sites de risco.' },
-                                { t: t('landing.browser_guard.feature2_title') || 'Blacklist Global', d: t('landing.browser_guard.feature2_desc') || 'Conectada à nossa base de dados atualizada.' }
+                                { t: t('landing.browser_guard.feature1_title'), d: t('landing.browser_guard.feature1_desc') },
+                                { t: t('landing.browser_guard.feature2_title'), d: t('landing.browser_guard.feature2_desc') }
                             ].map((item, i) => (
                                 <div key={i} className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800">
                                     <div className="font-black text-indigo-600 text-xs mb-1 uppercase tracking-widest">{item.t}</div>
@@ -396,7 +388,7 @@ export default function Home() {
                                     <div className="text-[10px] font-black text-indigo-400 uppercase">ShieldCheck Guard</div>
                                 </div>
                                 <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl space-y-2">
-                                    <div className="text-xs font-black text-red-500 uppercase">{t('landing.browser_guard.mock_alert') || 'SITE PERIGOSO DETECTADO'}</div>
+                                    <div className="text-xs font-black text-red-500 uppercase">{t('landing.browser_guard.mock_alert')}</div>
                                     <div className="text-[10px] text-slate-400 font-mono">amazon-ofertas-hoje.net</div>
                                 </div>
                                 <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
@@ -424,7 +416,7 @@ export default function Home() {
                             {t('landing.store_checker.desc')}
                         </p>
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                            {t('landing.store_checker.features', { returnObjects: true })?.map((item, i) => (
+                            {t('landing.store_checker.features', { returnObjects: true }) && Array.isArray(t('landing.store_checker.features', { returnObjects: true })) ? t('landing.store_checker.features', { returnObjects: true }).map((item, i) => (
                                 <li key={i} className="flex items-start gap-3">
                                     <div className="flex-shrink-0 w-5 h-5 bg-blue-500/10 rounded-md flex items-center justify-center text-blue-500 border border-blue-500/20">
                                         <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
@@ -434,7 +426,7 @@ export default function Home() {
                                         <div className="text-[9px] text-slate-500 font-bold">{item.d}</div>
                                     </div>
                                 </li>
-                            ))}
+                            )) : null}
                         </ul>
                         <div className="flex gap-6 pt-4">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" className="h-6 opacity-30 grayscale hover:grayscale-0 transition-all" />
@@ -448,125 +440,156 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="relative group">
-                        <div className="absolute inset-0 bg-blue-500/10 blur-[120px] rounded-full group-hover:bg-blue-500/20 transition-all" />
-                        <div className="relative glass-card bg-white dark:bg-slate-900 rounded-[3rem] p-1 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
-                            <div className="p-8 space-y-6">
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center justify-center">🌐</div>
-                                        <div className="text-xs font-bold text-slate-900 dark:text-white">iphone-por-metade-do-preco.com</div>
-                                    </div>
-                                    <div className="px-3 py-1 bg-red-500 text-white rounded-full text-[8px] font-black uppercase">SCAM</div>
-                                </div>
-                                <div className="space-y-4">
-                                    <div className="p-4 bg-red-500/5 border border-red-500/10 rounded-2xl flex items-center justify-between">
-                                        <span className="text-xs font-bold text-slate-500">Tempo de Domínio</span>
-                                        <span className="text-xs font-black text-red-500">2 dias</span>
-                                    </div>
-                                    <div className="p-4 bg-red-500/5 border border-red-500/10 rounded-2xl flex items-center justify-between">
-                                        <span className="text-xs font-bold text-slate-500">SSL Validado</span>
-                                        <span className="text-xs font-black text-red-500">Falso / Auto-assinado</span>
-                                    </div>
-                                </div>
-                                <div className="p-6 bg-red-600 rounded-2xl text-white text-center font-black uppercase text-xs tracking-widest shadow-lg shadow-red-500/20">
-                                    Risco de Fraude Critico
-                                </div>
-                            </div>
+                        <div className="absolute inset-0 bg-blue-500/20 blur-[120px] rounded-full group-hover:bg-blue-500/30 transition-all duration-700" />
+                        <img
+                            src="/assets/landing/secure_ecom_3d.png"
+                            alt="Secure Shopping Visual"
+                            className="relative w-full rounded-[3.5rem] shadow-3xl border border-blue-500/20 transform hover:scale-[1.02] transition-all duration-700"
+                        />
+                        <div className="absolute top-8 right-8 px-5 py-2 bg-blue-600/90 backdrop-blur-xl rounded-full text-[10px] font-black text-white uppercase tracking-widest border border-white/20 shadow-2xl">
+                            E-Commerce Shield Active
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* BENEFITS / VALUE PROPOSITION */}
-            <section className="max-w-7xl mx-auto px-4 bg-indigo-600 rounded-[4rem] p-12 lg:p-24 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-full bg-mesh opacity-20 pointer-events-none"></div>
-                <div className="relative z-10 text-center space-y-16">
-                    <div className="space-y-4">
-                        <h2 className="text-5xl font-black text-white tracking-tight">{t('landing.benefits.title') || 'Tranquilidade Digital para você'}</h2>
-                        <p className="text-xl text-indigo-100 max-w-2xl mx-auto font-medium opacity-80">{t('landing.benefits.subtitle') || 'Não é apenas sobre software, é sobre proteger o que você construiu.'}</p>
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {[
-                            { title: t('landing.benefits.item1_title') || 'Economize Dinheiro', desc: t('landing.benefits.item1_desc') || 'Evite prejuízos financeiros em transações falsas.', icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
-                            { title: t('landing.benefits.item2_title') || 'Proteja a Família', desc: t('landing.benefits.item2_desc') || 'Garanta que seus familiares não caiam em táticas de sequestro digital.', icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z' },
-                            { title: t('landing.benefits.item3_title') || 'Faro Hacker', desc: t('landing.benefits.item3_desc') || 'Tenha o poder de análise de um especialista na palma da mão.', icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.154-2.048-.445-3z' },
-                            { title: t('landing.benefits.item4_title') || 'Educacional', desc: t('landing.benefits.item4_desc') || 'Reconheça golpes antes mesmo de usar nossa IA.', icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253' }
-                        ].map((item, i) => (
-                            <div key={i} className="flex flex-col items-center text-center space-y-4 p-8 bg-white/10 rounded-[3rem] backdrop-blur-md border border-white/10 hover:bg-white/20 transition-all duration-300">
-                                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-indigo-600 shadow-xl">
-                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d={item.icon} /></svg>
-                                </div>
-                                <h3 className="text-xl font-black text-white leading-tight">{item.title}</h3>
-                                <p className="text-indigo-100 text-sm font-medium opacity-80 leading-relaxed">{item.desc}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* AFFILIATE PROGRAM - VIRAL GROWTH */}
+            {/* FAMILY GUARD - EMOTIONAL & SECURITY CONNECTION */}
             <section className="max-w-7xl mx-auto px-4">
-                <div className="bg-gradient-to-br from-indigo-900 to-slate-950 rounded-[4rem] p-12 lg:p-24 relative overflow-hidden border border-indigo-500/30">
-                    <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-indigo-500/20 blur-[150px] rounded-full" />
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-                        <div className="order-2 lg:order-1 relative flex justify-center lg:justify-start">
-                            <div className="relative glass-card bg-white/5 border border-white/10 p-8 rounded-[3rem] w-full max-w-sm rotate-[-3deg] hover:rotate-0 transition-transform duration-700">
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-12 h-12 bg-premium-gradient rounded-2xl flex items-center justify-center text-white font-black">S</div>
-                                    <div>
-                                        <h4 className="text-white font-black uppercase text-xs tracking-widest">Carteira Shield</h4>
-                                        <p className="text-indigo-400 text-[10px] font-bold">Programa de Afiliados</p>
-                                    </div>
+                <div className="bg-slate-900 border border-slate-800 rounded-[4rem] p-12 lg:p-24 relative overflow-hidden group shadow-2xl">
+                    {/* Background effects */}
+                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 blur-[120px] -z-10 rounded-full group-hover:bg-indigo-500/15 transition-all duration-700" />
+                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-500/5 blur-[100px] -z-10 rounded-full" />
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
+                        <div className="space-y-10 animate-fadeIn">
+                            <div className="space-y-6">
+                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/20 text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border border-indigo-500/30">
+                                    {t('landing.family_guard.badge')}
                                 </div>
-                                <div className="space-y-6">
-                                    <div className="p-6 bg-white/5 rounded-3xl border border-white/10">
-                                        <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Saldo Compartilhável</div>
-                                        <div className="text-4xl font-black text-white">R$ 1.240,00</div>
-                                    </div>
-                                    <div className="space-y-3">
-                                        <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-tighter">
-                                            <span className="text-slate-400">Meta Mensal</span>
-                                            <span className="text-white">85% Concluído</span>
-                                        </div>
-                                        <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                                            <div className="h-full bg-premium-gradient w-[85%]" />
-                                        </div>
-                                    </div>
-                                </div>
+                                <h2 className="text-5xl lg:text-7xl font-display font-black text-white leading-[1] tracking-tighter">
+                                    {t('landing.family_guard.title')} <br />
+                                    <span className="text-premium-gradient">{t('landing.family_guard.title_highlight')}</span>
+                                </h2>
+                                <p className="text-xl text-slate-400 font-medium leading-relaxed max-w-xl">
+                                    {t('landing.family_guard.desc')}
+                                </p>
                             </div>
-                            <div className="absolute top-[-20px] right-[-20px] p-6 bg-indigo-600 rounded-3xl text-white font-black shadow-2xl animate-bounce-slow flex flex-col items-center">
-                                <span className="text-2xl">30%</span>
-                                <span className="text-[8px] uppercase tracking-widest">Comissão</span>
-                            </div>
-                        </div>
-                        <div className="order-1 lg:order-2 space-y-8">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/20 text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-500/30">
-                                Income Program
-                            </div>
-                            <h2 className="text-5xl font-black text-white leading-tight">
-                                {t('landing.affiliate.title')} <br />
-                                <span className="text-premium-gradient">{t('landing.affiliate.title_highlight')}</span>
-                            </h2>
-                            <p className="text-xl text-slate-400 font-medium leading-relaxed">
-                                {t('landing.affiliate.desc')}
-                            </p>
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                {t('landing.affiliate.features', { returnObjects: true })?.map((item, i) => (
-                                    <li key={i} className="flex gap-4">
-                                        <div className="flex-shrink-0 w-6 h-6 bg-indigo-500/10 rounded-lg flex items-center justify-center text-indigo-400 border border-indigo-500/20">
-                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                {[
+                                    { title: t('landing.family_guard.feature1_title'), desc: t('landing.family_guard.feature1_desc'), icon: '📱' },
+                                    { title: t('landing.family_guard.feature2_title'), desc: t('landing.family_guard.feature2_desc'), icon: '🔔' },
+                                    { title: t('landing.family_guard.feature3_title'), desc: t('landing.family_guard.feature3_desc'), icon: '🛡️' }
+                                ].map((item, i) => (
+                                    <div key={i} className="flex gap-4 group/item">
+                                        <div className="w-12 h-12 flex-shrink-0 bg-white/5 rounded-2xl flex items-center justify-center text-2xl border border-white/10 group-hover/item:bg-indigo-600 transition-all duration-300">
+                                            {item.icon}
                                         </div>
                                         <div className="space-y-1">
-                                            <div className="font-black text-indigo-400 text-[10px] uppercase tracking-widest">{item.t}</div>
-                                            <div className="text-[10px] text-slate-500 font-medium leading-tight">{item.d}</div>
+                                            <h4 className="text-white font-black text-sm uppercase tracking-tight">{item.title}</h4>
+                                            <p className="text-slate-500 text-xs font-medium leading-snug">{item.desc}</p>
                                         </div>
-                                    </li>
+                                    </div>
                                 ))}
-                            </ul>
+                            </div>
+
                             <div className="pt-4">
-                                <Link to="/affiliate" className="px-10 py-5 bg-white text-indigo-950 font-black rounded-2xl hover:bg-slate-100 transition-all text-sm uppercase tracking-widest inline-block shadow-xl">
-                                    {t('landing.affiliate.cta')}
+                                <Link
+                                    to="/family-guard"
+                                    className="px-10 py-5 bg-white text-indigo-950 font-black rounded-2xl hover:bg-slate-100 transition-all text-sm uppercase tracking-widest inline-flex items-center gap-3 shadow-xl hover:scale-[1.02] active:scale-95"
+                                >
+                                    {t('landing.family_guard.cta')}
+                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className="relative group/img flex justify-center lg:justify-end">
+                            <div className="absolute -inset-10 bg-indigo-500/20 blur-[120px] rounded-full group-hover/img:bg-indigo-500/30 transition-all duration-700" />
+                            <div className="relative glass-card bg-white/5 border border-white/10 p-4 rounded-[3.5rem] shadow-3xl transform rotate-2 group-hover/img:rotate-0 transition-all duration-1000">
+                                <img
+                                    src="/assets/landing/family_guard_premium_banner.png"
+                                    alt="Family Guard Protection"
+                                    className="relative w-full max-w-[500px] rounded-[3rem] shadow-2xl"
+                                />
+                                {/* Overlay status bubbles */}
+                                <div className="absolute -top-6 -left-6 p-5 bg-slate-900/90 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl animate-float">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+                                        <span className="text-[10px] font-black text-white uppercase tracking-widest">Alerta: Pai (Protegido)</span>
+                                    </div>
+                                </div>
+                                <div className="absolute -bottom-6 -right-6 p-5 bg-indigo-600 rounded-3xl text-white font-black shadow-2xl animate-bounce-slow text-[10px] uppercase tracking-widest">
+                                    Blindagem Ativa
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* DARK WEB SCAN - ACTIVE MONITORING */}
+            <section className="max-w-7xl mx-auto px-4">
+                <div className="bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/50 rounded-[4rem] p-12 lg:p-24 relative overflow-hidden group shadow-lg">
+                    <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-red-500/5 blur-[120px] -z-10 rounded-full" />
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
+                        <div className="order-2 lg:order-1 relative group/img flex justify-center lg:justify-start">
+                            <div className="absolute -inset-10 bg-red-500/10 blur-[100px] rounded-full group-hover/img:bg-red-500/20 transition-all duration-700" />
+                            <div className="relative glass-card bg-white/5 border border-white/10 dark:border-slate-800/50 p-6 rounded-[3.5rem] shadow-3xl transform -rotate-2 group-hover/img:rotate-0 transition-all duration-1000">
+                                <img
+                                    src="/assets/landing/dark_web_leak_visual.png"
+                                    alt="Dark Web Monitoring"
+                                    className="relative w-full max-w-[450px] rounded-[2.5rem] shadow-2xl"
+                                />
+
+                                {/* Floating data indicators */}
+                                <div className="absolute -top-10 -right-10 p-6 bg-slate-950 rounded-3xl border border-red-500/30 shadow-2xl animate-float">
+                                    <div className="space-y-3">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                                            <span className="text-[10px] font-black text-white px-2">EMAIL LEAKED</span>
+                                        </div>
+                                        <div className="text-[8px] font-mono text-slate-500">Source: BreachedForums</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="order-1 lg:order-2 space-y-10">
+                            <div className="space-y-6">
+                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/10 text-red-500 rounded-full text-[10px] font-black uppercase tracking-widest border border-red-500/20">
+                                    {t('landing.dark_web.badge')}
+                                </div>
+                                <h2 className="text-5xl lg:text-7xl font-display font-black text-slate-900 dark:text-white leading-[1] tracking-tighter">
+                                    {t('landing.dark_web.title')} <br />
+                                    <span className="text-red-500">{t('landing.dark_web.title_highlight')}</span>
+                                </h2>
+                                <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed max-w-xl">
+                                    {t('landing.dark_web.desc')}
+                                </p>
+                            </div>
+
+                            <div className="flex gap-12">
+                                <div>
+                                    <div className="text-4xl font-black text-slate-900 dark:text-white leading-none">8.2{t('landing.dark_web.stat1_value')}</div>
+                                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2">{t('landing.dark_web.stat1_label')}</div>
+                                </div>
+                                <div className="w-px h-12 bg-slate-200 dark:bg-slate-800" />
+                                <div>
+                                    <div className="text-4xl font-black text-emerald-500 leading-none">{t('landing.dark_web.stat2_value')}</div>
+                                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2">{t('landing.dark_web.stat2_label')}</div>
+                                </div>
+                            </div>
+
+                            <div className="pt-4">
+                                <Link
+                                    to="/dark-web-scan"
+                                    className="px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-black rounded-2xl hover:bg-slate-800 dark:hover:bg-slate-100 transition-all text-sm uppercase tracking-widest inline-flex items-center gap-3 shadow-xl hover:scale-[1.02] active:scale-95"
+                                >
+                                    {t('landing.dark_web.cta')}
+                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                 </Link>
                             </div>
                         </div>
@@ -574,41 +597,68 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* FEATURES GRID */}
-            <section id="how-it-works" className="max-w-7xl mx-auto px-4 space-y-20">
-                <div className="text-center space-y-4">
-                    <h2 className="text-5xl font-black text-slate-900 dark:text-white tracking-tight">{t('landing.defenses.title') || 'Três Camadas de Defesa Total'}</h2>
-                    <p className="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium">{t('landing.defenses.subtitle') || 'Nossa tecnologia analisa o DNA das fraudes.'}</p>
-                </div>
+            {/* DEEPFAKE DETECTION - IA vs IA */}
+            <section className="max-w-7xl mx-auto px-4">
+                <div className="bg-slate-900 border border-slate-800 rounded-[4rem] p-12 lg:p-24 relative overflow-hidden group shadow-2xl">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/10 blur-[150px] -z-10 rounded-full animate-pulse" />
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div className="glass-card group p-12 rounded-[3.5rem] border border-white/50 dark:border-slate-800 shadow-xl space-y-6 hover-lift bg-white/40 dark:bg-slate-900/40">
-                        <div className="w-16 h-16 bg-indigo-600 rounded-[1.5rem] flex items-center justify-center text-white shadow-2xl group-hover:rotate-12 transition-transform">
-                            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                        </div>
-                        <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{t('landing.defenses.item1_title') || 'Varredura Multimodal'}</h3>
-                        <p className="text-slate-500 dark:text-slate-400 font-bold leading-relaxed">{t('landing.defenses.item1_desc') || 'Detectamos links maliciosos camuflados e sites falsos.'}</p>
-                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
+                        <div className="space-y-10">
+                            <div className="space-y-6">
+                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/10 text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-500/20">
+                                    {t('landing.deepfake.badge')}
+                                </div>
+                                <h2 className="text-5xl lg:text-7xl font-display font-black text-white leading-[1] tracking-tighter">
+                                    {t('landing.deepfake.title')} <br />
+                                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 animate-gradient">
+                                        {t('landing.deepfake.title_highlight')}
+                                    </span>
+                                </h2>
+                                <p className="text-xl text-slate-400 font-medium leading-relaxed max-w-xl">
+                                    {t('landing.deepfake.desc')}
+                                </p>
+                            </div>
 
-                    <div className="glass-card group p-12 rounded-[3.5rem] border border-white/50 dark:border-slate-800 shadow-xl space-y-6 hover-lift bg-white/40 dark:bg-slate-900/40">
-                        <div className="w-16 h-16 bg-blue-600 rounded-[1.5rem] flex items-center justify-center text-white shadow-2xl group-hover:rotate-12 transition-transform">
-                            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
-                        </div>
-                        <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{t('landing.defenses.item2_title') || 'IA Auditiva'}</h3>
-                        <p className="text-slate-500 dark:text-slate-400 font-bold leading-relaxed">{t('landing.defenses.item2_desc') || 'Nossa IA transcreve áudios e detecta técnicas de manipulação.'}</p>
-                    </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                {[
+                                    { label: t('landing.deepfake.feature1'), icon: "🎙️" },
+                                    { label: t('landing.deepfake.feature2'), icon: "📹" },
+                                    { label: t('landing.deepfake.feature3'), icon: "🧬" },
+                                    { label: t('landing.deepfake.feature4'), icon: "⚡" }
+                                ].map((feat, i) => (
+                                    <div key={i} className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all">
+                                        <span className="text-xl">{feat.icon}</span>
+                                        <span className="text-xs font-black text-white uppercase tracking-wider">{feat.label}</span>
+                                    </div>
+                                ))}
+                            </div>
 
-                    <div className="glass-card group p-12 rounded-[3.5rem] border border-white/50 dark:border-slate-800 shadow-xl space-y-6 hover-lift bg-white/40 dark:bg-slate-900/40">
-                        <div className="w-16 h-16 bg-purple-600 rounded-[1.5rem] flex items-center justify-center text-white shadow-2xl group-hover:rotate-12 transition-transform">
-                            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                            <div className="pt-4">
+                                <Link
+                                    to="/deepfake-lab"
+                                    className="px-10 py-5 bg-white text-slate-950 font-black rounded-2xl hover:bg-slate-100 transition-all text-sm uppercase tracking-widest inline-flex items-center gap-3 shadow-xl hover:scale-[1.02] active:scale-95"
+                                >
+                                    {t('landing.deepfake.cta')}
+                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                                </Link>
+                            </div>
                         </div>
-                        <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{t('landing.defenses.item3_title') || 'Audit de Loja'}</h3>
-                        <p className="text-slate-500 dark:text-slate-400 font-bold leading-relaxed">{t('landing.defenses.item3_desc') || 'Verificamos sites de e-commerce e CNPJs antes de você comprar.'}</p>
+
+                        <div className="relative group/img">
+                            <div className="absolute -inset-10 bg-indigo-500/20 blur-[100px] rounded-full group-hover/img:bg-indigo-500/30 transition-all duration-700" />
+                            <div className="relative glass-card bg-white/5 border border-white/10 p-4 rounded-[4rem] shadow-3xl transform rotate-3 group-hover/img:rotate-0 transition-all duration-1000 overflow-hidden">
+                                <img
+                                    src="/assets/landing/deepfake_detection_visual.png"
+                                    alt="Deepfake Detection AI"
+                                    className="relative w-full max-w-[500px] rounded-[3rem] shadow-2xl grayscale-[20%] group-hover/img:grayscale-0 transition-all duration-1000"
+                                />
+                                {/* Scanning line animation */}
+                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-500/40 to-transparent h-20 w-full animate-scan -z-1" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
-
-            {/* TARGET AUDIENCE - WHO IS IT FOR? */}
             <section className="max-w-7xl mx-auto px-4 space-y-20">
                 <div className="text-center space-y-4">
                     <h2 className="text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">{t('landing.audience.title') || 'Segurança para todos'}</h2>

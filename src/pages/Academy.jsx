@@ -113,7 +113,7 @@ export default function Academy() {
                         </div>
 
                         <div className="mt-10 relative z-10">
-                            {course.status === 'Disponível' ? (
+                            {course.status === t('tools.academy.available') ? (
                                 <Link
                                     to={course.link}
                                     className="w-full h-14 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 hover:opacity-90 transition-all shadow-xl"

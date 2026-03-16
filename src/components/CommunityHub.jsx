@@ -3,7 +3,10 @@ import { AuthContext } from '../context/AuthContext';
 import { API_ENDPOINTS } from '../api/config';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { useTranslation } from 'react-i18next';
+
 export default function CommunityHub() {
+    const { t } = useTranslation();
     const { user } = useContext(AuthContext);
     const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -82,14 +85,14 @@ export default function CommunityHub() {
         <div className="space-y-8 animate-fadeIn max-w-5xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6 bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm">
                 <div>
-                    <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Comunidade Sentinel</h2>
-                    <p className="text-slate-500 dark:text-slate-400 font-medium">O wiki coletivo contra golpes e fraudes em tempo real.</p>
+                    <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{t('tools.community.title_start')} {t('tools.community.title_highlight')}</h2>
+                    <p className="text-slate-500 dark:text-slate-400 font-medium">{t('tools.community.subtitle')}</p>
                 </div>
                 <button
                     onClick={() => setShowSubmitModal(true)}
                     className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-bold shadow-lg shadow-indigo-500/30 transition-all hover:-translate-y-1 active:scale-95 whitespace-nowrap"
                 >
-                    + Reportar Novo Golpe
+                    {t('tools.community.btn_report')}
                 </button>
             </div>
 
@@ -104,7 +107,7 @@ export default function CommunityHub() {
                         <div className="absolute top-8 right-8">
                             <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${report.status === 'Verificado' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'
                                 }`}>
-                                {report.status}
+                                {report.status === 'Verificado' ? t('tools.community.status_verified') : t('tools.community.status_pending')}
                             </span>
                         </div>
 
@@ -144,7 +147,7 @@ export default function CommunityHub() {
                                         <div className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[8px]">
                                             👤
                                         </div>
-                                        <span>Por: {report.author}</span>
+                                        <span>{t('tools.community.author_label')} {report.author}</span>
                                     </div>
                                     <span>{new Date(report.timestamp).toLocaleDateString()}</span>
                                 </div>
@@ -167,58 +170,58 @@ export default function CommunityHub() {
                             <div className="flex items-center gap-4 mb-8">
                                 <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-xl">📢</div>
                                 <div>
-                                    <h3 className="text-2xl font-black text-slate-900 dark:text-white">Reportar novo Golpe</h3>
-                                    <p className="text-sm text-slate-500 font-medium">Ajude a proteger os outros membros da comunidade.</p>
+                                    <h3 className="text-2xl font-black text-slate-900 dark:text-white">{t('tools.community.modal.title')}</h3>
+                                    <p className="text-sm text-slate-500 font-medium">{t('tools.community.modal.subtitle')}</p>
                                 </div>
                             </div>
 
                             <form onSubmit={handleSubmitReport} className="space-y-6">
                                 <div className="grid grid-cols-2 gap-6">
                                     <div className="space-y-2">
-                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Tipo de Golpe</label>
+                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">{t('tools.community.modal.type_label')}</label>
                                         <input
                                             type="text"
                                             required
                                             value={formData.type}
                                             onChange={e => setFormData({ ...formData, type: e.target.value })}
                                             className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500 font-bold text-slate-800 dark:text-white"
-                                            placeholder="Ex: Phishing, Falso Empréstimo"
+                                            placeholder={t('tools.community.modal.type_placeholder')}
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Plataforma</label>
+                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">{t('tools.community.modal.platform_label')}</label>
                                         <input
                                             type="text"
                                             required
                                             value={formData.platform}
                                             onChange={e => setFormData({ ...formData, platform: e.target.value })}
                                             className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500 font-bold text-slate-800 dark:text-white"
-                                            placeholder="Ex: WhatsApp, Instagram"
+                                            placeholder={t('tools.community.modal.platform_placeholder')}
                                         />
                                     </div>
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Alvo do Golpe</label>
+                                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">{t('tools.community.modal.target_label')}</label>
                                     <input
                                         type="text"
                                         required
                                         value={formData.target}
                                         onChange={e => setFormData({ ...formData, target: e.target.value })}
                                         className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500 font-bold text-slate-800 dark:text-white"
-                                        placeholder="Ex: Clientes do Banco Itáu, Idosos"
+                                        placeholder={t('tools.community.modal.target_placeholder')}
                                     />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Descrição Detalhada</label>
+                                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">{t('tools.community.modal.desc_label')}</label>
                                     <textarea
                                         required
                                         rows={4}
                                         value={formData.description}
                                         onChange={e => setFormData({ ...formData, description: e.target.value })}
                                         className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500 font-bold text-slate-800 dark:text-white"
-                                        placeholder="Explique como o golpe funciona e como identificá-lo..."
+                                        placeholder={t('tools.community.modal.desc_placeholder')}
                                     />
                                 </div>
 
@@ -227,14 +230,14 @@ export default function CommunityHub() {
                                         type="submit"
                                         className="flex-1 h-16 bg-premium-gradient text-white rounded-2xl font-black uppercase tracking-widest shadow-lg shadow-indigo-500/20"
                                     >
-                                        Publicar na Comunidade
+                                        {t('tools.community.modal.submit_btn')}
                                     </button>
                                     <button
                                         type="button"
                                         onClick={() => setShowSubmitModal(false)}
                                         className="flex-1 h-16 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded-2xl font-black uppercase tracking-widest"
                                     >
-                                        Cancelar
+                                        {t('tools.community.modal.cancel_btn')}
                                     </button>
                                 </div>
                             </form>

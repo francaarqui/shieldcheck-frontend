@@ -26,7 +26,12 @@ const LanguageSwitcher = () => {
     }, []);
 
     const changeLanguage = (lng) => {
-        i18n.changeLanguage(lng);
+        if (i18n.language !== lng) {
+            i18n.changeLanguage(lng);
+            // Small reload to ensure all components (even those not using useTranslation) update
+            // and to provide a "flash" of feedback that something changed.
+            window.location.reload();
+        }
         setIsOpen(false);
     };
 

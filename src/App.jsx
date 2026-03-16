@@ -9,6 +9,7 @@ import PrivateLayout from './layouts/PrivateLayout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import Dashboard from './pages/Dashboard';
 import Analyze from './pages/Analyze';
 import History from './pages/History';
@@ -56,6 +57,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/" element={<Home />} />
           <Route path="/fraud-dictionary" element={<FraudDictionary />} />
           <Route path="/empresas" element={<Empresas />} />
@@ -63,6 +65,7 @@ export default function App() {
           <Route path="/terms" element={<TermsOfUse />} />
           <Route path="/help" element={<Help />} />
           <Route path="/status" element={<Status />} />
+          <Route path="/scam-map" element={<ScamMap />} />
         </Route>
 
 
@@ -79,7 +82,6 @@ export default function App() {
           <Route path="/academy" element={<Academy />} />
           <Route path="/academy/simulator" element={<ScamSimulator />} />
           <Route path="/academy/deepfake-lab" element={<DeepfakeLab />} />
-          <Route path="/scam-map" element={<ScamMap />} />
 
           <Route path="/b2b-portal" element={<B2BPortal />} />
           <Route path="/success" element={<Success />} />

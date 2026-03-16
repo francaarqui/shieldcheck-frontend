@@ -11,19 +11,35 @@ export default function Plans() {
     const [searchParams] = useSearchParams();
     const [billingCycle, setBillingCycle] = useState('monthly'); // 'monthly' or 'yearly'
     const [loadingPlan, setLoadingPlan] = useState(null);
+    const hasTriggeredAuto = React.useRef(false);
 
     useEffect(() => {
         const autoPlan = searchParams.get('auto');
         const cycle = searchParams.get('cycle');
 
-        if (autoPlan && user && !loadingPlan) {
+        if (autoPlan && user && !loadingPlan && !hasTriggeredAuto.current) {
+            // Verificamos se já tentamos esse auto-check nesta sessão para evitar loop infinito de reload
+            const sessionKey = `wa_auto_checkout_${autoPlan}`;
+            if (sessionStorage.getItem(sessionKey)) {
+                console.log(`⏳ [AUTORUN] Already attempted auto-checkout for ${autoPlan} in this session. Skipping to avoid loop.`);
+                return;
+            }
+
             console.log(`🚀 [AUTORUN] Direct checkout triggered for: ${autoPlan} (${cycle})`);
+            hasTriggeredAuto.current = true;
+            sessionStorage.setItem(sessionKey, 'true'); // Marca na sessão
+
             if (cycle) setBillingCycle(cycle);
 
-            // Passamos o ciclo diretamente para evitar problemas com a atualização assíncrona do estado
-            handleSubscribe(autoPlan, cycle || billingCycle);
+            // Limpa a URL imediatamente (sem esperar o navigate do React)
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, '', newUrl);
+
+            setTimeout(() => {
+                handleSubscribe(autoPlan, cycle || 'monthly');
+            }, 500);
         }
-    }, [user, searchParams, loadingPlan, billingCycle]);
+    }, [user, searchParams, loadingPlan]);
 
     const handleSubscribe = async (planName, overrideCycle = null) => {
         const actualCycle = overrideCycle || billingCycle;
@@ -48,13 +64,15 @@ export default function Plans() {
             const data = await response.json();
 
             if (data.url) {
+                console.log(`🚀 [CHECKOUT SUCCESS] Redirecting to: ${data.url}`);
                 window.location.href = data.url;
             } else {
+                console.error(`❌ [CHECKOUT ERROR] No URL returned:`, data);
                 alert(data.error || t('common.error_occurred'));
                 setLoadingPlan(null);
             }
         } catch (error) {
-            console.error('Erro no checkout:', error);
+            console.error('❌ [CHECKOUT EXCEPTION]:', error);
             alert(t('common.connection_error'));
             setLoadingPlan(null);
         }
