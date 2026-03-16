@@ -44,6 +44,7 @@ import PrivacyPolicy from './pages/legal/PrivacyPolicy';
 import TermsOfUse from './pages/legal/TermsOfUse';
 import Help from './pages/legal/Help';
 import Status from './pages/legal/Status';
+import InviteBot from './pages/InviteBot';
 
 import ScrollToTop from './components/ScrollToTop';
 
@@ -66,6 +67,7 @@ export default function App() {
           <Route path="/help" element={<Help />} />
           <Route path="/status" element={<Status />} />
           <Route path="/scam-map" element={<ScamMap />} />
+          <Route path="/proteger" element={<InviteBot />} />
         </Route>
 
 
