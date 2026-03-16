@@ -49,6 +49,8 @@ export default function Plans() {
 
         try {
             const token = user?.token;
+            const waNumber = searchParams.get('wa');
+
             const response = await fetch(API_ENDPOINTS.CREATE_CHECKOUT_SESSION, {
                 method: 'POST',
                 headers: {
@@ -57,7 +59,8 @@ export default function Plans() {
                 },
                 body: JSON.stringify({
                     planId,
-                    planName: planName.toUpperCase() // Passando o nome do plano para o backend
+                    planName: planName.toUpperCase(), // Passando o nome do plano para o backend
+                    waNumber // Enviando o número do WhatsApp capturado da URL
                 })
             });
 
