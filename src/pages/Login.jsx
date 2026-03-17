@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AuthContext } from '../context/AuthContext';
 import { API_ENDPOINTS } from '../api/config';
 import { useTranslation } from 'react-i18next';
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function Login() {
     const { t } = useTranslation();
@@ -67,12 +68,30 @@ export default function Login() {
         }
     };
 
-    const handleGoogleLogin = () => {
+    const handleGoogleSuccess = async (credentialResponse) => {
         setIsGoogleLoading(true);
-        setTimeout(() => {
-            setError(t('auth.google_setup_msg'));
+        setError('');
+
+        try {
+            const response = await fetch(`${API_URL}/api/google-login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ idToken: credentialResponse.credential }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                login(data.token, data.user);
+                navigate('/dashboard');
+            } else {
+                throw new Error(data.error || 'Erro na autenticação com Google.');
+            }
+        } catch (err) {
+            setError(err.message);
+        } finally {
             setIsGoogleLoading(false);
-        }, 1000);
+        }
     };
 
     return (
@@ -189,26 +208,17 @@ export default function Login() {
                                 </div>
                             </div>
 
-                            <button
-                                type="button"
-                                onClick={handleGoogleLogin}
-                                disabled={isGoogleLoading}
-                                className="w-full flex items-center justify-center gap-3 px-6 py-4 border-2 border-slate-100 dark:border-slate-800 rounded-2xl font-bold bg-white dark:bg-slate-900 hover:border-slate-200 dark:hover:border-slate-700 transition-all active:scale-[0.98]"
-                            >
-                                {isGoogleLoading ? (
-                                    <div className="w-5 h-5 border-2 border-slate-300 border-t-slate-600 rounded-full animate-spin"></div>
-                                ) : (
-                                    <>
-                                        <svg className="w-5 h-5" viewBox="0 0 24 24">
-                                            <path fill="#EA4335" d="M12 5.04c1.64 0 3.12.56 4.28 1.67l3.2-3.2C17.52 1.64 14.96 1 12 1 7.37 1 3.4 3.63 1.48 7.49l3.77 2.92C6.14 7.24 8.87 5.04 12 5.04z" />
-                                            <path fill="#4285F4" d="M23.49 12.27c0-.8-.07-1.57-.2-2.3H12v4.35h6.44c-.28 1.46-1.11 2.7-2.34 3.53l3.65 2.83c2.14-1.97 3.38-4.88 3.38-8.41z" />
-                                            <path fill="#FBBC05" d="M5.25 10.41c-.24-.71-.37-1.47-.37-2.26 0-.79.13-1.55.37-2.26L1.48 2.97C.54 4.88 0 7.03 0 9.35c0 2.32.54 4.47 1.48 6.38l3.77-2.92z" />
-                                            <path fill="#34A853" d="M12 23c3.24 0 5.95-1.08 7.93-2.91l-3.65-2.83c-1.1.74-2.5 1.17-4.28 1.17-3.13 0-5.86-2.2-6.81-5.17l-3.77 2.92C3.4 20.37 7.37 23 12 23z" />
-                                        </svg>
-                                        <span>{t('auth.google_login')}</span>
-                                    </>
-                                )}
-                            </button>
+                            <div className="w-full flex justify-center">
+                                <GoogleLogin
+                                    onSuccess={handleGoogleSuccess}
+                                    onError={() => setError('Falha no login com Google. Tente novamente.')}
+                                    useOneTap
+                                    theme={document.documentElement.classList.contains('dark') ? 'filled_black' : 'outline'}
+                                    size="large"
+                                    width="100%"
+                                    shape="circle"
+                                />
+                            </div>
                         </motion.form>
                     ) : (
                         <motion.form

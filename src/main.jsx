@@ -6,6 +6,7 @@ import { ThemeProvider } from './context/ThemeContext'
 import App from './App.jsx'
 import './styles/main.scss'
 import './i18n'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 // Global Error Catching for Production
 window.onerror = function (message, source, lineno, colno, error) {
@@ -60,13 +61,15 @@ try {
     ReactDOM.createRoot(rootElement).render(
       <React.StrictMode>
         <ErrorBoundary>
-          <AuthProvider>
-            <ThemeProvider>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
-            </ThemeProvider>
-          </AuthProvider>
+          <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || 'your-client-id-here'}>
+            <AuthProvider>
+              <ThemeProvider>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </ThemeProvider>
+            </AuthProvider>
+          </GoogleOAuthProvider>
         </ErrorBoundary>
       </React.StrictMode>,
     )
