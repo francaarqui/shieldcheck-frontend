@@ -4,6 +4,14 @@ const getEffectiveApiUrl = () => {
     const savedUrl = localStorage.getItem('shieldcheck_api_url');
     if (savedUrl) return savedUrl;
 
+    // Detecção automática de ambiente local para facilitar testes do usuário
+    if (typeof window !== 'undefined') {
+        const hostname = window.location.hostname;
+        if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.')) {
+            return 'http://localhost:3001';
+        }
+    }
+
     return import.meta.env.VITE_API_URL || 'https://shieldcheck-api.onrender.com';
 };
 
