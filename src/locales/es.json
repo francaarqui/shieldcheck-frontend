@@ -889,7 +889,15 @@
                 "numbers": "Números",
                 "symbols": "Símbolos",
                 "copy": "Copiar Contraseña",
-                "copy_btn": "Copiar"
+                "copy_btn": "Copiar",
+                "generate": "Generar Contraseña",
+                "placeholder": "Tu nueva contraseña aparecerá aquí",
+                "vulnerability": "Nivel de Blindaje",
+                "vulnerable": "VULNERABLE",
+                "secure": "SEGURA",
+                "entropy": "ENTROPÍA MÁXIMA",
+                "pro_tip": "Consejo Pro",
+                "pro_tip_desc": "Usa contraseñas de +16 caracteres para máxima protección contra ataques de fuerza bruta."
             },
             "simulator_plus": {
                 "title": "Simulator Plus",

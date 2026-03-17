@@ -90,18 +90,93 @@
             }
         },
         "store_checker": {
-            "title": "Verificador de Lojas",
-            "subtitle": "Proteja seu dinheiro. Analisamos se o site é real antes de você comprar.",
-            "input_label": "URL da Loja ou Produto",
-            "placeholder": "https://loja-suspeita.com.br",
-            "analyze_btn": "Verificar Segurança",
-            "analyzing": "Analisando reputação, SSL e domínios...",
-            "trust_score": "Índice de Confiança",
-            "registration_age": "Tempo de Registro",
-            "verdict": "Veredito ShieldCheck",
-            "risk_factors": "Fatores de Risco Encontrados",
-            "error_quota": "Cota de verificação atingida.",
-            "error_domain": "Não foi possível validar este domínio."
+            "title_start": "Store",
+            "title_highlight": "Checker",
+            "subtitle": "Auditoria de segurança instantânea para sites e identificações fiscais.",
+            "tabs": {
+                "store": "Lojas",
+                "cnpj": "CNPJ",
+                "pix": "PIX",
+                "phone": "Fone",
+                "link": "Link"
+            },
+            "error_domain": "Não foi possível escanear este domínio no momento.",
+            "error_cnpj": "CNPJ inválido. Insira 14 dígitos.",
+            "error_cnpj_not_found": "Empresa não encontrada ou erro na base de dados.",
+            "error_generic": "Falha na consulta de segurança.",
+            "error_link": "Não foi possível processar este link.",
+            "error_quota": "Cota diária atingida.",
+            "form": {
+                "domain_title": "Análise de Domínio e Links",
+                "domain_placeholder": "URL da loja ou Link encurtado (ex: bit.ly/...)",
+                "domain_button": "Auditar Site",
+                "cnpj_title": "Consulta de Legitimidade Fiscal",
+                "cnpj_placeholder": "00.000.000/0001-00",
+                "cnpj_button": "Validar CNPJ",
+                "pix_title": "Verificador de Chave PIX",
+                "pix_placeholder": "CPF/CNPJ, E-mail, Telefone ou Chave Aleatória",
+                "pix_button": "Verificar PIX",
+                "phone_title": "Análise de Número de Telefone",
+                "phone_placeholder": "(11) 99999-9999",
+                "phone_button": "Analisar Número",
+                "link_title": "Expansor de Links Suspeitos",
+                "link_placeholder": "https://bit.ly/exemplo-sospeito",
+                "link_button": "Expandir e Analisar"
+            },
+            "results": {
+                "trust_score": "Trust Score",
+                "global_index": "Índice Global",
+                "pdf_report": "Relatório PDF",
+                "age": "Idade",
+                "verdict": "Veredito Final",
+                "situation": "Situação",
+                "active": "Ativa",
+                "foundation": "Fundação",
+                "capital": "Capital Social",
+                "location": "Localização Física",
+                "fiscal_score": "Score Fiscal",
+                "verified_rfb": "Verificado RFB",
+                "consistent_activity": "Atividade Consistente",
+                "legitimate_msg": "Este documento é legítimo perante os órgãos reguladores.",
+                "export_pdf": "Exportar PDF",
+                "risk": "Riesgo",
+                "reported_times": "Reportado {{count}}x pela comunidade",
+                "verified_identity": "Identidade Verificada por IA",
+                "security_advice": "Conselho de Segurança",
+                "expansion_msg": "Link expandido para:"
+            },
+            "premium_modal": {
+                "title": "Módulo Premium",
+                "desc": "A análise de lojas e documentos é exclusiva para assinantes Premium. Proteja seu dinheiro agora!",
+                "cta": "Conhecer Planos",
+                "later": "Talvez depois"
+            }
+        },
+        "dark_web": {
+            "badge": "Módulo de Inteligência Ativa",
+            "title_start": "Monitor de",
+            "title_highlight": "Dark Web",
+            "subtitle": "Varremos trilhões de registros vazados para encontrar seus dados pessoais e senhas expostas.",
+            "placeholder": "Insira seu e-mail ou CPF...",
+            "btn_start": "Iniciar Varredura",
+            "privacy_note": "Sua busca é privada e não armazenamos os termos consultados.",
+            "scanning_title": "Escaneando Camadas da Rede...",
+            "scanning_sub": "Analisando fóruns cibernéticos:",
+            "active_label": "ATIVO",
+            "found_leaks": "{{count}} Vazamentos Encontrados!",
+            "no_leaks": "Nenhuma vazamento detectado!",
+            "leaks_desc": "Detectamos que seus dados aparecem em bases de dados expostas. Veja abaixo os detalhes e como se proteger.",
+            "clean_desc": "Tudo limpo! Sua presença digital parece estar segura nesta consulta.",
+            "new_scan": "Nova consulta",
+            "exposed_data": "Dados expostos:",
+            "suggestion": "Sugerimos a troca imediata de senhas em sites similares e ativação de 2FA.",
+            "resilience_guide": "Guia de Resiliência Pós-Vazamento",
+            "tips": [
+                "Altere sua senha principal imediatamente.",
+                "Ative 2-Fatores (2FA) em todos os serviços.",
+                "Use um gerenciador de senhas para chaves únicas.",
+                "Fique alerta a tentativas de login no seu e-mail."
+            ]
         }
     },
     "settings": {
@@ -149,13 +224,17 @@
             "security_advice": "Conselho de Segurança",
             "premium_only": "Este é um módulo exclusivo para assinantes Premium.",
             "see_plans": "Ver Planos",
-            "later": "Talvez depois"
+            "later": "Talvez depois",
+            "reported_times": "Denunciada {{count}}x pela comunidade",
+            "premium_modal_title": "Limite Gratuito",
+            "premium_modal_desc": "Você atingiu o limite de verificações para este módulo hoje. Seja Premium para consultas ilimitadas!"
         },
         "auditor_loja": {
             "title": "Auditoria de Sites",
-            "subtitle": "Analise a confiabilidade de qualquer loja online através de nossa IA.",
-            "input_label": "Análise de Domínio",
-            "placeholder": "Insira a URL da loja (ex: https://loja.com)"
+            "subtitle": "Análise forense completa de domínios, SSL e riscos de segurança.",
+            "input_label": "URL da Loja ou Site",
+            "placeholder": "https://loja-exemplo.com",
+            "registration_label": "Tempo de Registro"
         },
         "consulta_cnpj": {
             "title": "Consulta de Empresas",
@@ -173,27 +252,42 @@
             "title": "Análise de Telefone",
             "subtitle": "Identifique perfis de fraude e golpes vinculados a números de celular.",
             "input_label": "Número de Telefone",
-            "placeholder": "(11) 99999-9999"
+            "placeholder": "(11) 99999-9999",
+            "spam_detected": "Detectado em {{count}} campanhas de spam"
         },
         "expansor_links": {
             "title": "Expansor de Links",
             "subtitle": "Revele o destino real de links encurtados e analise sua segurança.",
             "input_label": "Link Encurtado",
-            "placeholder": "https://bit.ly/exemplo"
+            "placeholder": "https://bit.ly/exemplo",
+            "result_label": "Link Destino Revelado"
         },
         "analisador_docs": {
             "title": "Analisador de Docs",
             "subtitle": "IA para leitura e detecção de fraudes em boletos e documentos.",
+            "upload_title": "Arraste seu Documento",
             "upload_btn": "Upload do Arquivo",
             "supported": "Formatos: PDF, JPG, PNG",
             "verifying": "Extraindo e Analisando...",
-            "processing": "Processando OCR..."
+            "processing": "Processando OCR...",
+            "detected_label": "Detectado",
+            "institution": "Instituição",
+            "amount": "Valor do Título",
+            "trust_signals": "Sinais de Confiança",
+            "analyze_another": "Analisar Outro"
         },
         "auditoria_social": {
             "title": "Auditoria de Perfil",
             "subtitle": "Verifique a autenticidade de perfis em redes sociais para evitar fakes.",
             "input_label": "URL do Perfil",
-            "placeholder": "instagram.com/usuario"
+            "placeholder": "instagram.com/usuario",
+            "bot_prob": "Probabilidade de Bot",
+            "metrics": {
+                "creation": "Criação",
+                "followers": "Seguidores",
+                "following": "Seguindo",
+                "risk": "Nível de Risco"
+            }
         },
         "gerador_senhas": {
             "title": "Gerador de Senhas",
@@ -203,15 +297,153 @@
             "numbers": "Números",
             "symbols": "Símbolos",
             "copy": "Copiar Senha",
-            "copy_btn": "Copiar"
+            "copy_btn": "Copiar",
+            "generate": "Gerar Senha",
+            "placeholder": "Sua nova senha aparecerá aqui",
+            "vulnerability": "Nível de Blindagem",
+            "vulnerable": "VULNERÁVEL",
+            "secure": "SEGURA",
+            "entropy": "ENTROPIA MÁXIMA",
+            "pro_tip": "Dica Pro",
+            "pro_tip_desc": "Use senhas de +16 caracteres para máxima proteção contra ataques de força bruta."
         },
-        "simulator_plus": {
-            "title": "Simulator Plus",
-            "subtitle": "Treinamentos interativos de alta fidelidade contra engenharia social.",
-            "level": "Nível de Dificuldade",
-            "start": "Iniciar Simulação de Elite",
-            "think_enemy": "Pense como o Inimigo",
-            "advice": "Golpistas usam urgência e autoridade para cegar seu julgamento. Analise com calma."
+        "simulator_plus": {},
+        "settings": {
+            "title": "Configurações de Segurança",
+            "profile": "Perfil e Assinatura",
+            "notifications": "Alertas e Notificações",
+            "language": "Idioma do Sistema",
+            "password": "Senha e Acesso",
+            "security": "Proteção Adicional (2FA)",
+            "save_success": "Configurações atualizadas!",
+            "whatsapp_guide": {
+                "title": "Como usar seu Escudo no Celular:",
+                "step1": "Adicione nosso número oficial aos seus contatos: <strong>+55 11 99999-9999</strong>",
+                "step2": "Encaminhe qualquer mensagem suspeita ou áudio para uma análise instantânea.",
+                "step3": "<strong>Anti-Clonagem:</strong> Sua licença Premium está ligada ao número acima. Para trocá-lo, use este painel."
+            },
+            "mfa_modal": {
+                "title": "Configurar Camada Extra",
+                "subtitle": "Escaneie o QR Code abaixo com seu aplicativo de autenticação.",
+                "code_label": "Insira o código de 6 dígitos",
+                "placeholder": "000000",
+                "confirm_btn": "Confirmar e Ativar",
+                "verifying_btn": "Verificando...",
+                "cancel": "Cancelar"
+            },
+            "messages": {
+                "mfa_success": "Autenticação de dois fatores ativada!",
+                "mfa_error": "Erro ao verificar o código MFA.",
+                "save_error": "Erro ao atualizar os dados.",
+                "mfa_setup_fail": "Falha ao iniciar configuração de 2FA."
+            }
+        },
+        "specialized_tools": {
+            "common": {
+                "header": "Auditoria ShieldCheck v3.0",
+                "technical_analysis": "Análise Técnica Forense",
+                "back": "Voltar",
+                "analyzing": "Analisando...",
+                "audit_now": "Auditar agora",
+                "verdict_title": "Veredito ShieldCheck AI",
+                "download_report": "Baixar Relatório PDF",
+                "risk_score": "Confiança",
+                "global_index": "Índice Global",
+                "risk_factors": "Fatores de Risco",
+                "security_advice": "Conselho de Segurança",
+                "premium_only": "Este é um módulo exclusivo para assinantes Premium.",
+                "see_plans": "Ver Planos",
+                "later": "Talvez depois",
+                "reported_times": "Denunciada {{count}}x pela comunidade",
+                "premium_modal_title": "Limite Gratuito",
+                "premium_modal_desc": "Você atingiu o limite de verificações para este módulo hoje. Seja Premium para consultas ilimitadas!"
+            },
+            "auditor_loja": {
+                "title": "Auditoria de Sites",
+                "subtitle": "Análise forense completa de domínios, SSL e riscos de segurança.",
+                "input_label": "URL da Loja ou Site",
+                "placeholder": "https://loja-exemplo.com",
+                "registration_label": "Tempo de Registro"
+            },
+            "consulta_cnpj": {
+                "title": "Consulta de Empresas",
+                "subtitle": "Valide a legitimidade fiscal e os dados cadastrais diretamente na Receita.",
+                "input_label": "Consulta de CNPJ",
+                "placeholder": "00.000.000/0001-00"
+            },
+            "verifica_pix": {
+                "title": "Verificador de PIX",
+                "subtitle": "Analise o risco de chaves PIX antes de realizar transferências.",
+                "input_label": "Chave PIX",
+                "placeholder": "CPF/CNPJ, E-mail, Telefone ou Chave Aleatória"
+            },
+            "analise_telefone": {
+                "title": "Análise de Telefone",
+                "subtitle": "Identifique perfis de fraude e golpes vinculados a números de celular.",
+                "input_label": "Número de Telefone",
+                "placeholder": "(11) 99999-9999",
+                "spam_detected": "Detectado em {{count}} campanhas de spam"
+            },
+            "expansor_links": {
+                "title": "Expansor de Links",
+                "subtitle": "Revele o destino real de links encurtados e analise sua segurança.",
+                "input_label": "Link Encurtado",
+                "placeholder": "https://bit.ly/exemplo",
+                "result_label": "Link Destino Revelado"
+            },
+            "analisador_docs": {
+                "title": "Analisador de Docs",
+                "subtitle": "IA para leitura e detecção de fraudes em boletos e documentos.",
+                "upload_title": "Arraste seu Documento",
+                "upload_btn": "Upload do Arquivo",
+                "supported": "Formatos: PDF, JPG, PNG",
+                "verifying": "Extraindo e Analisando...",
+                "processing": "Processando OCR...",
+                "detected_label": "Detectado",
+                "institution": "Instituição",
+                "amount": "Valor do Título",
+                "trust_signals": "Sinais de Confiança",
+                "analyze_another": "Analisar Outro"
+            },
+            "auditoria_social": {
+                "title": "Auditoria de Perfil",
+                "subtitle": "Verifique a autenticidade de perfis em redes sociais para evitar fakes.",
+                "input_label": "URL do Perfil",
+                "placeholder": "instagram.com/usuario",
+                "bot_prob": "Probabilidade de Bot",
+                "metrics": {
+                    "creation": "Criação",
+                    "followers": "Seguidores",
+                    "following": "Seguindo",
+                    "risk": "Nível de Risco"
+                }
+            },
+            "gerador_senhas": {
+                "title": "Gerador de Senhas",
+                "subtitle": "Crie chaves de acesso seguras com criptografia avançada.",
+                "length": "Tamanho",
+                "uppercase": "Maiúsculas",
+                "numbers": "Números",
+                "symbols": "Símbolos",
+                "copy": "Copiar Senha",
+                "copy_btn": "Copiar",
+                "generate": "Gerar Senha",
+                "placeholder": "Sua nova senha aparecerá aqui",
+                "vulnerability": "Nível de Blindagem",
+                "vulnerable": "VULNERÁVEL",
+                "secure": "SEGURA",
+                "entropy": "ENTROPIA MÁXIMA",
+                "pro_tip": "Dica Pro",
+                "pro_tip_desc": "Use senhas de +16 caracteres para máxima proteção contra ataques de força bruta."
+            },
+            "simulator_plus": {
+                "title": "Simulator Plus",
+                "subtitle": "Treinamentos interativos de alta fidelidade contra engenharia social.",
+                "level": "Nível de Dificuldade",
+                "start": "Iniciar Simulação de Elite",
+                "think_enemy": "Pense como o Inimigo",
+                "advice": "Golpistas usam urgência e autoridade para cegar seu julgamento. Analise com calma."
+            }
         }
     }
 }

@@ -124,7 +124,7 @@ export default function AnaliseTelefone() {
                                 </div>
                                 {genericResult.reportedTimes > 0 && (
                                     <div className="px-4 py-2 bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-400 rounded-xl text-[10px] font-black uppercase tracking-widest border border-red-200 dark:border-red-900">
-                                        Detectado em {genericResult.reportedTimes} campanhas de spam
+                                        {t('specialized_tools.analise_telefone.spam_detected', { count: genericResult.reportedTimes })}
                                     </div>
                                 )}
                             </div>

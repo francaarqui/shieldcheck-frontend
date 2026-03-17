@@ -186,7 +186,9 @@ export default function AuditorLoja() {
                                 <div>
                                     <h4 className="text-3xl font-display font-black text-slate-900 dark:text-white mb-2 break-all">{result.domain}</h4>
                                     <div className="flex gap-2 mb-8">
-                                        <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded-lg text-[10px] font-black uppercase tracking-widest border border-slate-200 dark:border-slate-700">Tempo de Registro: {result.registrationAge}</span>
+                                        <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded-lg text-[10px] font-black uppercase tracking-widest border border-slate-200 dark:border-slate-700">
+                                            {t('specialized_tools.auditor_loja.registration_label')}: {result.registrationAge}
+                                        </span>
                                     </div>
 
                                     <h5 className="text-xs font-black uppercase tracking-widest text-slate-400 flex items-center gap-2 mb-6">

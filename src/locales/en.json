@@ -60,7 +60,112 @@
             "risk_score": "Risk",
             "detected_signals": "Detected Signals",
             "recommendation": "Expert Recommendation",
-            "export_pdf": "Export PDF"
+            "export_pdf": "Export PDF",
+            "source_types": {
+                "image": "Image (screenshot)",
+                "audio": "Audio",
+                "video": "Video"
+            },
+            "status": {
+                "scam": "SCAM",
+                "safe": "SAFE",
+                "recognizing": "Recognizing Visual Patterns...",
+                "decoding_audio": "Decoding Audio...",
+                "decomposing_video": "Decomposing Video...",
+                "transcribe_error": "Error transcribing {{type}} file.",
+                "vision_error": "The image seems unreadable to the AI vision motor.",
+                "quota_error": "Daily quota reached.",
+                "motor_error": "Processing motor failure."
+            }
+        },
+        "dark_web": {
+            "badge": "Active Intelligence Module",
+            "title_start": "Dark Web",
+            "title_highlight": "Scan",
+            "subtitle": "We scan trillions of leaked records to find your personal data and exposed passwords.",
+            "placeholder": "Enter your email or ID...",
+            "btn_start": "Start Scan",
+            "privacy_note": "Your search is private and we do not store the terms consulted.",
+            "scanning_title": "Scanning Network Layers...",
+            "scanning_sub": "Analyzing cyber forums:",
+            "active_label": "ACTIVE",
+            "found_leaks": "{{count}} Leaks Found!",
+            "no_leaks": "No leaks detected!",
+            "leaks_desc": "We detected that your data appears in exposed databases. See below for details and how to protect yourself.",
+            "clean_desc": "All clean! Your digital presence seems to be safe in this query.",
+            "new_scan": "New scan",
+            "exposed_data": "Exposed data:",
+            "suggestion": "We suggest immediate password change on similar sites and 2FA activation.",
+            "resilience_guide": "Post-Leak Resilience Guide",
+            "tips": [
+                "Change your master password immediately.",
+                "Activate 2-Factor (2FA) on all services.",
+                "Use a password manager for unique keys.",
+                "Stay alert for login attempts in your email."
+            ]
+        },
+        "store_checker": {
+            "title_start": "Store",
+            "title_highlight": "Checker",
+            "subtitle": "Instant security audit for sites and tax IDs.",
+            "tabs": {
+                "store": "Stores",
+                "cnpj": "ID",
+                "pix": "PIX",
+                "phone": "Phone",
+                "link": "Link"
+            },
+            "error_domain": "Could not scan this domain at this time.",
+            "error_cnpj": "Invalid ID. Enter 14 digits.",
+            "error_cnpj_not_found": "Company not found or database error.",
+            "error_generic": "Security query failed.",
+            "error_link": "Could not process this link.",
+            "error_quota": "Daily quota reached.",
+            "form": {
+                "domain_title": "Domain and Link Analysis",
+                "domain_placeholder": "Store URL or Shortened Link (ex: bit.ly/...)",
+                "domain_button": "Audit Site",
+                "cnpj_title": "Tax Legitimacy Query",
+                "cnpj_placeholder": "00.000.000/0001-00",
+                "cnpj_button": "Validate ID",
+                "pix_title": "PIX Key Verifier",
+                "pix_placeholder": "ID, E-mail, Phone or Random Key",
+                "pix_button": "Verify PIX",
+                "phone_title": "Phone Number Analysis",
+                "phone_placeholder": "(11) 99999-9999",
+                "phone_button": "Analyze Number",
+                "link_title": "Suspicious Link Expander",
+                "link_placeholder": "https://bit.ly/suspicious-example",
+                "link_button": "Expand and Analyze"
+            },
+            "results": {
+                "trust_score": "Trust Score",
+                "global_index": "Global Index",
+                "pdf_report": "PDF Report",
+                "age": "Age",
+                "verdict": "Final Verdict",
+                "situation": "Situation",
+                "active": "Active",
+                "foundation": "Foundation",
+                "capital": "Social Capital",
+                "location": "Physical Location",
+                "fiscal_score": "Fiscal Score",
+                "verified_rfb": "RFB Verified",
+                "consistent_activity": "Consistent Activity",
+                "legitimate_msg": "This ID is legitimate before regulatory bodies.",
+                "export_pdf": "Export PDF",
+                "risk": "Risk",
+                "reported_times": "Reported {{count}}x by community",
+                "verified_identity": "ID Verified by AI",
+                "security_advice": "Security Advice",
+                "expansion_msg": "Link expanded to:"
+            },
+            "premium_modal": {
+                "title": "Premium Module",
+                "desc": "Store and ID analysis is exclusive for Premium subscribers. Protect your money now!",
+                "cta": "See Plans",
+                "later": "Maybe later"
+            }
         }
     },
     "settings": {
@@ -84,22 +189,26 @@
             "technical_analysis": "Forensic Technical Analysis",
             "back": "Back",
             "analyzing": "Analyzing...",
-            "audit_now": "Audit Now",
+            "audit_now": "Audit now",
             "verdict_title": "ShieldCheck AI Verdict",
             "download_report": "Download PDF Report",
-            "risk_score": "Trust Score",
+            "risk_score": "Confidence",
             "global_index": "Global Index",
             "risk_factors": "Risk Factors",
             "security_advice": "Security Advice",
             "premium_only": "This is an exclusive module for Premium subscribers.",
             "see_plans": "See Plans",
-            "later": "Maybe later"
+            "later": "Maybe later",
+            "reported_times": "Reported {{count}}x by community",
+            "premium_modal_title": "Free Limit",
+            "premium_modal_desc": "You have reached the verification limit for this module today. Become Premium for unlimited queries!"
         },
         "auditor_loja": {
             "title": "Website Audit",
-            "subtitle": "Analyze the reliability of any online store through our AI.",
-            "input_label": "Domain Analysis",
-            "placeholder": "Enter store URL (ex: https://store.com)"
+            "subtitle": "Complete forensic analysis of domains, SSL, and security risks.",
+            "input_label": "Store or Site URL",
+            "placeholder": "https://store-example.com",
+            "registration_label": "Registration Time"
         },
         "consulta_cnpj": {
             "title": "Company Inquiry",
@@ -117,27 +226,42 @@
             "title": "Phone Analysis",
             "subtitle": "Identify fraud profiles and scams linked to mobile numbers.",
             "input_label": "Phone Number",
-            "placeholder": "(11) 99999-9999"
+            "placeholder": "(11) 99999-9999",
+            "spam_detected": "Detected in {{count}} spam campaigns"
         },
         "expansor_links": {
             "title": "Link Expander",
-            "subtitle": "Reveal the true destination of shortened links and analyze their safety.",
+            "subtitle": "Reveal the real destination of shortened links and analyze their safety.",
             "input_label": "Shortened Link",
-            "placeholder": "https://bit.ly/example"
+            "placeholder": "https://bit.ly/example",
+            "result_label": "Revealed Destination Link"
         },
         "analisador_docs": {
             "title": "Docs Analyzer",
-            "subtitle": "IA for reading and detecting fraud in invoices and documents.",
+            "subtitle": "AI for reading and fraud detection in invoices and documents.",
+            "upload_title": "Drag your Document",
             "upload_btn": "Upload File",
             "supported": "Formats: PDF, JPG, PNG",
             "verifying": "Extracting and Analyzing...",
-            "processing": "Processing OCR..."
+            "processing": "Processing OCR...",
+            "detected_label": "Detected",
+            "institution": "Institution",
+            "amount": "Document Amount",
+            "trust_signals": "Trust Signals",
+            "analyze_another": "Analyze Another"
         },
         "auditoria_social": {
             "title": "Profile Audit",
-            "subtitle": "Check social media profile authenticity to avoid fakes.",
+            "subtitle": "Check the authenticity of profiles on social networks to avoid fakes.",
             "input_label": "Profile URL",
-            "placeholder": "instagram.com/username"
+            "placeholder": "instagram.com/user",
+            "bot_prob": "Bot Probability",
+            "metrics": {
+                "creation": "Creation",
+                "followers": "Followers",
+                "following": "Following",
+                "risk": "Risk Level"
+            }
         },
         "gerador_senhas": {
             "title": "Password Generator",
@@ -147,7 +271,15 @@
             "numbers": "Numbers",
             "symbols": "Symbols",
             "copy": "Copy Password",
-            "copy_btn": "Copy"
+            "copy_btn": "Copy",
+            "generate": "Generate Password",
+            "placeholder": "Your new password will appear here",
+            "vulnerability": "Protection Level",
+            "vulnerable": "VULNERABLE",
+            "secure": "SECURE",
+            "entropy": "MAX ENTROPY",
+            "pro_tip": "Pro Tip",
+            "pro_tip_desc": "Use 16+ character passwords for maximum protection against brute force attacks."
         },
         "simulator_plus": {
             "title": "Simulator Plus",

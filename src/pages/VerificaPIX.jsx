@@ -124,7 +124,7 @@ export default function VerificaPIX() {
                                 </div>
                                 {genericResult.reportedTimes > 0 && (
                                     <div className="px-4 py-2 bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-400 rounded-xl text-[10px] font-black uppercase tracking-widest border border-red-200 dark:border-red-900 animate-pulse">
-                                        Denunciada {genericResult.reportedTimes}x pela comunidade
+                                        {t('specialized_tools.common.reported_times', { count: genericResult.reportedTimes })}
                                     </div>
                                 )}
                             </div>
@@ -165,12 +165,12 @@ export default function VerificaPIX() {
                                 <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                             </div>
                             <div className="space-y-2">
-                                <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Limite Gratuito</h3>
-                                <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">Você atingiu o limite de verificações de PIX por hoje. Seja Premium para consultas ilimitadas!</p>
+                                <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{t('specialized_tools.common.premium_modal_title')}</h3>
+                                <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{t('specialized_tools.common.premium_modal_desc')}</p>
                             </div>
                             <div className="flex flex-col gap-3">
-                                <button onClick={() => navigate('/plans')} className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black py-4 rounded-2xl hover:opacity-90 transition-all text-lg">Ver Planos</button>
-                                <button onClick={() => setShowPremiumModal(false)} className="text-slate-400 font-bold text-sm hover:text-slate-600 dark:hover:text-slate-200 transition-colors">Talvez mais tarde</button>
+                                <button onClick={() => navigate('/plans')} className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black py-4 rounded-2xl hover:opacity-90 transition-all text-lg">{t('specialized_tools.common.see_plans')}</button>
+                                <button onClick={() => setShowPremiumModal(false)} className="text-slate-400 font-bold text-sm hover:text-slate-600 dark:hover:text-slate-200 transition-colors">{t('specialized_tools.common.later')}</button>
                             </div>
                         </div>
                     </div>

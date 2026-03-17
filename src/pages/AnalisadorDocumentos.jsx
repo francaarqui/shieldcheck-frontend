@@ -14,33 +14,35 @@ export default function AnalisadorDocumentos() {
         const selectedFile = e.target.files?.[0] || e.dataTransfer?.files?.[0];
         if (selectedFile) {
             setFile(selectedFile);
-            simulateAnalysis(selectedFile);
+            runRealAnalysis(selectedFile);
         }
     };
 
-    const simulateAnalysis = (file) => {
+    const runRealAnalysis = async (file) => {
         setLoading(true);
         setAnalysis(null);
-        setTimeout(() => {
-            setAnalysis({
-                fileName: file.name,
-                type: 'Boleto Bancário',
-                beneficiary: 'EMPRESA EXEMPLO LTDA',
-                cnpj: '00.000.000/0001-00',
-                bank: 'Banco do Brasil',
-                value: 'R$ 1.250,00',
-                riskScore: 15,
-                status: 'Legítimo',
-                signals: [
-                    'Linha digitável condiz com beneficiário',
-                    'Empresa ativa na Receita Federal',
-                    'Nenhum alerta de fraude para este CNPJ',
-                    'Domínio do emissor verificado'
-                ],
-                recommendation: 'Este documento parece seguro para pagamento. Os dados do beneficiário conferem com o registro oficial.'
+
+        try {
+            const token = localStorage.getItem('token');
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/analyze-doc`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
             });
+
+            if (!res.ok) throw new Error('Falha na análise');
+            const data = await res.json();
+            setAnalysis(data);
+        } catch (error) {
+            console.error(error);
+        } finally {
             setLoading(false);
-        }, 3000);
+        }
     };
 
     return (
@@ -112,7 +114,7 @@ export default function AnalisadorDocumentos() {
                             <div className="flex-1 space-y-10">
                                 <div>
                                     <span className="px-3 py-1 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-100">
-                                        Detectado: {analysis.type}
+                                        {t('specialized_tools.analisador_docs.detected_label')}: {analysis.type}
                                     </span>
                                     <h3 className="text-4xl font-display font-black text-slate-900 dark:text-white mt-4">{analysis.beneficiary}</h3>
                                     <p className="text-xl font-bold text-slate-400 font-mono mt-2">{analysis.cnpj}</p>
@@ -125,17 +127,17 @@ export default function AnalisadorDocumentos() {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="bg-slate-50/50 dark:bg-slate-900/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-800">
-                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Instituição</label>
+                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('specialized_tools.analisador_docs.institution')}</label>
                                         <p className="text-xl font-black text-slate-800 dark:text-slate-200">{analysis.bank}</p>
                                     </div>
                                     <div className="bg-slate-50/50 dark:bg-slate-900/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-800">
-                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Valor do Título</label>
+                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('specialized_tools.analisador_docs.amount')}</label>
                                         <p className="text-xl font-black text-slate-800 dark:text-slate-200">{analysis.value}</p>
                                     </div>
                                 </div>
 
                                 <div className="space-y-4">
-                                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Trust Signals</h4>
+                                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('specialized_tools.analisador_docs.trust_signals')}</h4>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                         {analysis.signals.map((signal, idx) => (
                                             <div key={idx} className="flex gap-3 items-center bg-slate-50/50 dark:bg-slate-800/10 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 group hover:border-indigo-500/30 transition-colors">
@@ -159,7 +161,7 @@ export default function AnalisadorDocumentos() {
                                         <p className="text-xs font-bold leading-relaxed opacity-80 mt-4">{analysis.recommendation}</p>
                                     </div>
                                 </div>
-                                <button onClick={() => setAnalysis(null)} className="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 font-black rounded-2xl text-xs uppercase tracking-widest hover:bg-slate-200 transition-all">Analisar Outro</button>
+                                <button onClick={() => setAnalysis(null)} className="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 font-black rounded-2xl text-xs uppercase tracking-widest hover:bg-slate-200 transition-all">{t('specialized_tools.analisador_docs.analyze_another')}</button>
                             </div>
                         </div>
                     </div>

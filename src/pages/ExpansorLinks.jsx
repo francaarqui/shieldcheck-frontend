@@ -118,7 +118,7 @@ export default function ExpansorLinks() {
                         <div className="p-10 space-y-10">
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-10 border-b border-slate-100 dark:border-slate-800">
                                 <div>
-                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Link Destino Revelado</p>
+                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{t('specialized_tools.expansor_links.result_label')}</p>
                                     <h4 className="text-2xl font-display font-black text-indigo-600 break-all">{result.expandedUrl}</h4>
                                 </div>
                                 <div className="bg-slate-900 dark:bg-white p-4 px-6 rounded-2xl border border-slate-100 dark:border-slate-800 flex flex-col items-center">

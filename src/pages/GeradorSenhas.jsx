@@ -62,7 +62,11 @@ export default function GeradorSenhas() {
 
             <div className="text-center md:text-left space-y-4">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-100 dark:border-indigo-900/30">
-                    🛡️ Cryptographic Grade
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                    </span>
+                    {t('specialized_tools.common.header')}
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">
                     {t('specialized_tools.gerador_senhas.title')}
@@ -73,28 +77,27 @@ export default function GeradorSenhas() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <div className="lg:col-span-12 glass-card p-10 rounded-[3rem] border border-white dark:border-slate-800 shadow-2xl space-y-10">
-                    <div className="relative group">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-                        <div className="relative flex flex-col md:flex-row items-center gap-4 bg-slate-900 dark:bg-black p-4 rounded-[2rem] border border-white/10">
+                <div className="lg:col-span-12 glass-card p-10 rounded-[3rem] border border-white dark:border-slate-800 shadow-2xl space-y-10 group hover:border-indigo-500/30 transition-all duration-500">
+                    <div className="relative">
+                        <div className="relative flex flex-col md:flex-row items-center gap-4 bg-slate-900 dark:bg-black p-4 rounded-[2.5rem] border-2 border-slate-800 dark:border-slate-800 shadow-inner group-hover:border-indigo-500/20 transition-all">
                             <input
                                 type="text"
                                 value={password}
                                 readOnly
-                                className="flex-1 bg-transparent text-white font-mono text-2xl md:text-4xl px-8 py-6 outline-none tracking-widest"
+                                className="flex-1 bg-transparent text-white font-mono text-2xl md:text-3xl px-8 py-6 outline-none tracking-[0.2em] placeholder:text-slate-700"
                                 placeholder={t('specialized_tools.gerador_senhas.placeholder')}
                             />
-                            <div className="flex gap-2 p-2">
+                            <div className="flex gap-3 p-2">
                                 <button
                                     onClick={copyToClipboard}
-                                    className="p-5 bg-white/10 hover:bg-white/20 text-white rounded-2xl transition-all active:scale-90"
+                                    className="p-5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-2xl transition-all active:scale-90 border border-slate-700"
                                     title={t('specialized_tools.gerador_senhas.copy_btn')}
                                 >
-                                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
                                 </button>
                                 <button
                                     onClick={generatePassword}
-                                    className="px-10 py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-2xl transition-all shadow-xl shadow-indigo-500/20 active:scale-95 text-xl uppercase tracking-widest"
+                                    className="px-10 py-5 bg-slate-100 dark:bg-white text-slate-900 font-black rounded-2xl transition-all shadow-xl active:scale-95 text-lg uppercase tracking-widest border border-white"
                                 >
                                     {t('specialized_tools.gerador_senhas.generate')}
                                 </button>
@@ -104,9 +107,9 @@ export default function GeradorSenhas() {
 
                     <div className="space-y-4">
                         <div className="flex justify-between items-end">
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Nível de Blindagem</p>
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('specialized_tools.gerador_senhas.vulnerability') || "Nível de Blindagem"}</p>
                             <span className={`text-sm font-black ${strength > 80 ? 'text-emerald-500' : strength > 40 ? 'text-amber-500' : 'text-slate-400'}`}>
-                                {strength > 80 ? 'ENTROPIA MÁXIMA' : strength > 40 ? 'SEGURA' : 'VULNERÁVEL'}
+                                {strength > 80 ? t('specialized_tools.gerador_senhas.entropy') : strength > 40 ? t('specialized_tools.gerador_senhas.secure') : t('specialized_tools.gerador_senhas.vulnerable')}
                             </span>
                         </div>
                         <div className="h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
@@ -159,9 +162,9 @@ export default function GeradorSenhas() {
                                 <span className="text-sm font-bold text-slate-400">Salvar no Vault (Breve)</span>
                             </label>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800 text-center">
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Dica Pro</p>
-                            <p className="text-xs font-bold text-slate-600 dark:text-slate-400 leading-tight">Use senhas de +16 caracteres para máxima proteção contra ataques de força bruta.</p>
+                        <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800 text-center flex flex-col justify-center">
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{t('specialized_tools.gerador_senhas.pro_tip')}</p>
+                            <p className="text-xs font-bold text-slate-600 dark:text-slate-400 leading-tight italic">{t('specialized_tools.gerador_senhas.pro_tip_desc')}</p>
                         </div>
                     </div>
                 </div>

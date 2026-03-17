@@ -195,12 +195,15 @@ export default function DarkWebScan() {
                                 <div className="p-10 bg-slate-900 rounded-[3rem] text-white space-y-6">
                                     <h4 className="text-xl font-black">🛡️ {t('tools.dark_web.resilience_guide')}</h4>
                                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        {t('tools.dark_web.tips', { returnObjects: true }).map((tip, i) => (
-                                            <li key={i} className="flex items-start gap-4">
-                                                <span className="w-6 h-6 bg-white/10 rounded flex items-center justify-center text-[10px] font-black">{i + 1}</span>
-                                                <span className="text-sm font-medium text-slate-400">{tip}</span>
-                                            </li>
-                                        ))}
+                                        {(() => {
+                                            const tips = t('tools.dark_web.tips', { returnObjects: true });
+                                            return Array.isArray(tips) ? tips.map((tip, i) => (
+                                                <li key={i} className="flex items-start gap-4">
+                                                    <span className="w-6 h-6 bg-white/10 rounded flex items-center justify-center text-[10px] font-black">{i + 1}</span>
+                                                    <span className="text-sm font-medium text-slate-400">{tip}</span>
+                                                </li>
+                                            )) : null;
+                                        })()}
                                     </ul>
                                 </div>
                             )}

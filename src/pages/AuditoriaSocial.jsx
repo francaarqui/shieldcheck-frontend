@@ -9,31 +9,36 @@ export default function AuditoriaSocial() {
     const [loading, setLoading] = useState(false);
     const [audit, setAudit] = useState(null);
 
-    const runAudit = (e) => {
+    const runAudit = async (e) => {
         e.preventDefault();
         if (!handle) return;
         setLoading(true);
         setAudit(null);
 
-        setTimeout(() => {
+        try {
+            const token = localStorage.getItem('token');
+            const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/check-social`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ handle })
+            });
+
+            if (!res.ok) throw new Error('Falha na auditoria');
+            const data = await res.json();
+
             setAudit({
                 handle: handle.startsWith('@') ? handle : `@${handle}`,
-                botProbability: 12,
-                accountAge: '4 anos',
-                followers: '12.4k',
-                following: '850',
-                riskLevel: 'Baixo',
-                verdict: 'Perfil Altamente Confiável',
-                signals: [
-                    'Atividade humana detectada (horários variados)',
-                    'Interações orgânicas com perfis reais',
-                    'Histórico de postagens consistente',
-                    'Nenhum padrão de spam identificado'
-                ],
-                recommendation: 'Este perfil apresenta características de uso humano genuíno e orgânico. Seguro para interações e transações.'
+                ...data
             });
+        } catch (error) {
+            console.error(error);
+            // Fallback for UI if needed, but here we want to be honest
+        } finally {
             setLoading(false);
-        }, 3500);
+        }
     };
 
     return (
@@ -107,26 +112,26 @@ export default function AuditoriaSocial() {
                                 </div>
                                 <div className="text-center">
                                     <h4 className="text-2xl font-black text-slate-900 dark:text-white">{audit.handle}</h4>
-                                    <span className="px-3 py-1 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 rounded-lg text-[10px] font-black uppercase tracking-widest border border-indigo-100">Bot Probability: {audit.botProbability}%</span>
+                                    <span className="px-3 py-1 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 rounded-lg text-[10px] font-black uppercase tracking-widest border border-indigo-100">{t('specialized_tools.auditoria_social.bot_prob')}: {audit.botProbability}%</span>
                                 </div>
                             </div>
 
                             <div className="flex-1 space-y-10">
                                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                                     <div className="bg-slate-50/50 dark:bg-slate-900/30 p-5 rounded-3xl border border-slate-100 dark:border-slate-800 text-center">
-                                        <p className="text-[10px] font-black text-slate-400 uppercase mb-1">Criação</p>
+                                        <p className="text-[10px] font-black text-slate-400 uppercase mb-1">{t('specialized_tools.auditoria_social.metrics.creation')}</p>
                                         <p className="text-lg font-black text-slate-800 dark:text-slate-200">{audit.accountAge}</p>
                                     </div>
                                     <div className="bg-slate-50/50 dark:bg-slate-900/30 p-5 rounded-3xl border border-slate-100 dark:border-slate-800 text-center">
-                                        <p className="text-[10px] font-black text-slate-400 uppercase mb-1">Seguidores</p>
+                                        <p className="text-[10px] font-black text-slate-400 uppercase mb-1">{t('specialized_tools.auditoria_social.metrics.followers')}</p>
                                         <p className="text-lg font-black text-slate-800 dark:text-slate-200">{audit.followers}</p>
                                     </div>
                                     <div className="bg-slate-50/50 dark:bg-slate-900/30 p-5 rounded-3xl border border-slate-100 dark:border-slate-800 text-center">
-                                        <p className="text-[10px] font-black text-slate-400 uppercase mb-1">Seguindo</p>
+                                        <p className="text-[10px] font-black text-slate-400 uppercase mb-1">{t('specialized_tools.auditoria_social.metrics.following')}</p>
                                         <p className="text-lg font-black text-slate-800 dark:text-slate-200">{audit.following}</p>
                                     </div>
                                     <div className="bg-slate-50/50 dark:bg-slate-900/30 p-5 rounded-3xl border border-slate-100 dark:border-slate-800 text-center">
-                                        <p className="text-[10px] font-black text-slate-400 uppercase mb-1">Risco</p>
+                                        <p className="text-[10px] font-black text-slate-400 uppercase mb-1">{t('specialized_tools.auditoria_social.metrics.risk')}</p>
                                         <p className="text-lg font-black text-emerald-500 uppercase">{audit.riskLevel}</p>
                                     </div>
                                 </div>
