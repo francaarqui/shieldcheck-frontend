@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { API_ENDPOINTS } from '../api/config';
 
 export default function AuditoriaSocial() {
     const { t } = useTranslation();
@@ -17,7 +18,7 @@ export default function AuditoriaSocial() {
 
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/check-social`, {
+            const res = await fetch(API_ENDPOINTS.CHECK_SOCIAL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,8 +35,8 @@ export default function AuditoriaSocial() {
                 ...data
             });
         } catch (error) {
-            console.error(error);
-            // Fallback for UI if needed, but here we want to be honest
+            console.error('Audit Error:', error);
+            alert(`Erro na Auditoria: ${error.message}`);
         } finally {
             setLoading(false);
         }

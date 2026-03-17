@@ -60,6 +60,8 @@ export const API_ENDPOINTS = {
 
     // Phase 7: Enterprise Analytics
     ENTERPRISE_ANALYTICS: `${API_URL}/api/analytics/enterprise`,
+    CHECK_SOCIAL: `${API_URL}/api/check-social`,
+    ANALYZE_DOC: `${API_URL}/api/analyze-doc`,
 };
 
 

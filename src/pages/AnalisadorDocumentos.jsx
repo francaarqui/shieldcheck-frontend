@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { API_ENDPOINTS } from '../api/config';
 
 export default function AnalisadorDocumentos() {
     const { t } = useTranslation();
@@ -27,7 +28,7 @@ export default function AnalisadorDocumentos() {
             const formData = new FormData();
             formData.append('file', file);
 
-            const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/analyze-doc`, {
+            const res = await fetch(API_ENDPOINTS.ANALYZE_DOC, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -39,7 +40,8 @@ export default function AnalisadorDocumentos() {
             const data = await res.json();
             setAnalysis(data);
         } catch (error) {
-            console.error(error);
+            console.error('Analysis Error:', error);
+            alert(`Erro na Análise: ${error.message}`);
         } finally {
             setLoading(false);
         }
