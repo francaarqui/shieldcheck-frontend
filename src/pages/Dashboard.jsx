@@ -152,6 +152,42 @@ export default function Dashboard() {
                         </div>
                     </div>
 
+                    {/* Quick Tools Grid */}
+                    <div className="space-y-6">
+                        <div className="flex items-center justify-between">
+                            <h3 className="text-xl font-display font-black text-slate-900 dark:text-white uppercase tracking-tight">
+                                {t('dashboard.quick_tools')}
+                            </h3>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                            {[
+                                { to: '/auditor-loja', label: t('sidebar.auditor_loja'), icon: '🌐', color: 'bg-blue-50 text-blue-600' },
+                                { to: '/consulta-cnpj', label: t('sidebar.consulta_cnpj'), icon: '🏢', color: 'bg-indigo-50 text-indigo-600' },
+                                { to: '/verifica-pix', label: t('sidebar.verifica_pix'), icon: '💸', color: 'bg-teal-50 text-teal-600' },
+                                { to: '/analise-telefone', label: t('sidebar.analise_telefone'), icon: '📱', color: 'bg-emerald-50 text-emerald-600' },
+                                { to: '/expansor-links', label: t('sidebar.expansor_links'), icon: '🔗', color: 'bg-amber-50 text-amber-600' },
+                                { to: '/analisador-docs', label: t('sidebar.analisador_docs'), icon: '📄', color: 'bg-purple-50 text-purple-600' },
+                                { to: '/auditoria-social', label: t('sidebar.auditoria_social'), icon: '👤', color: 'bg-pink-50 text-pink-600' },
+                                { to: '/gerador-senhas', label: t('sidebar.gerador_senhas'), icon: '🔑', color: 'bg-slate-50 text-slate-600' },
+                                { to: '/academy-advanced', label: t('sidebar.simulator_plus'), icon: '🎯', color: 'bg-orange-50 text-orange-600' },
+                                { to: '/academy', label: t('sidebar.academy_center'), icon: '🎓', color: 'bg-indigo-600 text-white' }
+                            ].map((tool, idx) => (
+                                <Link
+                                    key={idx}
+                                    to={tool.to}
+                                    className="glass-card p-4 rounded-2xl flex flex-col items-center justify-center gap-3 hover-lift text-center group transition-all"
+                                >
+                                    <div className={`w-12 h-12 rounded-xl ${tool.color} flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform`}>
+                                        {tool.icon}
+                                    </div>
+                                    <span className="text-[10px] font-black uppercase tracking-tight text-slate-600 dark:text-slate-400">
+                                        {tool.label}
+                                    </span>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* Impact Section: Security Pulse */}
                     <div className="glass-card p-6 lg:p-8 rounded-[2rem] border border-white dark:border-slate-800 bg-mesh shadow-lg overflow-hidden relative transition-all duration-300">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-indigo-500 to-emerald-500 opacity-50"></div>

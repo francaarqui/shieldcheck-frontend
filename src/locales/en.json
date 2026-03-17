@@ -56,6 +56,7 @@
         "empty_logs": "Your history is clean for now.",
         "start_now": "Start now",
         "evaluation": "Evaluation",
+        "quick_tools": "Quick Tools Hub",
         "types": {
             "text": "TEXT",
             "audio": "AUDIO",
@@ -516,26 +517,24 @@
             }
         },
         "sidebar": {
-            "tools_title": "Tools",
-            "protection_title": "Analyses & Reports",
-            "education_title": "Education & Social",
-            "enterprise_title": "Business & Brand",
+            "tools_title": "Quick Queries",
+            "protection_title": "Pro Protection",
+            "education_title": "Education & Academy",
+            "enterprise_title": "Dashboard",
             "account_title": "Account & Management",
-            "brand_protect": "Brand Protection",
-            "business_portal": "B2B Portal",
-            "enterprise_analytics": "Enterprise Analytics",
-            "privacy_hub": "Privacy Hub",
+            "auditor_loja": "Website Audit",
+            "consulta_cnpj": "ID/Company Query",
+            "verifica_pix": "Verify PIX",
+            "analise_telefone": "Phone Analysis",
+            "expansor_links": "Link Expander",
+            "analisador_docs": "Docs Analyzer",
+            "auditoria_social": "Profile Audit",
+            "gerador_senhas": "Password Generator",
+            "simulator_plus": "Simulator Plus",
+            "academy_center": "Academy Center",
             "plans": "Plans",
-            "referral": "Refer & Earn",
-            "operator": "Operator",
-            "plan_label": "Plan",
-            "family_guard": "Family Guard",
-            "dark_web": "Dark Web Scan",
-            "store_auditor": "Store Auditor",
-            "academy": "Academy 2.0",
-            "community": "Community",
-            "fraud_dict": "Fraud Dictionary",
-            "elite_protection": "Elite Protection Active"
+            "settings": "Settings",
+            "logout": "Logout"
         },
         "academy": {
             "title": "Advanced <span class=\"text-premium-gradient\">Training Center</span>",
@@ -820,6 +819,84 @@
             "mfa_error": "Error verifying MFA code.",
             "save_error": "Error updating data.",
             "mfa_setup_fail": "Failed to start 2FA setup."
+        },
+        "specialized_tools": {
+            "common": {
+                "back": "Back",
+                "analyzing": "Analyzing...",
+                "audit_now": "Audit Now",
+                "verdict_title": "ShieldCheck AI Verdict",
+                "download_report": "Download PDF Report",
+                "risk_score": "Trust Score",
+                "global_index": "Global Index",
+                "risk_factors": "Risk Factors",
+                "security_advice": "Security Advice",
+                "premium_only": "This is an exclusive module for Premium subscribers.",
+                "see_plans": "See Plans",
+                "later": "Maybe later"
+            },
+            "auditor_loja": {
+                "title": "Website Audit",
+                "subtitle": "Analyze the reliability of any online store through our AI.",
+                "input_label": "Domain Analysis",
+                "placeholder": "Enter store URL (ex: https://store.com)"
+            },
+            "consulta_cnpj": {
+                "title": "Company Inquiry",
+                "subtitle": "Validate fiscal legitimacy and registration data directly with authorities.",
+                "input_label": "ID/Company Query",
+                "placeholder": "00.000.000/0001-00"
+            },
+            "verifica_pix": {
+                "title": "PIX Verifier",
+                "subtitle": "Analyze the risk of PIX keys before making transfers.",
+                "input_label": "PIX Key",
+                "placeholder": "ID, E-mail, Phone or Random Key"
+            },
+            "analise_telefone": {
+                "title": "Phone Analysis",
+                "subtitle": "Identify fraud profiles and scams linked to mobile numbers.",
+                "input_label": "Phone Number",
+                "placeholder": "(11) 99999-9999"
+            },
+            "expansor_links": {
+                "title": "Link Expander",
+                "subtitle": "Reveal the true destination of shortened links and analyze their safety.",
+                "input_label": "Shortened Link",
+                "placeholder": "https://bit.ly/example"
+            },
+            "analisador_docs": {
+                "title": "Docs Analyzer",
+                "subtitle": "IA for reading and detecting fraud in invoices and documents.",
+                "upload_btn": "Upload File",
+                "supported": "Formats: PDF, JPG, PNG",
+                "verifying": "Extracting and Analyzing...",
+                "processing": "Processing OCR..."
+            },
+            "auditoria_social": {
+                "title": "Profile Audit",
+                "subtitle": "Check social media profile authenticity to avoid fakes.",
+                "input_label": "Profile URL",
+                "placeholder": "instagram.com/username"
+            },
+            "gerador_senhas": {
+                "title": "Password Generator",
+                "subtitle": "Create secure access keys with advanced encryption.",
+                "length": "Length",
+                "uppercase": "Uppercase",
+                "numbers": "Numbers",
+                "symbols": "Symbols",
+                "copy": "Copy Password",
+                "copy_btn": "Copy"
+            },
+            "simulator_plus": {
+                "title": "Simulator Plus",
+                "subtitle": "High-fidelity interactive training against social engineering.",
+                "level": "Difficulty Level",
+                "start": "Start Elite Simulation",
+                "think_enemy": "Think like the Enemy",
+                "advice": "Scammers use urgency and authority to blind your judgment. Analyze calmly."
+            }
         }
     }
 }

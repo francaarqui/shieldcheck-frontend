@@ -56,6 +56,7 @@
         "empty_logs": "Tu historial está limpio por ahora.",
         "start_now": "Empezar ahora",
         "evaluation": "Evaluación",
+        "quick_tools": "Acceso a Herramientas",
         "types": {
             "text": "TEXTO",
             "audio": "AUDIO",
@@ -516,26 +517,24 @@
             }
         },
         "sidebar": {
-            "protection_title": "Protección y Scan",
-            "education_title": "Educación y Social",
-            "enterprise_title": "Negocios y Marcas",
+            "tools_title": "Consultas Rápidas",
+            "protection_title": "Protección Pro",
+            "education_title": "Educación & Academy",
+            "enterprise_title": "Dashboard",
             "account_title": "Cuenta y Gestión",
-            "brand_protect": "Protección de Marca",
-            "business_portal": "Portal B2B",
-            "enterprise_analytics": "Analytics Enterprise",
-            "privacy_hub": "Hub de Privacidad",
+            "auditor_loja": "Auditoría de Sitios",
+            "consulta_cnpj": "Consulta CNPJ",
+            "verifica_pix": "Verificar PIX",
+            "analise_telefone": "Análisis de Teléfono",
+            "expansor_links": "Expansor de Enlaces",
+            "analisador_docs": "Analizador de Docs",
+            "auditoria_social": "Auditoría de Perfil",
+            "gerador_senhas": "Generador de Contraseñas",
+            "simulator_plus": "Simulator Plus",
+            "academy_center": "Academy Center",
             "plans": "Planes",
-            "referral": "Indica y Gana",
-            "operator": "Operador",
-            "plan_label": "Cuenta",
-            "family_guard": "Family Guard",
-            "dark_web": "Dark Web Scan",
-            "store_auditor": "Auditor de Tienda",
-            "academy": "Academy 2.0",
-            "community": "Comunidad",
-            "fraud_dict": "Diccionario de Estafas",
-            "elite_protection": "Protección Elite Activa",
-            "upgrade_now": "Hacer Upgrade Ahora"
+            "settings": "Configuraciones",
+            "logout": "Salir"
         },
         "academy": {
             "title": "Centro de <span class=\"text-premium-gradient\">Entrenamiento Avanzado</span>",
@@ -820,6 +819,84 @@
             "mfa_error": "Error al verificar el código MFA.",
             "save_error": "Error al actualizar los datos.",
             "mfa_setup_fail": "Fallo al iniciar configuración de 2FA."
+        },
+        "specialized_tools": {
+            "common": {
+                "back": "Volver",
+                "analyzing": "Analizando...",
+                "audit_now": "Auditar ahora",
+                "verdict_title": "Veredicto ShieldCheck AI",
+                "download_report": "Bajar Informe PDF",
+                "risk_score": "Confianza",
+                "global_index": "Índice Global",
+                "risk_factors": "Factores de Riesgo",
+                "security_advice": "Consejo de Seguridad",
+                "premium_only": "Este es un módulo exclusivo para suscriptores Premium.",
+                "see_plans": "Ver Planes",
+                "later": "Tal vez después"
+            },
+            "auditor_loja": {
+                "title": "Auditoría de Sitios",
+                "subtitle": "Analiza la confiabilidad de cualquier tienda online a través de nuestra IA.",
+                "input_label": "Análisis de Dominio",
+                "placeholder": "Inserta la URL de la tienda (ej: https://tienda.com)"
+            },
+            "consulta_cnpj": {
+                "title": "Consulta de Empresas",
+                "subtitle": "Valida la legitimidad fiscal y los datos de registro directamente.",
+                "input_label": "Consulta de ID",
+                "placeholder": "00.000.000/0001-00"
+            },
+            "verifica_pix": {
+                "title": "Verificador de PIX",
+                "subtitle": "Analiza el riesgo de las claves PIX antes de realizar transferencias.",
+                "input_label": "Clave PIX",
+                "placeholder": "ID, E-mail, Teléfono o Clave Aleatoria"
+            },
+            "analise_telefone": {
+                "title": "Análisis de Teléfono",
+                "subtitle": "Identifica perfiles de fraude y estafas vinculados a números de celular.",
+                "input_label": "Número de Teléfono",
+                "placeholder": "(11) 99999-9999"
+            },
+            "expansor_links": {
+                "title": "Expansor de Enlaces",
+                "subtitle": "Revela el destino real de enlaces acortados y analiza su seguridad.",
+                "input_label": "Enlace Acortado",
+                "placeholder": "https://bit.ly/ejemplo"
+            },
+            "analisador_docs": {
+                "title": "Analizador de Docs",
+                "subtitle": "IA para lectura y detección de fraudes en facturas y documentos.",
+                "upload_btn": "Subir Archivo",
+                "supported": "Formatos: PDF, JPG, PNG",
+                "verifying": "Trayendo y Analizando...",
+                "processing": "Procesando OCR..."
+            },
+            "auditoria_social": {
+                "title": "Auditoría de Perfil",
+                "subtitle": "Verifique la autenticidad de perfiles en redes sociales para evitar fakes.",
+                "input_label": "URL del Perfil",
+                "placeholder": "instagram.com/usuario"
+            },
+            "gerador_senhas": {
+                "title": "Generador de Contraseñas",
+                "subtitle": "Crea claves de acesso seguras con cifrado avanzado.",
+                "length": "Tamaño",
+                "uppercase": "Mayúsculas",
+                "numbers": "Números",
+                "symbols": "Símbolos",
+                "copy": "Copiar Contraseña",
+                "copy_btn": "Copiar"
+            },
+            "simulator_plus": {
+                "title": "Simulator Plus",
+                "subtitle": "Entrenamientos interactivos contra ingeniería social.",
+                "level": "Nivel de Dificultad",
+                "start": "Iniciar Simulación de Elite",
+                "think_enemy": "Piensa como el Enemigo",
+                "advice": "Los estafadores usan la urgencia y la autoridad para cegar tu juicio. Analiza con calma."
+            }
         }
     }
 }

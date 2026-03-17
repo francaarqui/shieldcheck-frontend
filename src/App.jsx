@@ -31,6 +31,15 @@ import ViralSocialStudio from './pages/ViralSocialStudio';
 import ComplianceHub from './pages/ComplianceHub';
 import Success from './pages/Success';
 import AdminDashboard from './pages/AdminDashboard';
+import AuditorLoja from './pages/AuditorLoja';
+import ConsultaCNPJ from './pages/ConsultaCNPJ';
+import VerificaPIX from './pages/VerificaPIX';
+import AnaliseTelefone from './pages/AnaliseTelefone';
+import ExpansorLinks from './pages/ExpansorLinks';
+import GeradorSenhas from './pages/GeradorSenhas';
+import AnalisadorDocumentos from './pages/AnalisadorDocumentos';
+import AuditoriaSocial from './pages/AuditoriaSocial';
+import AcademyAdvanced from './pages/AcademyAdvanced';
 
 import Cancel from './pages/Cancel';
 import Home from './pages/Home';
@@ -82,7 +91,16 @@ export default function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/intelligence" element={<Intelligence />} />
           <Route path="/developer" element={<Developer />} />
-          <Route path="/store-checker" element={<StoreChecker />} />
+          <Route path="/auditor-loja" element={<AuditorLoja />} />
+          <Route path="/consulta-cnpj" element={<ConsultaCNPJ />} />
+          <Route path="/verifica-pix" element={<VerificaPIX />} />
+          <Route path="/analise-telefone" element={<AnaliseTelefone />} />
+          <Route path="/expansor-links" element={<ExpansorLinks />} />
+          <Route path="/gerador-senhas" element={<GeradorSenhas />} />
+          <Route path="/analisador-documentos" element={<AnalisadorDocumentos />} />
+          <Route path="/auditoria-social" element={<AuditoriaSocial />} />
+          <Route path="/academy/advanced" element={<AcademyAdvanced />} />
+          <Route path="/store-checker" element={<AuditorLoja />} />
           <Route path="/academy" element={<Academy />} />
           <Route path="/academy/simulator" element={<ScamSimulator />} />
           <Route path="/academy/deepfake-lab" element={<DeepfakeLab />} />
