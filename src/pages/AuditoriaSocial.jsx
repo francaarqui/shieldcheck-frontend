@@ -46,8 +46,12 @@ export default function AuditoriaSocial() {
             </div>
 
             <div className="text-center md:text-left space-y-4">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-pink-50 dark:bg-pink-950/30 text-pink-600 dark:text-pink-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-pink-100 dark:border-pink-900/30">
-                    📸 Social Media ID Auditor
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-100 dark:border-indigo-900/30">
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                    </span>
+                    {t('specialized_tools.common.header')}
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">
                     {t('specialized_tools.auditoria_social.title')}
@@ -103,7 +107,7 @@ export default function AuditoriaSocial() {
                                 </div>
                                 <div className="text-center">
                                     <h4 className="text-2xl font-black text-slate-900 dark:text-white">{audit.handle}</h4>
-                                    <span className="px-3 py-1 bg-pink-50 dark:bg-pink-950/30 text-pink-600 dark:text-pink-400 rounded-lg text-[10px] font-black uppercase tracking-widest border border-pink-100">Bot Probability: {audit.botProbability}%</span>
+                                    <span className="px-3 py-1 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 rounded-lg text-[10px] font-black uppercase tracking-widest border border-indigo-100">Bot Probability: {audit.botProbability}%</span>
                                 </div>
                             </div>
 
@@ -128,22 +132,27 @@ export default function AuditoriaSocial() {
                                 </div>
 
                                 <div className="space-y-4">
-                                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Behavioral Signals</h4>
+                                    <h5 className="text-xs font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
+                                        <div className="w-1.5 h-4 bg-indigo-500 rounded-full"></div>
+                                        {t('specialized_tools.common.technical_analysis')}
+                                    </h5>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                         {audit.signals.map((signal, idx) => (
-                                            <div key={idx} className="flex gap-3 items-center bg-indigo-50/30 dark:bg-indigo-950/10 p-4 rounded-2xl border border-indigo-100/50">
-                                                <div className="w-1.5 h-6 bg-pink-500 rounded-full"></div>
+                                            <div key={idx} className="flex gap-3 items-center bg-slate-50/50 dark:bg-slate-800/10 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 group hover:border-indigo-500/30 transition-colors">
+                                                <div className="p-1.5 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">
+                                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                                </div>
                                                 <span className="text-sm font-bold text-slate-600 dark:text-slate-300">{signal}</span>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
 
-                                <div className="p-8 bg-slate-900 dark:bg-white rounded-[2rem] text-white dark:text-slate-900 shadow-xl relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 dark:bg-slate-900/5 rotate-45 translate-x-16 -translate-y-16"></div>
-                                    <h4 className="text-[10px] font-black uppercase tracking-widest mb-3 opacity-60">Veredito da Auditoria</h4>
+                                <div className="p-8 bg-slate-900 dark:bg-white rounded-[2rem] text-white dark:text-slate-900 shadow-xl relative overflow-hidden group border-2 border-indigo-500/30">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rotate-45 translate-x-16 -translate-y-16"></div>
+                                    <h4 className="text-[10px] font-black uppercase tracking-widest mb-3 opacity-60">{t('specialized_tools.common.verdict_title')}</h4>
                                     <p className="text-2xl font-black mb-2">{audit.verdict}</p>
-                                    <p className="text-lg font-medium opacity-80 leading-relaxed">{audit.recommendation}</p>
+                                    <p className="text-lg font-medium opacity-80 leading-relaxed text-indigo-100  dark:text-slate-600">"{audit.recommendation}"</p>
                                 </div>
                             </div>
                         </div>

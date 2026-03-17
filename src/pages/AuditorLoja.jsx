@@ -101,7 +101,7 @@ export default function AuditorLoja() {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
                     </span>
-                    Security Audit v2.0
+                    {t('specialized_tools.common.header')}
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">
                     {t('specialized_tools.auditor_loja.title')}
@@ -185,16 +185,21 @@ export default function AuditorLoja() {
                             <div className="flex-1 space-y-10">
                                 <div>
                                     <h4 className="text-3xl font-display font-black text-slate-900 dark:text-white mb-2 break-all">{result.domain}</h4>
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-2 mb-8">
                                         <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded-lg text-[10px] font-black uppercase tracking-widest border border-slate-200 dark:border-slate-700">Tempo de Registro: {result.registrationAge}</span>
                                     </div>
+
+                                    <h5 className="text-xs font-black uppercase tracking-widest text-slate-400 flex items-center gap-2 mb-6">
+                                        <div className="w-1.5 h-4 bg-indigo-500 rounded-full"></div>
+                                        {t('specialized_tools.common.technical_analysis')}
+                                    </h5>
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {result.riskFactors.map((factor, idx) => (
-                                        <div key={idx} className="flex gap-4 items-center bg-slate-50/50 dark:bg-slate-800/10 border border-slate-100 dark:border-slate-800 p-5 rounded-2xl">
-                                            <div className={`p-1.5 rounded-lg ${result.trustScore > 70 ? 'bg-emerald-100 text-emerald-600' : 'bg-red-100 text-red-600'}`}>
-                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                        <div key={idx} className="flex gap-4 items-center bg-slate-50/50 dark:bg-slate-800/10 border border-slate-100 dark:border-slate-800 p-5 rounded-2xl group hover:border-indigo-500/30 transition-colors">
+                                            <div className={`p-1.5 rounded-lg ${result.trustScore > 70 ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400' : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'}`}>
+                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                             </div>
                                             <span className="text-sm font-bold text-slate-700 dark:text-slate-300 leading-tight">{factor}</span>
                                         </div>
@@ -202,8 +207,8 @@ export default function AuditorLoja() {
                                 </div>
 
                                 <div className={`p-8 rounded-[2rem] border-2 shadow-sm ${result.trustScore > 50 ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-100 dark:border-emerald-900/30' : 'bg-red-50/50 dark:bg-red-950/20 border-red-100 dark:border-red-900/30'}`}>
-                                    <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-3 text-emerald-600">{t('specialized_tools.common.verdict_title')}</h4>
-                                    <p className="text-xl font-bold leading-relaxed text-emerald-900 dark:text-emerald-400">"{result.recommendation}"</p>
+                                    <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-3 text-indigo-600 dark:text-indigo-400">{t('specialized_tools.common.verdict_title')}</h4>
+                                    <p className={`text-xl font-bold leading-relaxed ${result.trustScore > 50 ? 'text-emerald-900 dark:text-emerald-400' : 'text-red-900 dark:text-red-400'}`}>"{result.recommendation}"</p>
                                 </div>
                             </div>
                         </div>

@@ -136,6 +136,8 @@
     },
     "specialized_tools": {
         "common": {
+            "header": "Auditoria ShieldCheck v3.0",
+            "technical_analysis": "Análise Técnica Forense",
             "back": "Voltar",
             "analyzing": "Analisando...",
             "audit_now": "Auditar agora",

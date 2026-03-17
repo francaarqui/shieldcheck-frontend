@@ -53,8 +53,12 @@ export default function AnaliseTelefone() {
             </div>
 
             <div className="text-center md:text-left space-y-4">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-blue-100 dark:border-blue-900/30">
-                    📞 Digital Identity Audit
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-100 dark:border-indigo-900/30">
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                    </span>
+                    {t('specialized_tools.common.header')}
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">
                     {t('specialized_tools.analise_telefone.title')}
@@ -94,9 +98,10 @@ export default function AnaliseTelefone() {
                         <button
                             onClick={checkItem}
                             disabled={loading || !phone}
-                            className="lg:w-72 h-20 bg-blue-600 text-white font-black rounded-3xl hover:bg-blue-700 transition-all shadow-2xl shadow-blue-200 dark:shadow-none disabled:opacity-50 text-xl"
+                            className="lg:w-72 h-20 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black rounded-3xl hover:opacity-90 transition-all shadow-xl disabled:opacity-50 text-xl flex items-center justify-center gap-3 active:scale-95"
                         >
-                            Analisar Número
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                            {t('specialized_tools.common.audit_now')}
                         </button>
                     </div>
                 </div>
@@ -113,29 +118,37 @@ export default function AnaliseTelefone() {
                                         genericResult.score > 30 ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900/30 text-amber-600 dark:text-amber-400' :
                                             'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/30 text-emerald-600 dark:text-emerald-400'}
                                 `}>
-                                    <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Probabilidade de Fraude</p>
+                                    <p className="text-[10px] font-black uppercase tracking-widest opacity-60">{t('specialized_tools.common.risk_score')}</p>
                                     <p className="text-8xl font-display font-black leading-none">{genericResult.score}</p>
                                     <p className="text-xs font-bold mt-2 uppercase tracking-tighter">{genericResult.status}</p>
                                 </div>
                                 {genericResult.reportedTimes > 0 && (
-                                    <div className="px-4 py-2 bg-red-100 text-red-700 rounded-xl text-[10px] font-black uppercase tracking-widest">
+                                    <div className="px-4 py-2 bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-400 rounded-xl text-[10px] font-black uppercase tracking-widest border border-red-200 dark:border-red-900">
                                         Detectado em {genericResult.reportedTimes} campanhas de spam
                                     </div>
                                 )}
                             </div>
                             <div className="flex-1 space-y-10">
                                 <div><h4 className="text-3xl font-display font-black text-slate-900 dark:text-white mb-2 break-all">{phone}</h4></div>
+
+                                <h5 className="text-xs font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
+                                    <div className="w-1.5 h-4 bg-indigo-500 rounded-full"></div>
+                                    {t('specialized_tools.common.technical_analysis')}
+                                </h5>
+
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {genericResult.signals.map((signal, idx) => (
-                                        <div key={idx} className="flex gap-4 items-center bg-slate-50/50 dark:bg-slate-800/10 border border-slate-100 dark:border-slate-800 p-5 rounded-2xl">
-                                            <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                                        <div key={idx} className="flex gap-4 items-center bg-slate-50/50 dark:bg-slate-800/10 border border-slate-100 dark:border-slate-800 p-5 rounded-2xl group hover:border-indigo-500/30 transition-colors">
+                                            <div className="p-1.5 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">
+                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                            </div>
                                             <span className="text-sm font-bold text-slate-700 dark:text-slate-300 leading-tight">{signal}</span>
                                         </div>
                                     ))}
                                 </div>
-                                <div className="p-8 bg-blue-600 rounded-[2rem] text-white shadow-xl">
-                                    <h4 className="text-[10px] font-black uppercase tracking-widest mb-3 opacity-60">Protocolo de Defesa</h4>
-                                    <p className="text-xl font-bold leading-relaxed">{genericResult.recommendation}</p>
+                                <div className={`p-8 rounded-[2rem] border-2 shadow-sm ${genericResult.score > 50 ? 'bg-red-50/50 dark:bg-red-950/20 border-red-100 dark:border-red-900/30' : 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-100 dark:border-emerald-900/30'}`}>
+                                    <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-3 text-indigo-600 dark:text-indigo-400">{t('specialized_tools.common.verdict_title')}</h4>
+                                    <p className={`text-xl font-bold leading-relaxed ${genericResult.score > 50 ? 'text-red-900 dark:text-red-400' : 'text-emerald-900 dark:text-emerald-400'}`}>"{genericResult.recommendation}"</p>
                                 </div>
                             </div>
                         </div>

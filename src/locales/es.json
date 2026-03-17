@@ -822,6 +822,8 @@
         },
         "specialized_tools": {
             "common": {
+                "header": "Auditoría ShieldCheck v3.0",
+                "technical_analysis": "Análisis Técnico Forense",
                 "back": "Volver",
                 "analyzing": "Analizando...",
                 "audit_now": "Auditar ahora",

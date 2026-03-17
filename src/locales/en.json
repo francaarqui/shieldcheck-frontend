@@ -80,6 +80,8 @@
     },
     "specialized_tools": {
         "common": {
+            "header": "ShieldCheck Audit v3.0",
+            "technical_analysis": "Forensic Technical Analysis",
             "back": "Back",
             "analyzing": "Analyzing...",
             "audit_now": "Audit Now",

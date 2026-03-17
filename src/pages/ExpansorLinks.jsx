@@ -58,7 +58,11 @@ export default function ExpansorLinks() {
 
             <div className="text-center md:text-left space-y-4">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-100 dark:border-indigo-900/30">
-                    🔗 Advanced URL Inspection
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                    </span>
+                    {t('specialized_tools.common.header')}
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">
                     {t('specialized_tools.expansor_links.title')}
@@ -98,8 +102,9 @@ export default function ExpansorLinks() {
                         <button
                             onClick={expandUrl}
                             disabled={loading || !url}
-                            className="lg:w-72 h-20 bg-indigo-600 text-white font-black rounded-3xl hover:bg-indigo-700 transition-all shadow-2xl disabled:opacity-50 text-xl"
+                            className="lg:w-72 h-20 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black rounded-3xl hover:opacity-90 transition-all shadow-xl disabled:opacity-50 text-xl flex items-center justify-center gap-3 active:scale-95"
                         >
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                             {t('specialized_tools.common.audit_now')}
                         </button>
                     </div>
@@ -116,24 +121,30 @@ export default function ExpansorLinks() {
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Link Destino Revelado</p>
                                     <h4 className="text-2xl font-display font-black text-indigo-600 break-all">{result.expandedUrl}</h4>
                                 </div>
-                                <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Score de Segurança</p>
+                                <div className="bg-slate-900 dark:bg-white p-4 px-6 rounded-2xl border border-slate-100 dark:border-slate-800 flex flex-col items-center">
+                                    <p className="text-[10px] font-black text-slate-400/60 dark:text-slate-500 uppercase tracking-widest mb-1">{t('specialized_tools.common.risk_score')}</p>
                                     <p className={`text-4xl font-black ${result.trustScore > 70 ? 'text-emerald-500' : 'text-red-500'}`}>{result.trustScore}</p>
                                 </div>
                             </div>
+
+                            <h5 className="text-xs font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
+                                <div className="w-1.5 h-4 bg-indigo-500 rounded-full"></div>
+                                {t('specialized_tools.common.technical_analysis')}
+                            </h5>
+
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {result.riskFactors.map((factor, idx) => (
-                                    <div key={idx} className="flex gap-4 items-center bg-slate-50/50 dark:bg-slate-800/10 border border-slate-100 dark:border-slate-800 p-6 rounded-2xl">
+                                    <div key={idx} className="flex gap-4 items-center bg-slate-50/50 dark:bg-slate-800/10 border border-slate-100 dark:border-slate-800 p-6 rounded-2xl group hover:border-indigo-500/30 transition-colors">
                                         <div className={`p-2 rounded-xl ${result.trustScore > 70 ? 'bg-emerald-100 text-emerald-600' : 'bg-red-100 text-red-600'}`}>
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                         </div>
                                         <span className="text-lg font-bold text-slate-700 dark:text-slate-300 leading-tight">{factor}</span>
                                     </div>
                                 ))}
                             </div>
-                            <div className={`p-8 rounded-[2.5rem] border-2 ${result.trustScore > 50 ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-100' : 'bg-red-50/50 dark:bg-red-950/20 border-red-100'}`}>
-                                <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-3 opacity-60">Análise da IA</h4>
-                                <p className="text-2xl font-bold leading-relaxed">"{result.recommendation}"</p>
+                            <div className={`p-8 rounded-[2.5rem] border-2 shadow-sm ${result.trustScore > 50 ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-100 dark:border-emerald-900/30' : 'bg-red-50/50 dark:bg-red-950/20 border-red-100 dark:border-red-900/30'}`}>
+                                <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-3 text-indigo-600 dark:text-indigo-400">{t('specialized_tools.common.verdict_title')}</h4>
+                                <p className={`text-2xl font-bold leading-relaxed ${result.trustScore > 50 ? 'text-emerald-900 dark:text-emerald-400' : 'text-red-900 dark:text-red-400'}`}>"{result.recommendation}"</p>
                             </div>
                         </div>
                     </div>

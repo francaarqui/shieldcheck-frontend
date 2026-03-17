@@ -54,7 +54,11 @@ export default function AnalisadorDocumentos() {
 
             <div className="text-center md:text-left space-y-4">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-100 dark:border-indigo-900/30">
-                    📄 OCR Deep Inspection
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                    </span>
+                    {t('specialized_tools.common.header')}
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">
                     {t('specialized_tools.analisador_docs.title')}
@@ -114,6 +118,11 @@ export default function AnalisadorDocumentos() {
                                     <p className="text-xl font-bold text-slate-400 font-mono mt-2">{analysis.cnpj}</p>
                                 </div>
 
+                                <h5 className="text-xs font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
+                                    <div className="w-1.5 h-4 bg-indigo-500 rounded-full"></div>
+                                    {t('specialized_tools.common.technical_analysis')}
+                                </h5>
+
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="bg-slate-50/50 dark:bg-slate-900/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-800">
                                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Instituição</label>
@@ -129,8 +138,10 @@ export default function AnalisadorDocumentos() {
                                     <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Trust Signals</h4>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                         {analysis.signals.map((signal, idx) => (
-                                            <div key={idx} className="flex gap-3 items-center bg-emerald-50/30 dark:bg-emerald-950/10 p-4 rounded-2xl border border-emerald-100/50">
-                                                <svg className="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                                            <div key={idx} className="flex gap-3 items-center bg-slate-50/50 dark:bg-slate-800/10 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 group hover:border-indigo-500/30 transition-colors">
+                                                <div className="p-1.5 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">
+                                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                                                </div>
                                                 <span className="text-sm font-bold text-slate-600 dark:text-slate-300">{signal}</span>
                                             </div>
                                         ))}
@@ -140,10 +151,10 @@ export default function AnalisadorDocumentos() {
 
                             <div className="w-full lg:w-80 flex flex-col gap-4">
                                 <div className={`rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden
-                                    ${analysis.riskScore < 30 ? 'bg-emerald-600' : 'bg-red-600'}
+                                    ${analysis.riskScore < 30 ? 'bg-emerald-600 dark:bg-white text-white dark:text-slate-900 border-2 border-emerald-100 dark:border-emerald-400' : 'bg-red-600 dark:bg-white text-white dark:text-slate-900 border-2 border-red-100 dark:border-red-400'}
                                 `}>
                                     <div className="relative z-10 flex flex-col items-center text-center space-y-4">
-                                        <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Status de Segurança</p>
+                                        <p className="text-[10px] font-black uppercase tracking-widest opacity-60">{t('specialized_tools.common.verdict_title')}</p>
                                         <div className="text-6xl font-display font-black">{analysis.status}</div>
                                         <p className="text-xs font-bold leading-relaxed opacity-80 mt-4">{analysis.recommendation}</p>
                                     </div>

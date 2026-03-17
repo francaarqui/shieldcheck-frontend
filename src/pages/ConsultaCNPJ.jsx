@@ -76,8 +76,12 @@ export default function ConsultaCNPJ() {
             </div>
 
             <div className="text-center md:text-left space-y-4">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-purple-100 dark:border-purple-900/30">
-                    🏢 Fiscal Intelligence
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-100 dark:border-indigo-900/30">
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                    </span>
+                    {t('specialized_tools.common.header')}
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">
                     {t('specialized_tools.consulta_cnpj.title')}
@@ -117,9 +121,10 @@ export default function ConsultaCNPJ() {
                         <button
                             onClick={checkCnpj}
                             disabled={loading || !cnpj}
-                            className="lg:w-72 h-20 bg-purple-600 text-white font-black rounded-3xl hover:bg-purple-700 transition-all shadow-2xl shadow-purple-200 dark:shadow-none disabled:opacity-50 text-xl"
+                            className="lg:w-72 h-20 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black rounded-3xl hover:opacity-90 transition-all shadow-xl disabled:opacity-50 text-xl flex items-center justify-center gap-3 active:scale-95"
                         >
-                            Validar agora
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                            {t('specialized_tools.common.audit_now')}
                         </button>
                     </div>
                 </div>
@@ -139,12 +144,18 @@ export default function ConsultaCNPJ() {
                                     <h3 className="text-4xl font-display font-black text-slate-900 dark:text-white leading-tight">{cnpjResult.razao_social}</h3>
                                     <p className="text-slate-400 dark:text-slate-500 font-bold font-mono text-xl">{cnpjResult.cnpj}</p>
                                 </div>
+
+                                <h5 className="text-xs font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
+                                    <div className="w-1.5 h-4 bg-indigo-500 rounded-full"></div>
+                                    {t('specialized_tools.common.technical_analysis')}
+                                </h5>
+
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                    <div className="bg-slate-50/50 dark:bg-slate-900/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-800">
+                                    <div className="bg-slate-50/50 dark:bg-slate-900/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 flex flex-col justify-center">
                                         <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Fundação</label>
                                         <p className="text-slate-800 dark:text-slate-200 font-black text-xl">{cnpjResult.data_inicio_atividade}</p>
                                     </div>
-                                    <div className="bg-slate-50/50 dark:bg-slate-900/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-800">
+                                    <div className="bg-slate-50/50 dark:bg-slate-900/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 flex flex-col justify-center">
                                         <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Capital Social</label>
                                         <p className="text-slate-800 dark:text-slate-200 font-black text-xl">R$ {cnpjResult.capital_social?.toLocaleString()}</p>
                                     </div>
@@ -161,21 +172,21 @@ export default function ConsultaCNPJ() {
                                 </div>
                             </div>
                             <div className="w-full lg:w-80 flex flex-col gap-4">
-                                <div className="bg-indigo-600 rounded-[2rem] p-8 text-white shadow-2xl relative overflow-hidden group">
+                                <div className="bg-slate-900 dark:bg-white rounded-[2rem] p-8 text-white dark:text-slate-900 shadow-2xl relative overflow-hidden group">
                                     <h4 className="font-black text-xl mb-6 relative z-10 flex items-center justify-between">
-                                        Fiscal Score
-                                        <div className="bg-white/20 p-2 rounded-xl"><svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 12l2 2 4-4" /></svg></div>
+                                        {t('specialized_tools.common.verdict_title')}
+                                        <div className="bg-indigo-500 p-2 rounded-xl text-white"><svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 12l2 2 4-4" /></svg></div>
                                     </h4>
                                     <div className="space-y-4 relative z-10">
-                                        <div className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-indigo-300 rounded-full"></div><span className="text-xs font-bold">Verificado RFB</span></div>
-                                        <div className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-indigo-300 rounded-full"></div><span className="text-xs font-bold">Atividade Consistente</span></div>
-                                        <p className="text-[10px] text-indigo-100/60 font-black uppercase tracking-widest pt-6 mt-4 border-t border-white/10">Este CNPJ é legítimo perante os órgãos reguladores.</p>
+                                        <div className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></div><span className="text-xs font-bold">Verificado RFB</span></div>
+                                        <div className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></div><span className="text-xs font-bold">Atividade Consistente</span></div>
+                                        <p className="text-[10px] opacity-60 font-black uppercase tracking-widest pt-6 mt-4 border-t border-white/10 dark:border-slate-800/10">Este CNPJ é legítimo perante os órgãos reguladores. Operação em situação regularizada.</p>
                                     </div>
                                 </div>
                                 {user?.plan === 'PREMIUM' && (
                                     <button onClick={generateCnpjReport} className="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-xs uppercase tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-2">
                                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                                        Exportar PDF
+                                        {t('specialized_tools.common.download_report')}
                                     </button>
                                 )}
                             </div>
